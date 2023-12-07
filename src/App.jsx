@@ -1,10 +1,16 @@
 import { React } from 'react';
 import './App.css';
+import Container from '@mui/material/Container';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App() {
   return (
     <>
-      <h1>Hello World</h1>
+      <Container>
+        <Header></Header>
+        <Footer></Footer>
+      </Container>
     </>
   );
 }
