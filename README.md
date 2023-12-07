@@ -11,8 +11,8 @@ Currently, two official plugins are available:
 ## LAPS Front-End Development To-Do List
 
 ### Project Setup
-- [ ] Initialize React project with Vite
-- [ ] Install and configure MUI, ESLint, Prettier
+- [x] Initialize React project with Vite
+- [x] Install and configure MUI, ESLint, Prettier
 
 ### Layout and Basic Components
 - [ ] Create basic layout components (Header, Footer, Navigation)
