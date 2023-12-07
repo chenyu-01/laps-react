@@ -12,10 +12,10 @@ Currently, two official plugins are available:
 
 ### Login Page
 
-- [ ] Design a simple and intuitive login page.
+- [x] Design a simple and intuitive login page.
   - Include fields for:
-    - [ ] Username.
-    - [ ] Password.
+    - [x] Username.
+    - [x] Password.
   - Add options for:
     - [ ] Forgot Password.
     - [ ] New User Registration.
