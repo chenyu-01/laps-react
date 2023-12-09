@@ -20,7 +20,7 @@ Currently, two official plugins are available:
     - [ ] Forgot Password.
     - [ ] New User Registration.
 
-### Dashboard Page
+### Dashboard Page  - Preethi
 
 - [ ] Create a dashboard for different user roles: Employee, Manager, Admin.
   - [ ] Incorporate navigation elements for:
