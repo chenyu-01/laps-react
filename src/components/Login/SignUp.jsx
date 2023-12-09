@@ -2,7 +2,10 @@ import * as React from 'react';
 import universityImage from './university.png';
 import { useState } from 'react';
 import InputBox from './inputBox';
-export default function Login() {
+import { Button } from './Login';
+import { Link } from 'react-router-dom';
+import Header from '../Header';
+export default function SignUp() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
@@ -62,6 +65,7 @@ export default function Login() {
   };
   return (
     <div className="">
+      <Header></Header>
       <div className="flex w-full flex-col mb-40 items-start max-md:max-w-full max-md:my-10">
         <div className="self-stretch flex items-stretch justify-between gap-5 mt-20 max-md:max-w-full max-md:flex-wrap">
           <img
@@ -99,22 +103,16 @@ export default function Login() {
               >
                 Error: {error}
               </div>
-              <button type="submit" className="w-full" disabled={error}>
-                <div
-                  className={`text-white text-xl font-bold tracking-widest whitespace-nowrap shadow-lg ${
-                    error ? 'bg-gray-300' : 'bg-green-400'
-                  } self-stretch justify-center items-center mt-10 px-16 py-6 rounded-xl max-md:mt-10 max-md:px-5`}
-                >
-                  <p className="text-center">Register</p>
-                </div>
-              </button>
+              <Button error={error}></Button>
             </form>
 
             <div className="text-center text-base font-medium mt-4">
               <span className="font-medium text-black">
                 if you already have an account you can{' '}
               </span>
-              <span className="font-bold text-indigo-500">Login here!</span>
+              <Link to="/login">
+                <span className="font-bold text-indigo-500">Login here!</span>
+              </Link>
             </div>
           </div>
         </div>

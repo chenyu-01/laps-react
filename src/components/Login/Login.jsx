@@ -2,10 +2,13 @@ import * as React from 'react';
 import universityImage from './university.png';
 import { useState } from 'react';
 import InputBox from './inputBox';
+import Header from '../Header';
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [error, setError] = useState('init');
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -57,6 +60,7 @@ export default function Login() {
   };
   return (
     <div className="">
+      <Header></Header>
       <div className="flex w-full flex-col mb-40 items-start max-md:max-w-full max-md:my-10">
         <div className="self-stretch flex items-stretch justify-between gap-5 mt-20 max-md:max-w-full max-md:flex-wrap">
           <img
@@ -81,34 +85,49 @@ export default function Login() {
                 validation={validateForm}
               ></InputBox>
               <div
-                className={`bg-red-100 text-red-700 text-center py-1 ${
-                  error ? 'block' : 'hidden'
+                className={`bg-red-100 text-red-700 text-center my-1 ${
+                  error !== 'init' ? 'block' : 'hidden'
                 }`}
               >
-                Error: {error}
+                {error}
               </div>
-              <button type="submit" className="w-full" disabled={error}>
-                <div
-                  className={`text-white text-xl font-bold tracking-widest whitespace-nowrap shadow-lg ${
-                    error ? 'bg-gray-300' : 'bg-indigo-500'
-                  } self-stretch justify-center items-center mt-10 px-16 py-6 rounded-xl max-md:mt-10 max-md:px-5`}
-                >
-                  <p className="text-center">Sign In</p>
-                </div>
-              </button>
+              <Button error={error}></Button>
             </form>
             <div className="text-zinc-500 text-center text-base font-bold leading-[77px] tracking-widest max-w-[400px] mt-6">
               Forget Password ?
             </div>
             <div className="text-center text-base font-medium mt-4">
-              <span className="font-medium text-black">
-                if you do not have an account you can{' '}
+              <span className="font-medium text-black mr-1">
+                if you do not have an account you can
               </span>
-              <span className="font-bold text-indigo-500">Register here!</span>
+              <Link to="/signup">
+                <span className="font-bold text-indigo-500">
+                  Register here!
+                </span>
+              </Link>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+export function Button({ error }) {
+  const location = useLocation();
+  const buttonText = location.pathname === '/login' ? 'Sign In' : 'Register';
+  // Destructure error from props
+  return (
+    <div>
+      <button
+        type="submit"
+        className={`text-white text-xl font-bold tracking-widest whitespace-nowrap shadow-lg ${
+          error && error !== 'init' ? 'bg-gray-300' : 'bg-indigo-500'
+        } w-full self-stretch justify-center items-center mt-10 px-16 py-6 rounded-xl`}
+        disabled={!!error && error !== 'init'} // Disable button if error is set and not equal to 'init'
+      >
+        <p className="text-center">{buttonText}</p>
+      </button>
     </div>
   );
 }
