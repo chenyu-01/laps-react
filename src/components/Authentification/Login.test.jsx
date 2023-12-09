@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Login from './Login'; // Import your Login component
+import Login from './Layout'; // Import your Login component
 
 describe('Login form submission', () => {
   it('should submit form data correctly', async () => {
