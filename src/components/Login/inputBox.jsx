@@ -2,10 +2,17 @@ import React, { useState } from 'react';
 import eyeIcon from './eyeIcon.svg';
 import eyeSlash from './eyeSlash.svg';
 import crossX from './crossX.svg';
-export default function InputBox({ input, setInput, placeholder, property }) {
+export default function InputBox({
+  input,
+  setInput,
+  placeholder,
+  property,
+  validation,
+}) {
   const inputHandler = (event) => {
     const value = event.target.value;
     setInput(value);
+    validation();
   };
 
   const [hidden, setHidden] = useState(false);
@@ -13,7 +20,7 @@ export default function InputBox({ input, setInput, placeholder, property }) {
   const toggleHide = (event) => {
     setHidden(!hidden);
   };
-  const toggleClose = (event) => {
+  const toggleClean = (event) => {
     setInput('');
   };
   return (
@@ -28,7 +35,7 @@ export default function InputBox({ input, setInput, placeholder, property }) {
         />
       </div>
       {property === 'user' && (
-        <img onClick={toggleClose} src={crossX} className="w-6 h-6 mx-4"></img>
+        <img onClick={toggleClean} src={crossX} className="w-6 h-6 mx-4"></img>
       )}
       {property === 'pass' && (
         <img onClick={toggleHide} src={eyeicon} className="w-6 h-6 mx-4"></img>

@@ -5,6 +5,7 @@ import InputBox from './inputBox';
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [password2, setPassword2] = useState('');
   const [error, setError] = useState('');
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -19,6 +20,10 @@ export default function Login() {
     // Password check (basic example: check for non-empty and minimum length)
     if (!password || password.length < 6) {
       setError('Password must be at least 6 characters long.');
+      return false;
+    }
+    if (password !== password2) {
+      setError('Passwords do not match.');
       return false;
     }
     setError('');
@@ -80,6 +85,13 @@ export default function Login() {
                 property={'pass'}
                 validation={validateForm}
               ></InputBox>
+              <InputBox
+                input={password}
+                setInput={setPassword2}
+                placeholder={'Your Password'}
+                property={'pass'}
+                validation={validateForm}
+              />
               <div
                 className={`bg-red-100 text-red-700 text-center py-1 ${
                   error ? 'block' : 'hidden'
@@ -90,21 +102,19 @@ export default function Login() {
               <button type="submit" className="w-full" disabled={error}>
                 <div
                   className={`text-white text-xl font-bold tracking-widest whitespace-nowrap shadow-lg ${
-                    error ? 'bg-gray-300' : 'bg-indigo-500'
+                    error ? 'bg-gray-300' : 'bg-green-400'
                   } self-stretch justify-center items-center mt-10 px-16 py-6 rounded-xl max-md:mt-10 max-md:px-5`}
                 >
-                  <p className="text-center">Sign In</p>
+                  <p className="text-center">Register</p>
                 </div>
               </button>
             </form>
-            <div className="text-zinc-500 text-center text-base font-bold leading-[77px] tracking-widest max-w-[400px] mt-6">
-              Forget Password ?
-            </div>
+
             <div className="text-center text-base font-medium mt-4">
               <span className="font-medium text-black">
-                if you do not have an account you can{' '}
+                if you already have an account you can{' '}
               </span>
-              <span className="font-bold text-indigo-500">Register here!</span>
+              <span className="font-bold text-indigo-500">Login here!</span>
             </div>
           </div>
         </div>

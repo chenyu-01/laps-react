@@ -11,13 +11,10 @@ export default function Header() {
           History
         </div>
         <div className="text-black text-lg font-medium tracking-wider self-stretch">
-          Blog
-        </div>
-        <div className="text-black text-lg font-medium tracking-wider self-stretch">
-          Pages
+          Admin Management
         </div>
         <div className="text-black text-lg font-medium tracking-wider">
-          Contact
+          Leave Approval
         </div>
       </div>
       <div className="self-stretch flex justify-between gap-5 items-center">
