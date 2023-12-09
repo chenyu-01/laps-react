@@ -3,8 +3,9 @@ import universityImage from './university.png';
 import { useState } from 'react';
 import InputBox from './inputBox';
 import { Button } from './Login';
-import { Link } from 'react-router-dom';
 import Header from '../Header';
+import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 export default function SignUp() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -33,6 +34,10 @@ export default function SignUp() {
     return true;
   };
 
+  useEffect(() => {
+    validateForm();
+  }, [username, password, password2]);
+
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent default form submission
     if (!validateForm()) return;
@@ -54,10 +59,10 @@ export default function SignUp() {
       if (response.ok) {
         // Handle successful submission here
         const responseData = await response.json();
-        console.log('Login Successful:', responseData);
+        console.log('Signup Successful:', responseData);
       } else {
         // Handle errors
-        console.error('Login Failed');
+        console.error('Signup Failed');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -78,23 +83,17 @@ export default function SignUp() {
               <InputBox
                 input={username}
                 setInput={setUsername}
-                placeholder={'Your Email'}
                 property={'user'}
-                validation={validateForm}
               ></InputBox>
               <InputBox
                 input={password}
                 setInput={setPassword}
-                placeholder={'Your Password'}
                 property={'pass'}
-                validation={validateForm}
               ></InputBox>
               <InputBox
-                input={password}
+                input={password2}
                 setInput={setPassword2}
-                placeholder={'Your Password'}
-                property={'pass'}
-                validation={validateForm}
+                property={'pass2'}
               />
               <div
                 className={`bg-red-100 text-red-700 text-center py-1 ${

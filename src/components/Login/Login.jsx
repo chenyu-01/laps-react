@@ -28,6 +28,10 @@ export default function Login() {
     return true;
   };
 
+  React.useEffect(() => {
+    validateForm();
+  }, [username, password]);
+
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent default form submission
     if (!validateForm()) return;
@@ -73,16 +77,12 @@ export default function Login() {
               <InputBox
                 input={username}
                 setInput={setUsername}
-                placeholder={'Your Email'}
                 property={'user'}
-                validation={validateForm}
               ></InputBox>
               <InputBox
                 input={password}
                 setInput={setPassword}
-                placeholder={'Your Password'}
                 property={'pass'}
-                validation={validateForm}
               ></InputBox>
               <div
                 className={`bg-red-100 text-red-700 text-center my-1 ${
