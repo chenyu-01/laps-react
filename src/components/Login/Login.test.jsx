@@ -2,19 +2,15 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Login from './Login'; // Import your Login component
-import { React } from 'react';
 
 describe('Login form submission', () => {
   it('should submit form data correctly', async () => {
     // Mock the fetch API
-    global.fetch = vi.fn(() =>
-      Promise.resolve({
-        ok: true,
-        json: () => Promise.resolve({ message: 'Success' }),
-      })
-    );
+    vi.spyOn(global, 'fetch').mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ message: 'Login successful' }),
+    });
 
-    // Render the Login component
     render(<Login />);
 
     // Fill the form fields
@@ -29,7 +25,7 @@ describe('Login form submission', () => {
     fireEvent.click(screen.getByText('Sign In'));
 
     // Assertions
-    expect(fetch).toHaveBeenCalledWith('YOUR_BACKEND_ENDPOINT', {
+    expect(global.fetch).toHaveBeenCalledWith('api/test', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -40,6 +36,7 @@ describe('Login form submission', () => {
       }),
     });
 
-    // Add any additional assertions here, like checking for success messages, etc.
+    // Clean up mock
+    global.fetch.mockRestore();
   });
 });

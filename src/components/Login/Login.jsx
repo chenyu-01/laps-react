@@ -5,9 +5,26 @@ import InputBox from './inputBox';
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent default form submission
+    setError('');
+    // Username check
 
+    if (!validateEmail(username)) {
+      setError('Please enter a valid email address');
+      return;
+    }
+    // Password check (basic example: check for non-empty and minimum length)
+    if (!password || password.length < 6) {
+      setError('Password must be at least 6 characters long.');
+      return;
+    }
     // Prepare data to be sent
     const data = {
       username, // assuming these are state variables
@@ -15,7 +32,7 @@ export default function Login() {
     };
 
     try {
-      const response = await fetch('YOUR_BACKEND_ENDPOINT', {
+      const response = await fetch('api/test', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -58,9 +75,11 @@ export default function Login() {
                 placeholder={'Your Password'}
                 property={'pass'}
               ></InputBox>
-              <div className="text-white text-xl font-bold tracking-widest whitespace-nowrap shadow-lg bg-indigo-500 self-stretch justify-center items-center mt-10 px-16 py-6 rounded-xl max-md:mt-10 max-md:px-5">
-                <p className="text-center">Sign In</p>
-              </div>
+              <button type="submit" className="w-full">
+                <div className="text-white text-xl font-bold tracking-widest whitespace-nowrap shadow-lg bg-indigo-500 self-stretch justify-center items-center mt-10 px-16 py-6 rounded-xl max-md:mt-10 max-md:px-5">
+                  <p className="text-center">Sign In</p>
+                </div>
+              </button>
             </form>
             <div className="text-zinc-500 text-center text-base font-bold leading-[77px] tracking-widest max-w-[400px] mt-6">
               Forget Password ?
