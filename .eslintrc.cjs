@@ -27,4 +27,10 @@ module.exports = {
   rules: {
     'react/prop-types': 'off',
   },
+  globals: {
+    describe: 'readonly',
+    it: 'readonly',
+    expect: 'readonly',
+    vi: 'readonly',
+  },
 };

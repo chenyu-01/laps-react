@@ -1,11 +1,10 @@
 import * as React from 'react';
-import universityImage from './university.png';
 import { useState } from 'react';
 import InputBox from './inputBox';
 import { Button } from './Button';
 import { Link } from 'react-router-dom';
-import Layout from '../Layout';
 import { useEffect } from 'react';
+import LayoutAuth from './LayoutAuth';
 export default function SignUp() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -70,49 +69,42 @@ export default function SignUp() {
   };
   return (
     <div className="">
-      <Layout>
-        <img
-          loading="lazy"
-          srcSet={universityImage}
-          className="aspect-[1.18] object-contain object-center w-full overflow-hidden grow basis-[0%] max-md:max-w-full"
-        />
-        <div className="self-center flex grow basis-[0%] flex-col items-center my-auto">
-          <form onSubmit={handleSubmit}>
-            <InputBox
-              input={username}
-              setInput={setUsername}
-              property={'user'}
-            ></InputBox>
-            <InputBox
-              input={password}
-              setInput={setPassword}
-              property={'pass'}
-            ></InputBox>
-            <InputBox
-              input={password2}
-              setInput={setPassword2}
-              property={'pass2'}
-            />
-            <div
-              className={`bg-red-100 text-red-700 text-center py-1 ${
-                error ? 'block' : 'hidden'
-              }`}
-            >
-              Error: {error}
-            </div>
-            <Button error={error}></Button>
-          </form>
-
-          <div className="text-center text-base font-medium mt-4">
-            <span className="font-medium text-black">
-              if you already have an account you can{' '}
-            </span>
-            <Link to="/login">
-              <span className="font-bold text-indigo-500">Login here!</span>
-            </Link>
+      <LayoutAuth>
+        <form onSubmit={handleSubmit}>
+          <InputBox
+            input={username}
+            setInput={setUsername}
+            property={'user'}
+          ></InputBox>
+          <InputBox
+            input={password}
+            setInput={setPassword}
+            property={'pass'}
+          ></InputBox>
+          <InputBox
+            input={password2}
+            setInput={setPassword2}
+            property={'pass2'}
+          />
+          <div
+            className={`bg-red-100 text-red-700 text-center py-1 ${
+              error ? 'block' : 'hidden'
+            }`}
+          >
+            Error: {error}
           </div>
+          <Button error={error}></Button>
+        </form>
+
+        <div className="text-center text-base font-medium mt-4">
+          <span className="font-medium text-black">
+            if you already have an account you can{' '}
+          </span>
+          <Link to="/login">
+            <span className="font-bold text-indigo-500">Login here!</span>
+          </Link>
         </div>
-      </Layout>
+      </LayoutAuth>
     </div>
   );
 }

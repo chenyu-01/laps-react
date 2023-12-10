@@ -1,10 +1,9 @@
 import * as React from 'react';
-import universityImage from './university.png';
 import { useState } from 'react';
 import InputBox from './inputBox';
 import { Link } from 'react-router-dom';
 import { Button } from './Button';
-import Layout from '../Layout';
+import LayoutAuth from './LayoutAuth';
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -63,14 +62,9 @@ export default function Login() {
     }
   };
   return (
-    <div className="flex justify-center">
-      <Layout>
-        <img
-          loading="lazy"
-          srcSet={universityImage}
-          className="object-contain object-center md:w-1/2 overflow-hidden hidden md:flex"
-        />
-        <div className="justify-center self-center flex md:w-1/2 flex-col items-center my-auto">
+    <div>
+      <LayoutAuth>
+        <div className="">
           <form onSubmit={handleSubmit}>
             <InputBox
               input={username}
@@ -100,7 +94,7 @@ export default function Login() {
             </Link>
           </div>
         </div>
-      </Layout>
+      </LayoutAuth>
     </div>
   );
 }

@@ -1,7 +1,8 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
-import Login from './Layout'; // Import your Login component
+import Login from './Login'; // Import your Login component
 import React from 'react';
 describe('Login form submission', () => {
   it('should submit form data correctly', async () => {
@@ -11,7 +12,11 @@ describe('Login form submission', () => {
       json: () => Promise.resolve({ message: 'Login successful' }),
     });
 
-    render(<Login />);
+    render(
+      <MemoryRouter initialEntries={['/login']}>
+        <Login />
+      </MemoryRouter>
+    );
 
     // Fill the form fields
     fireEvent.change(screen.getByPlaceholderText('Your Email'), {
