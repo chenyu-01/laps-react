@@ -10,7 +10,7 @@ Currently, two official plugins are available:
 
 ## UI Design To-Do List
 
-### Login Page
+### Login Page - Chen Yu
 
 - [x] Design a simple and intuitive login page.
   - Include fields for:
@@ -20,7 +20,7 @@ Currently, two official plugins are available:
     - [ ] Forgot Password.
     - [ ] New User Registration.
 
-### Dashboard Page
+### Dashboard Page  - Preethi
 
 - [ ] Create a dashboard for different user roles: Employee, Manager, Admin.
   - [ ] Incorporate navigation elements for:
