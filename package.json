@@ -9,7 +9,11 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,css,md}": "prettier --write"
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.{css,md}": "prettier --write"
   },
   "scripts": {
     "dev": "vite",
