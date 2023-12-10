@@ -8,6 +8,9 @@
       "pre-commit": "prettier --write && git add -A"
     }
   },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,css,md}": "prettier --write"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",

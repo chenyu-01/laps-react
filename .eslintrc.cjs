@@ -33,4 +33,8 @@ module.exports = {
     expect: 'readonly',
     vi: 'readonly',
   },
+  'lint-staged': {
+    '*.{js,jsx,ts,tsx}': ['eslint --fix', 'prettier --write'],
+    '*.{css,md}': 'prettier --write',
+  },
 };
