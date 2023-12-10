@@ -2,15 +2,23 @@
 
 This is vite+reactjs which provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+Currently, the project is using React 17.0.2, Vite 2.5.1, and Tailwind CSS 2.2.7. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Project Setup
 
+```bash
+## installing
+git clone https://github.com/chenyu-01/laps-react.git
+cd laps-react
+## dependencies
+npm install
+## run
+npm run dev
+```
 
 ## UI Design To-Do List
 
-### Login Page - Chen Yu
+### Login and Signup Page - Chen Yu
 
 - [x] Design a simple and intuitive login page.
   - Include fields for:
@@ -18,7 +26,7 @@ Currently, two official plugins are available:
     - [x] Password.
   - Add options for:
     - [ ] Forgot Password.
-    - [ ] New User Registration.
+    - [x] New User Registration.
 
 ### Dashboard Page  - Preethi
 

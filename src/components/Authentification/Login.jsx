@@ -63,14 +63,14 @@ export default function Login() {
     }
   };
   return (
-    <div className="">
+    <div className="flex justify-center">
       <Layout>
         <img
           loading="lazy"
           srcSet={universityImage}
-          className="object-contain object-center w-1/2 overflow-hidden"
+          className="object-contain object-center md:w-1/2 overflow-hidden hidden md:flex"
         />
-        <div className="self-center flex w-1/2 flex-col items-center my-auto">
+        <div className="justify-center self-center flex md:w-1/2 flex-col items-center my-auto">
           <form onSubmit={handleSubmit}>
             <InputBox
               input={username}
@@ -91,9 +91,6 @@ export default function Login() {
             </div>
             <Button error={error}></Button>
           </form>
-          <div className="text-zinc-500 text-center text-base font-bold tracking-widest my-1 max-w-[400px]">
-            Forget Password ?
-          </div>
           <div className="text-center text-base font-medium">
             <span className="font-medium text-black mr-1">
               if you do not have an account you can
