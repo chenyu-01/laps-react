@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 export default function Header() {
   return (
     <div className="self-stretch flex w-full justify-between items-center max-md:max-w-full max-md:flex-wrap">
@@ -17,14 +17,18 @@ export default function Header() {
           Leave Approval
         </div>
       </div>
-      <div className="self-stretch flex justify-between gap-5 items-center">
-        <div className="text-indigo-500 text-lg font-bold tracking-wider whitespace-nowrap shadow-sm bg-white grow items-stretch pt-4 pb-2.5 px-6 rounded-3xl max-md:px-5">
-          Sign in
-        </div>
-        <div className="text-indigo-500 text-lg font-bold tracking-wider whitespace-nowrap shadow-sm bg-white grow items-stretch pt-4 pb-2.5 px-6 rounded-3xl max-md:px-5">
-          Register
-        </div>
+      <div className="self-stretch flex justify-between items-center">
+        <HeaderRight text="Login" link={'/login'}></HeaderRight>
+        <HeaderRight text="Sign Up" link={'/signup'}></HeaderRight>
       </div>
+    </div>
+  );
+}
+
+function HeaderRight({ text, link }) {
+  return (
+    <div className="text-indigo-500 text-lg font-bold tracking-wider whitespace-nowrap shadow-sm bg-white grow items-stretch py-3 px-4 rounded-3xl max-md:px-5">
+      <Link to={link}>{text}</Link>
     </div>
   );
 }
