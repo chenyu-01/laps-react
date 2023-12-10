@@ -4,6 +4,8 @@ This is vite+reactjs which provides a minimal setup to get React working in Vite
 
 Currently, the project is using React 17.0.2, Vite 2.5.1, and Tailwind CSS 2.2.7.
 
+Every Commit You should have the eslint and prettier check passed, if not, please fix it before commit.
+
 ## Project Setup
 
 ```bash
