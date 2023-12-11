@@ -27,9 +27,9 @@ npm run dev
 
 For every page, please contain your react component within `<Layout><Layout/>` to have Header in every possible Page
 
-## UI Design To-Do List
+## Pages to be Implemented
 
-### Authentification Page - Chen Yu
+### Authentification Page
 
 - [x] Design a simple and intuitive login page.
   - Include fields for:
@@ -39,13 +39,23 @@ For every page, please contain your react component within `<Layout><Layout/>` t
     - [ ] Forgot Password.
     - [x] New User Registration.
 
-### Dashboard Page - Preethi
+### Dashboard Page
 
 - [ ] Create a dashboard for different user roles: Employee, Manager, Admin.
-  - [ ] Incorporate navigation elements for:
-    - [ ] Leave application.
-    - [ ] Leave history.
-    - [ ] Admin functionalities.
+  - Employee:
+    - [ ] Submit Leave Application
+    - [ ] View Personal Leave History
+    - [ ] Claim Compensation
+  - Manager:
+    - [ ] View Applications for Approval
+    - [ ] View Employee Leave History
+    - [ ] Approve/Reject Leave
+    - [ ] Approve Compensation Claim
+  - Admin:
+    - [ ] Manage Leave Types
+    - [ ] Manage Staff
+    - [ ] Manage Leave Entitlement
+    - [ ] Manage Approval Hierarchy
 
 ### Leave Application Form
 
@@ -66,7 +76,7 @@ For every page, please contain your react component within `<Layout><Layout/>` t
 ### Admin Management Page
 
 - [ ] Design a page for administrators to manage users, roles, and leave types.
-  - Include options to:
+  - [ ] Include options to:
     - [ ] Add employee records.
     - [ ] Edit employee records.
     - [ ] Delete employee records.
@@ -74,7 +84,7 @@ For every page, please contain your react component within `<Layout><Layout/>` t
 ### Leave Approval Page for Managers
 
 - [ ] Create a page for managers to view and manage leave applications.
-  - Include options to:
+  - [ ] Include options to:
     - [ ] Approve applications.
     - [ ] Reject applications.
     - [ ] Add comments.
@@ -82,7 +92,7 @@ For every page, please contain your react component within `<Layout><Layout/>` t
 ### Report Generation Page (Optional)
 
 - [ ] Design a page for generating reports (if included).
-  - Allow managers to:
+  - [ ] Allow managers to:
     - [ ] Select criteria for report generation.
     - [ ] View/export the generated report.
 

@@ -68,7 +68,7 @@ export default function SignUp() {
     }
   };
   return (
-    <div className="">
+    <div>
       <LayoutAuth>
         <form onSubmit={handleSubmit}>
           <InputBox

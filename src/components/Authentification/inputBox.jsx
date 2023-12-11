@@ -38,8 +38,8 @@ export default function InputBox({ input, setInput, property }) {
   }
 
   return (
-    <div className="bg-gray-100 self-stretch flex items-center justify-between gap-5 py-4 my-5 rounded-xl max-md:pr-5">
-      <div className="text-zinc-600 text-lg font-medium leading-8 ml-4 tracking-widest grow whitespace-nowrap my-auto">
+    <div className="bg-gray-100 flex items-center justify-between px-3 py-4 my-5 rounded-xl">
+      <div className="text-zinc-600 text-lg font-medium leading-8 mx-4 tracking-widest grow whitespace-nowrap my-auto">
         <input
           type={inputType}
           placeholder={placeholder}

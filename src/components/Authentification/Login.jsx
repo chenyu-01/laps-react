@@ -64,35 +64,33 @@ export default function Login() {
   return (
     <div>
       <LayoutAuth>
-        <div className="">
-          <form onSubmit={handleSubmit}>
-            <InputBox
-              input={username}
-              setInput={setUsername}
-              property={'user'}
-            ></InputBox>
-            <InputBox
-              input={password}
-              setInput={setPassword}
-              property={'pass'}
-            ></InputBox>
-            <div
-              className={`bg-red-100 text-red-700 text-center py-2 ${
-                error ? 'block' : 'hidden'
-              }`}
-            >
-              {error}
-            </div>
-            <Button error={error}></Button>
-          </form>
-          <div className="text-center text-base font-medium">
-            <span className="font-medium text-black mr-1">
-              if you do not have an account you can
-            </span>
-            <Link to="/signup">
-              <span className="font-bold text-indigo-500">Register here!</span>
-            </Link>
+        <form onSubmit={handleSubmit}>
+          <InputBox
+            input={username}
+            setInput={setUsername}
+            property={'user'}
+          ></InputBox>
+          <InputBox
+            input={password}
+            setInput={setPassword}
+            property={'pass'}
+          ></InputBox>
+          <div
+            className={`bg-red-100 text-red-700 text-center py-2 ${
+              error ? 'block' : 'hidden'
+            }`}
+          >
+            {error}
           </div>
+          <Button error={error}></Button>
+        </form>
+        <div className="text-center text-base font-medium">
+          <span className="font-medium text-black mr-1">
+            if you do not have an account you can
+          </span>
+          <Link to="/signup">
+            <span className="font-bold text-indigo-500">Register here!</span>
+          </Link>
         </div>
       </LayoutAuth>
     </div>
