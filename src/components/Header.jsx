@@ -33,7 +33,7 @@ export default function Header() {
           <Link>History</Link>
         </HeaderLeft>
         <HeaderLeft>
-          <Link>Admin</Link>
+          <Link>Admi</Link>
         </HeaderLeft>
       </nav>
       <div className="self-stretch flex justify-between items-center">
