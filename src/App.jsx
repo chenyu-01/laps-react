@@ -1,6 +1,6 @@
 import { React } from 'react';
 import './App.css';
-import SignUp from './components/Authentification/Signup';
+import SignUp from './components/Authentification/SignUp';
 import Login from './components/Authentification/Login';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
