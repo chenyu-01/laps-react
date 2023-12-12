@@ -36,7 +36,6 @@ For every page, please contain your react component within `<Layout><Layout/>` t
     - [x] Username.
     - [x] Password.
   - Add options for:
-    - [ ] Forgot Password.
     - [x] New User Registration.
 
 ### Dashboard Navigator Page -Pretthi
@@ -73,7 +72,7 @@ For every page, please contain your react component within `<Layout><Layout/>` t
     - [ ] Status.
     - [ ] Details.
 
-### Admin Management Page -YU ZEJING
+### Admin Management Page - YU ZEJING
 
 - [ ] Design a page for administrators to manage users, roles, and leave types.
   - [ ] Include options to:

@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkAuthStatus = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/check-auth', {
+        const response = await fetch('http://localhost:8080/api/check-auth', {
           credentials: 'include',
         });
         if (response.ok) {
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await fetch('http://localhost:3000/api/logout', {
+      await fetch('http://localhost:8080/api/logout', {
         method: 'POST',
         credentials: 'include',
       });
@@ -54,7 +54,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     try {
-      const response = await fetch('http://localhost:3000/api/login', {
+      const response = await fetch('http://localhost:8080/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
