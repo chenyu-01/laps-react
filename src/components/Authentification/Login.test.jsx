@@ -30,7 +30,7 @@ describe('Login form submission', () => {
     fireEvent.click(screen.getByText('Sign In'));
 
     // Assertions
-    expect(global.fetch).toHaveBeenCalledWith('api/test', {
+    expect(global.fetch).toHaveBeenCalledWith('api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

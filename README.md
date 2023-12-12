@@ -2,7 +2,7 @@
 
 This is vite+reactjs which provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, the project is using React 17.0.2, Vite 2.5.1, and Tailwind CSS 2.2.7.
+Currently, the project is using React 18.0.2, Vite 2.5.1, and Tailwind CSS 2.2.7. The project require node js version to be above 20.0.0
 
 Every Commit You should have the eslint and prettier check passed, if not, please fix it before commit.
 
@@ -29,9 +29,9 @@ For every page, please contain your react component within `<Layout><Layout/>` t
 
 ## Pages to be Implemented
 
-### Authentification Page
+### Authentification Page - Chen Yu
 
-- [x] Design a simple and intuitive login page.
+- [x] Design a simple and intuitive login page and signup page.
   - Include fields for:
     - [x] Username.
     - [x] Password.
@@ -39,7 +39,7 @@ For every page, please contain your react component within `<Layout><Layout/>` t
     - [ ] Forgot Password.
     - [x] New User Registration.
 
-### Dashboard Page
+### Dashboard Navigator Page -Pretthi
 
 - [ ] Create a dashboard for different user roles: Employee, Manager, Admin.
   - Employee:
@@ -88,13 +88,6 @@ For every page, please contain your react component within `<Layout><Layout/>` t
     - [ ] Approve applications.
     - [ ] Reject applications.
     - [ ] Add comments.
-
-### Report Generation Page (Optional)
-
-- [ ] Design a page for generating reports (if included).
-  - [ ] Allow managers to:
-    - [ ] Select criteria for report generation.
-    - [ ] View/export the generated report.
 
 ## Development To-Do List
 

@@ -1,13 +1,15 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
 import { useState } from 'react';
 import InputBox from './inputBox';
 import { Link } from 'react-router-dom';
 import { Button } from './Button';
 import LayoutAuth from './LayoutAuth';
+import { AuthContext } from '../../context/AuthContext';
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const { login } = useContext(AuthContext);
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -35,31 +37,7 @@ export default function Login() {
     event.preventDefault(); // Prevent default form submission
     if (!validateForm()) return;
     // Prepare data to be sent
-    const data = {
-      username, // assuming these are state variables
-      password,
-    };
-
-    try {
-      const response = await fetch('api/test', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        // Handle successful submission here
-        const responseData = await response.json();
-        console.log('Login Successful:', responseData);
-      } else {
-        // Handle errors
-        console.error('Login Failed');
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error);
-    }
+    login(username, password);
   };
   return (
     <div>
