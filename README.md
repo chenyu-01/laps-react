@@ -57,7 +57,7 @@ For every page, please contain your react component within `<Layout><Layout/>` t
     - [ ] Manage Leave Entitlement
     - [ ] Manage Approval Hierarchy
 
-### Leave Application Form
+### Leave Application Form - Priya
 
 - [ ] Design a form for leave application submission.
   - Include fields for:
@@ -66,14 +66,14 @@ For every page, please contain your react component within `<Layout><Layout/>` t
     - [ ] Reason for leave.
     - [ ] Contact information.
 
-### Leave History Page
+### Leave History Page - Liu Bao
 
 - [ ] Design a page for employees to view their leave history.
   - [ ] Use a tabular format to list previous leave applications with:
     - [ ] Status.
     - [ ] Details.
 
-### Admin Management Page
+### Admin Management Page -YU ZEJING
 
 - [ ] Design a page for administrators to manage users, roles, and leave types.
   - [ ] Include options to:
@@ -81,7 +81,7 @@ For every page, please contain your react component within `<Layout><Layout/>` t
     - [ ] Edit employee records.
     - [ ] Delete employee records.
 
-### Leave Approval Page for Managers
+### Leave Approval Page for Managers -YU ZEJING
 
 - [ ] Create a page for managers to view and manage leave applications.
   - [ ] Include options to:
