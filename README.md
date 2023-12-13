@@ -2,7 +2,7 @@
 
 This is vite+reactjs which provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, the project is using React 18.0.2, Vite 2.5.1, and Tailwind CSS 2.2.7. The project require node js version to be above 20.0.0
+Currently, the project is using React ^18.2.0, Vite ^5.0.0, and Tailwind CSS ^3.3.6. The project require node js version to be above 20.0.0
 
 Every Commit You should have the eslint and prettier check passed, if not, please fix it before commit.
 

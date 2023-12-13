@@ -3,8 +3,8 @@ import { useState } from 'react';
 import InputBox from './inputBox';
 import { Button } from './Button';
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
 import LayoutAuth from './LayoutAuth';
+import { Warning } from './Login';
 export default function SignUp() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -33,13 +33,9 @@ export default function SignUp() {
     return true;
   };
 
-  useEffect(() => {
-    validateForm();
-  }, [username, password, password2]);
-
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent default form submission
-    if (!validateForm()) return;
+    if (!validateForm()) return false;
     // Prepare data to be sent
     const data = {
       username, // assuming these are state variables
@@ -86,14 +82,8 @@ export default function SignUp() {
             setInput={setPassword2}
             property={'pass2'}
           />
-          <div
-            className={`bg-red-100 text-red-700 text-center py-1 ${
-              error ? 'block' : 'hidden'
-            }`}
-          >
-            Error: {error}
-          </div>
-          <Button error={error}></Button>
+          {error && <Warning error={error}></Warning>}
+          <Button></Button>
         </form>
 
         <div className="text-center text-base font-medium mt-4">
