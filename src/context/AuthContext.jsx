@@ -5,7 +5,6 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
     const checkAuthStatus = async () => {
@@ -15,6 +14,7 @@ export const AuthProvider = ({ children }) => {
         });
         if (response.ok) {
           setIsAuthenticated(true);
+          navigate('/dashboard');
         } else {
           setIsAuthenticated(false);
           navigate('/login');
@@ -22,8 +22,6 @@ export const AuthProvider = ({ children }) => {
       } catch (error) {
         console.error('Error checking authentication status:', error);
         setIsAuthenticated(false);
-      } finally {
-        setIsLoading(false);
       }
     };
 
@@ -46,7 +44,6 @@ export const AuthProvider = ({ children }) => {
   const login = async (username, password) => {
     // Make an API call to log in
 
-    setIsLoading(true);
     // await new Promise((resolve) => setTimeout(resolve, 1000));  // For now, let's simulate it with a timeout
     const data = {
       username,
@@ -79,15 +76,13 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       console.error('Check out Login Error:', error);
       setIsAuthenticated(false);
-    } finally {
-      setIsLoading(false);
     }
   };
 
   // ... in AuthProvider value
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, isLoading, logout, login }}>
+    <AuthContext.Provider value={{ isAuthenticated, logout, login }}>
       {children}
     </AuthContext.Provider>
   );
