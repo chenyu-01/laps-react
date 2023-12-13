@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
 import { useState } from 'react';
 import InputBox from './inputBox';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from './Button';
 import LayoutAuth from './LayoutAuth';
 import { AuthContext } from '../../context/AuthContext';
 export default function Login() {
-  const { isAuthenticated, login } = useContext(AuthContext);
+  const { isAuthenticated, setIsAuthenticated, setUserData } =
+    useContext(AuthContext);
+  const navigate = useNavigate();
   if (isAuthenticated) {
     window.location.href = '/dashboard';
   }
@@ -30,6 +32,45 @@ export default function Login() {
     }
     setError('');
     return true;
+  };
+
+  const login = async (username, password) => {
+    // Make an API call to log in
+
+    // await new Promise((resolve) => setTimeout(resolve, 1000));  // For now, let's simulate it with a timeout
+    const data = {
+      username,
+      password,
+    };
+    let responseData = null;
+    try {
+      const response = await fetch('http://localhost:8080/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        credentials: 'include',
+      });
+
+      responseData = await response.json();
+
+      if (response.ok) {
+        // Handle successful submission here
+        // After successful login (based on API response), update the isAuthenticated state
+        console.log('Login Successful:', responseData);
+        setIsAuthenticated(true);
+        setUserData(responseData);
+        navigate('/dashboard');
+      } else {
+        // Handle errors
+        console.error('Login Failed:', responseData);
+        setIsAuthenticated(false);
+      }
+    } catch (error) {
+      console.error('Check out Login Error:', error);
+      setIsAuthenticated(false);
+    }
   };
 
   const handleSubmit = async (event) => {
