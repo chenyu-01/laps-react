@@ -26,6 +26,7 @@ module.exports = {
   plugins: ['react'],
   rules: {
     'react/prop-types': 'off',
+    'linebreak-style': 'off',
   },
   globals: {
     describe: 'readonly',
