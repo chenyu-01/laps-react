@@ -14,7 +14,6 @@ export const AuthProvider = ({ children }) => {
         });
         if (response.ok) {
           setIsAuthenticated(true);
-          navigate('/dashboard');
         } else {
           setIsAuthenticated(false);
           navigate('/login');

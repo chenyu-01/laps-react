@@ -6,10 +6,13 @@ import { Button } from './Button';
 import LayoutAuth from './LayoutAuth';
 import { AuthContext } from '../../context/AuthContext';
 export default function Login() {
+  const { isAuthenticated, login } = useContext(AuthContext);
+  if (isAuthenticated) {
+    window.location.href = '/dashboard';
+  }
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const { login } = useContext(AuthContext);
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
