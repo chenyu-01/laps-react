@@ -10,15 +10,19 @@ Run ESLint Separately for Debugging: If the commit error happens, you might want
 
 ## Project Setup
 
-```bash
-## installing
-git clone https://github.com/chenyu-01/laps-react.git
-cd laps-react
-## dependencies
-npm install
-## run
-npm run dev
-```
+### download git repository
+
+- `git clone https://github.com/chenyu-01/laps-react.git`
+- if you have already downloaded the repository, please run `git pull` to get the latest version
+
+### install dependencies
+
+1. go to project directory `cd laps-react`
+2. install dependencies `npm install`, also when you pull the latest version, please run `npm install` to get the latest dependencies
+
+### run the project
+
+`npm run dev`
 
 ## Project Structure
 

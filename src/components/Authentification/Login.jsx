@@ -37,12 +37,10 @@ export default function Login() {
   const login = async (email, password) => {
     // Make an API call to log in
 
-    // await new Promise((resolve) => setTimeout(resolve, 1000));  // For now, let's simulate it with a timeout
     const data = {
       email,
       password,
     };
-    let responseData = null;
     try {
       const response = await fetch('http://localhost:8080/api/login', {
         method: 'POST',
@@ -53,19 +51,17 @@ export default function Login() {
         credentials: 'include',
       });
 
-      responseData = await response.json();
-
       if (response.ok) {
         // Handle successful submission here
         // After successful login (based on API response), update the isAuthenticated state
-        console.log('Login Successful:', responseData);
+        console.log('Login Successful:', response);
         setIsAuthenticated(true);
-        setUserData(responseData);
+        setUserData(response);
         navigate('/dashboard');
       } else {
         // Handle errors
-        console.error('Login Failed:', responseData);
-        setError(responseData.error);
+        console.error('Login Failed:', response);
+        setError(response.error);
         setIsAuthenticated(false);
       }
     } catch (error) {
