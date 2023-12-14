@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
       } else {
         setIsAuthenticated(false);
         console.log('User is not authenticated', response);
-        navigate('/login');
+        // navigate('/login'); // Redirect to login page if not authenticated
       }
     } catch (error) {
       console.error('Error checking authentication status:', error);
