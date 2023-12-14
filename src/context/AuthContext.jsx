@@ -35,6 +35,7 @@ export const AuthProvider = ({ children }) => {
         credentials: 'include',
       });
       setIsAuthenticated(false);
+      navigate('/login');
       // Redirect to login page or perform other actions
     } catch (error) {
       console.error('Logout failed:', error);
@@ -45,7 +46,13 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ userData, isAuthenticated, logout, setUserData }}
+      value={{
+        userData,
+        isAuthenticated,
+        setIsAuthenticated,
+        logout,
+        setUserData,
+      }}
     >
       {children}
     </AuthContext.Provider>
