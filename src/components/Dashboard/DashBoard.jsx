@@ -12,7 +12,9 @@ export default function DashBoard() {
       >
         Logout
       </button>
-      <div>{userData}</div>
+      <div>Role: {userData.role}</div>
+      <div>User: {userData.name}</div>
+      <div>Email: {userData.email}</div>
     </div>
   );
 }
