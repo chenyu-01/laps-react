@@ -22,6 +22,7 @@ export const AuthProvider = ({ children }) => {
       } catch (error) {
         console.error('Error checking authentication status:', error);
         setIsAuthenticated(false);
+        navigate('/login');
       }
     };
 
