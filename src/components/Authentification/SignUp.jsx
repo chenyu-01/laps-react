@@ -2,21 +2,24 @@ import * as React from 'react';
 import { useState } from 'react';
 import InputBox from './inputBox';
 import { Button } from './Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LayoutAuth from './LayoutAuth';
 import { Warning } from './Login';
 export default function SignUp() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [error, setError] = useState('');
+  const [role, setRole] = useState('');
+  const navigate = useNavigate();
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
   const validateForm = () => {
-    if (!validateEmail(username)) {
+    if (!validateEmail(email)) {
       setError('Please enter a valid email address');
       return false;
     }
@@ -38,39 +41,66 @@ export default function SignUp() {
     if (!validateForm()) return false;
     // Prepare data to be sent
     const data = {
-      username, // assuming these are state variables
+      name,
+      role,
+      email, // assuming these are state variables
       password,
     };
 
     try {
-      const response = await fetch('api/test', {
+      const response = await fetch('http://localhost:8080/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
+        credentials: 'include',
       });
 
       if (response.ok) {
         // Handle successful submission here
         const responseData = await response.json();
         console.log('Signup Successful:', responseData);
+        navigate('/login');
       } else {
         // Handle errors
-        console.error('Signup Failed');
+        const responseData = await response.json();
+        console.error('Signup Failed', responseData);
+        setError(responseData.error);
       }
     } catch (error) {
       console.error('Error submitting form:', error);
+      setError(error);
     }
+  };
+  const handleSelect = (event) => {
+    setRole(event.target.value);
   };
   return (
     <div>
       <LayoutAuth>
         <form onSubmit={handleSubmit}>
+          <select
+            className="select select-bordered w-full"
+            value={role}
+            onChange={handleSelect}
+          >
+            <option disabled selected value="">
+              User Type?
+            </option>
+            <option value="Employee">Employee</option>
+            <option value="Admin">Admin</option>
+            <option value="Manager">Manager</option>
+          </select>
           <InputBox
-            input={username}
-            setInput={setUsername}
+            input={name}
+            setInput={setName}
             property={'user'}
+          ></InputBox>
+          <InputBox
+            input={email}
+            setInput={setEmail}
+            property={'email'}
           ></InputBox>
           <InputBox
             input={password}

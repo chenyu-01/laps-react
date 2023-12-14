@@ -12,7 +12,7 @@ export default function Login() {
   if (isAuthenticated) {
     window.location.href = '/dashboard';
   }
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const validateEmail = (email) => {
@@ -21,7 +21,7 @@ export default function Login() {
   };
 
   const validateForm = () => {
-    if (!validateEmail(username)) {
+    if (!validateEmail(email)) {
       setError('Please enter a valid email address');
       return false;
     }
@@ -34,12 +34,12 @@ export default function Login() {
     return true;
   };
 
-  const login = async (username, password) => {
+  const login = async (email, password) => {
     // Make an API call to log in
 
     // await new Promise((resolve) => setTimeout(resolve, 1000));  // For now, let's simulate it with a timeout
     const data = {
-      username,
+      email,
       password,
     };
     let responseData = null;
@@ -65,10 +65,12 @@ export default function Login() {
       } else {
         // Handle errors
         console.error('Login Failed:', responseData);
+        setError(responseData.error);
         setIsAuthenticated(false);
       }
     } catch (error) {
       console.error('Check out Login Error:', error);
+      setError(error);
       setIsAuthenticated(false);
     }
   };
@@ -77,16 +79,16 @@ export default function Login() {
     event.preventDefault(); // Prevent default form submission
     if (!validateForm()) return;
     // Prepare data to be sent
-    login(username, password);
+    login(email, password);
   };
   return (
     <div>
       <LayoutAuth>
         <form onSubmit={handleSubmit}>
           <InputBox
-            input={username}
-            setInput={setUsername}
-            property={'user'}
+            input={email}
+            setInput={setEmail}
+            property={'email'}
           ></InputBox>
           <InputBox
             input={password}
