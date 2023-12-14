@@ -1,6 +1,5 @@
 name: Build and Deploy to GitHub Pages
 on:
-  # set main pull request merged to trigger this deployment
   push:
     branches: [main]
   pull_request:
