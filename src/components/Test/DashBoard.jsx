@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext.jsx';
+import BackgroundPicTest from '../../assets/background-pic-test.png';
 export default function DashBoard() {
   const { isAuthenticated, logout, userData } = useContext(AuthContext);
   return (
@@ -15,6 +16,7 @@ export default function DashBoard() {
       <div>Role: {userData.role}</div>
       <div>User: {userData.name}</div>
       <div>Email: {userData.email}</div>
+      <img src={BackgroundPicTest} alt="BackgroundPicTest" />
     </div>
   );
 }
