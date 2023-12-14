@@ -15,7 +15,7 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const validateEmail = (email) => {
+  const validateEmail = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
@@ -26,8 +26,13 @@ export default function Login() {
       return false;
     }
     // Password check (basic example: check for non-empty and minimum length)
-    if (!password || password.length < 6) {
-      setError('Password must be at least 6 characters long.');
+    if (!password) {
+      if (password.length < 8) {
+        setError('Password must be at least 8 characters long.');
+      }
+      if (password.length > 20) {
+        setError('Password must be at most 20 characters long.');
+      }
       return false;
     }
     setError('');
@@ -54,14 +59,14 @@ export default function Login() {
       if (response.ok) {
         // Handle successful submission here
         // After successful login (based on API response), update the isAuthenticated state
-        console.log('Login Successful:', response);
+        const userData = await response.json();
         setIsAuthenticated(true);
-        setUserData(response);
+        setUserData(userData);
         navigate('/dashboard');
       } else {
         // Handle errors
-        console.error('Login Failed:', response);
-        setError(response.error);
+        const errorMessage = await response.text();
+        setError(errorMessage);
         setIsAuthenticated(false);
       }
     } catch (error) {
@@ -123,7 +128,7 @@ export function Warning({ error }) {
           d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
         />
       </svg>
-      <span>Warning: {error}</span>
+      <span>{error}</span>
     </div>
   );
 }
