@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 export default function DashBoard() {
-  const { isAuthenticated, logout } = useContext(AuthContext);
+  const { isAuthenticated, logout, userData } = useContext(AuthContext);
   return (
     <div>
       <h1>Dashboard To Test</h1>
@@ -12,6 +12,7 @@ export default function DashBoard() {
       >
         Logout
       </button>
+      <div>{userData}</div>
     </div>
   );
 }
