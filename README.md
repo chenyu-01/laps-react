@@ -2,7 +2,7 @@
 
 This is vite+reactjs which provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, the project is using React ^18.2.0, Vite ^5.0.0, and Tailwind CSS ^3.3.6. The project require node js version to be above 20.0.0
+Currently, the project is using React ^18.2.0, Vite ^5.0.0, and Tailwind CSS ^3.3.6. The project require Node.js version to be above 20.0.0
 
 Every Commit You should have the eslint and prettier check passed, if not, please fix it before commit.
 
@@ -29,7 +29,7 @@ Run ESLint Separately for Debugging: If the commit error happens, you might want
 - `src/` folder App.jsx is the main entry point for the application
 - `src/components/` folder contains all the React pages.
 
-For every page, please contain your react component within `<Layout><Layout/>` to have Header in every possible Page
+For every page, please contain your React component within `<Layout><Layout/>` to have Header in every possible Page
 
 ## Test User Account
 
@@ -38,7 +38,7 @@ Password: `yYjHDp)d~+]Pb`
 
 ## Pages to be Implemented
 
-### Authentification Page - Chen Yu
+### Authentication Page - Chen Yu
 
 - [x] Design a simple and intuitive login page and signup page.
   - Include fields for:
@@ -89,7 +89,7 @@ Password: `yYjHDp)d~+]Pb`
     - [ ] Edit employee records.
     - [ ] Delete employee records.
 
-### Leave Approval Page for Managers -YU ZEJING
+### Leave Approval Page for Managers - YU ZEJING
 
 - [ ] Create a page for managers to view and manage leave applications.
   - [ ] Include options to:
@@ -106,23 +106,23 @@ Password: `yYjHDp)d~+]Pb`
 
 ### Layout and Basic Components
 
-- [ ] Create basic layout components (Header, Footer, Navigation) using Radix & Tailwind
+- [ ] Create basic layout components (Header, Footer, Navigation)
 - [ ] Design responsive layout with Tailwind CSS
 
 ### User Authentication
 
-- [x] Implement Login and Registration components with Tailwind CSS for styling
+- [x] Implement Login and Registration components
 - [x] Add user authentication handling (login/logout)
 
 ### Leave Application Functionality
 
-- [ ] Develop Leave Application Form component with Tailwind CSS
+- [ ] Develop Leave Application Form component
 - [ ] Implement form validation and submission logic
-- [ ] Create Leave History Page with Radix & Tailwind
+- [ ] Create Leave History Page
 
 ### Admin Functionality
 
-- [ ] Develop admin dashboard for leave request management using Radix & Tailwind
+- [ ] Develop admin dashboard for leave request management
 - [ ] Add functionalities for request approval/rejection
 
 ### Integration and Testing
@@ -132,6 +132,5 @@ Password: `yYjHDp)d~+]Pb`
 
 ### Finalization and Deployment
 
-- [ ] Conduct thorough testing and UI/UX refinement with Tailwind CSS
-- [ ] Prepare for deployment
-- [ ] Deploy to a web server
+- [ ] Conduct thorough testing and UI/UX refinement
+- [x] Deploy to a GitHub Pages on pull request merge
