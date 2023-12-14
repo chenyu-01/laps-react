@@ -9,6 +9,7 @@ This workflow helps maintain the stability of the main branch and ensures that n
   ```bash
   git checkout main
   git pull
+  npm install # Install any new dependencies
   ```
 
 ## **Create a New Branch for Your Work**
@@ -37,6 +38,7 @@ This workflow helps maintain the stability of the main branch and ensures that n
   ```bash
   git checkout main
   git pull
+  npm install # Install any new dependencies
   git checkout [your-new-branch]
   git merge main
   ```
