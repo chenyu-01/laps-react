@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-and-deploy:
-    if: github.event.pull_request.merged == true
+    if: ${{ github.event.pull_request.merged == true || startsWith(github.event.head_commit.message, '#DEPLOY') }}
     runs-on: ubuntu-latest
 
     steps:
@@ -20,7 +20,7 @@ jobs:
           node-version: '21' # Specify Node.js version
 
       - name: Install and Build
-        run: |
+        run: | # Run commands in the working directory
           npm install
           npm run build
 
