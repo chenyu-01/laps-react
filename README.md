@@ -27,6 +27,11 @@ npm run dev
 
 For every page, please contain your react component within `<Layout><Layout/>` to have Header in every possible Page
 
+## Test User Account
+
+Email: testuser@gmail.com
+Password: password123
+
 ## Pages to be Implemented
 
 ### Authentification Page - Chen Yu
@@ -102,8 +107,8 @@ For every page, please contain your react component within `<Layout><Layout/>` t
 
 ### User Authentication
 
-- [ ] Implement Login and Registration components with Tailwind CSS for styling
-- [ ] Add user authentication handling (login/logout)
+- [x] Implement Login and Registration components with Tailwind CSS for styling
+- [x] Add user authentication handling (login/logout)
 
 ### Leave Application Functionality
 
