@@ -18,7 +18,7 @@ Run ESLint Separately for Debugging: If the commit error happens, you might want
 ### install dependencies
 
 1. go to project directory `cd laps-react`
-2. install dependencies `npm install`, also when you pull the latest version, please run `npm install` to get the latest dependencies
+2. install dependencies `npm install`
 
 ### run the project
 
@@ -33,18 +33,19 @@ For every page, please contain your React component within `<Layout><Layout/>` t
 
 ## Development
 
-Before you start your work, please make sure you have the latest version of the project and check if dependencies are installed correctly. For more information about how to use git, please refer to [How to Use Git](docs/How-to-use-git.md)
-Here is a guide for how to use [React Context API](docs/React-context-api.md) in our project
-Since it is the front end part, we will also have to run the back end part to test the whole project. Please refer to [LAPS Back-End Project](https://github.com/chenyu-01/LAPS-Back-End.git) for more information.
-Some recommended VSCode extensions for React development:
+- Before you start your work, please make sure you have the latest version of the project and check if dependencies are installed correctly. For more information about how to use git, please refer to [How to Use Git](docs/How-to-use-git.md)
+- Here is a guide for how to use [React Context API](docs/React-context-api.md) in our project.
+- Since it is the front end part, we will also have to run the back end part to test the whole project. Please refer to [LAPS Back-End Project](https://github.com/chenyu-01/LAPS-Back-End.git) for more information.
+- Some recommended VSCode extensions for React development:
 
-- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-- [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
-  After talking with Bao, it is also recommended to use Intellij IDEA for React development with built-in ESLint, Prettier and Tailwind support.
-- [Intellij IDEA](https://www.jetbrains.com/idea/)
-- [Intellij IDEA Ultimate](https://www.jetbrains.com/idea/download/#section=windows)
-  Here is the Official Documentation for React: [React](https://react.dev/learn)
+  - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+  - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+  - [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+
+- After talking with Bao, it is also recommended to use Intellij IDEA for React development with built-in ESLint, Prettier and Tailwind support.
+  - [Intellij IDEA](https://www.jetbrains.com/idea/)
+  - [Intellij IDEA Ultimate](https://www.jetbrains.com/idea/download/#section=windows)
+- Here is the Official Documentation for [React](https://react.dev/learn)
 
 ## Test User Account
 
