@@ -33,8 +33,8 @@ For every page, please contain your react component within `<Layout><Layout/>` t
 
 ## Test User Account
 
-Email: testuser@gmail.com
-Password: password123
+Email: `testuser@gmail.com`
+Password: `yYjHDp)d~+]Pb`
 
 ## Pages to be Implemented
 
