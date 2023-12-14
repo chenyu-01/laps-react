@@ -75,7 +75,7 @@ export default function SignUp() {
       }
     } catch (error) {
       console.error('Error submitting form:', error);
-      setError(error);
+      setError('Failed to connect to the server. Please try again later.');
     }
   };
   const handleSelect = (event) => {

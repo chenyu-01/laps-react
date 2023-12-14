@@ -27,13 +27,14 @@ export default function Login() {
     }
     // Password check (basic example: check for non-empty and minimum length)
     if (!password) {
-      if (password.length < 8) {
-        setError('Password must be at least 8 characters long.');
-      }
-      if (password.length > 20) {
-        setError('Password must be at most 20 characters long.');
-      }
+      setError('Please enter a password');
       return false;
+    }
+    if (password.length < 8) {
+      setError('Password must be at least 8 characters long.');
+    }
+    if (password.length > 20) {
+      setError('Password must be at most 20 characters long.');
     }
     setError('');
     return true;
@@ -71,7 +72,7 @@ export default function Login() {
       }
     } catch (error) {
       console.error('Check out Login Error:', error);
-      setError(error);
+      setError('Failed to connect to the server. Please try again later.');
       setIsAuthenticated(false);
     }
   };
