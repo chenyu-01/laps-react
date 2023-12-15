@@ -4,7 +4,7 @@ import AppRoutes from './AppRouts';
 import { BrowserRouter } from 'react-router-dom';
 function App() {
   return (
-    <div className="flex justify-center">
+    <div className>
       <BrowserRouter>
         <AppRoutes />
       </BrowserRouter>
