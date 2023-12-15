@@ -1,13 +1,14 @@
 name: Build and Deploy to GitHub Pages
 on:
-  # set main pull request merged to trigger this deployment
+  push:
+    branches: [main]
   pull_request:
     types: [closed]
     branches: [main]
 
 jobs:
   build-and-deploy:
-    if: github.event.pull_request.merged == true
+    if: ${{ github.event.pull_request.merged == true || startsWith(github.event.head_commit.message, '#DEPLOY') }}
     runs-on: ubuntu-latest
 
     steps:
@@ -20,7 +21,7 @@ jobs:
           node-version: '21' # Specify Node.js version
 
       - name: Install and Build
-        run: |
+        run: | # Run commands in the working directory
           npm install
           npm run build
 
