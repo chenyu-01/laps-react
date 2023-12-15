@@ -4,7 +4,7 @@ import AppRoutes from './AppRouts';
 import { BrowserRouter } from 'react-router-dom';
 function App() {
   return (
-    <div className>
+    <div className="flex">
       <BrowserRouter>
         <AppRoutes />
       </BrowserRouter>
