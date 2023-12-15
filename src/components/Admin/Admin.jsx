@@ -1,40 +1,99 @@
-import React from 'react';
+import React, { useState } from 'react';
+import TestLayout from '../TestLayout';
+import addIcon from '../../assets/add.png';
+import queryIcon from '../../assets/query.svg';
+import PersonCardComponent from './PersonCard';
 
 function AdminPage(props) {
+  //const { personCount } = props;
+
+  const renderPersonCards = () => {
+    var personCount = 11; //for test
+    return Array.from({ length: personCount }, (_, index) => (
+      <PersonCardComponent key={index} />
+    ));
+  };
+
   return (
-    <form className="flex max-w-[700px] justify-between gap-5 items-start max-md:flex-wrap">
-      <header className="text-black text-2xl font-bold">User Records</header>
-      <AdminTitle />
-      <AdminTitle />
-    </form>
+    <TestLayout>
+      <div className="flex flex-col gap-5">
+        <AdminTitle />
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+          {renderPersonCards()}
+        </div>
+      </div>
+    </TestLayout>
   );
 }
 
 function AdminTitle() {
+  const [showInput, setShowInput] = useState(false);
+  const [query, setQuery] = useState('');
+
+  const handleButtonClick = () => {
+    setShowInput(true);
+  };
+
+  const handleQueryChange = (event) => {
+    setQuery(event.target.value);
+  };
+
+  const sendQuery = (queryContent) => {
+    console.log('Sending query:', queryContent);
+    // To Do: 实现查询发送逻辑
+  };
+
+  const handleBlur = () => {
+    if (!query) {
+      setShowInput(false);
+    }
+    sendQuery(query);
+  };
+
   return (
-    <div className="flex-3.5 px-5 items-start max-md:justify-center">
-      <div className="flex-col text-neutral-400 text-sm font-medium relative whitespace-nowrap overflow-hidden aspect-[4.076923076923077] justify-center items-stretch mt-2 pr-4">
-        <img
-          loading="lazy"
-          srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/f6f8e11c-5767-4656-a2aa-8ee637f76dd2?apiKey=afcfb69cbe1345f7bd15a0a535fc2da7&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/f6f8e11c-5767-4656-a2aa-8ee637f76dd2?apiKey=afcfb69cbe1345f7bd15a0a535fc2da7&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/f6f8e11c-5767-4656-a2aa-8ee637f76dd2?apiKey=afcfb69cbe1345f7bd15a0a535fc2da7&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/f6f8e11c-5767-4656-a2aa-8ee637f76dd2?apiKey=afcfb69cbe1345f7bd15a0a535fc2da7&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/f6f8e11c-5767-4656-a2aa-8ee637f76dd2?apiKey=afcfb69cbe1345f7bd15a0a535fc2da7&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/f6f8e11c-5767-4656-a2aa-8ee637f76dd2?apiKey=afcfb69cbe1345f7bd15a0a535fc2da7&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/f6f8e11c-5767-4656-a2aa-8ee637f76dd2?apiKey=afcfb69cbe1345f7bd15a0a535fc2da7&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/f6f8e11c-5767-4656-a2aa-8ee637f76dd2?apiKey=afcfb69cbe1345f7bd15a0a535fc2da7&"className="absolute h-full w-full object-cover object-center inset-0"
-          alt="Type1"
-        />
-        <span>Type1</span>
+    <div className="flex justify-between items-center px-5">
+      <header className="text-black text-2xl font-bold">User Records</header>
+
+      <div className="flex items-center">
+        {/* Type Option - 仅在没有显示搜索框时显示 */}
+        {!showInput && (
+          <div className="relative">
+            <select className="bg-white rounded text-sm text-neutral-400 p-2 mr-4 focus:outline-none focus:ring focus:border-blue-300">
+              <option value="">Select Type</option>
+              <option value="type1">Type1</option>
+              <option value="type2">Type2</option>
+              {/* More options */}
+            </select>
+          </div>
+        )}
+
+        {showInput ? (
+          <div className="flex items-center">
+            <input
+              type="text"
+              value={query}
+              onChange={handleQueryChange}
+              className="border border-gray-300 rounded p-2"
+              onBlur={handleBlur}
+            />
+            <img
+              src={queryIcon}
+              alt="Query"
+              className="ml-2 w-4 h-4 cursor-pointer"
+              onClick={() => sendQuery(query)}
+            />
+          </div>
+        ) : (
+          <button
+            onClick={handleButtonClick}
+            className="flex items-center justify-center p-2"
+          >
+            <img src={queryIcon} alt="Search" className="w-4 h-4" />
+          </button>
+        )}
       </div>
-      <img
-        loading="lazy"
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/6eeab42927ff7b87fb8c27f005e858615fd9e87a01c2d6fe0d6ddbff1553a338?apiKey=afcfb69cbe1345f7bd15a0a535fc2da7&"
-        className="aspect-square object-contain object-center w-2.5 stroke-[0.768px] stroke-neutral-400 overflow-hidden self-center shrink- max-w-full my-auto"
-        alt=""
-      />
-      <img
-        loading="lazy"
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/3992a09e8284f5fc5ef17e979e8de61e1eaad6ea25199cfc1895ccada55a4ab9?apiKey=afcfb69cbe1345f7bd15a0a535fc2da7&"
-        className="aspect-square object-contain object-center w-[22px] overflow-hidden self-stretch shrink-0 max-w-full"
-        alt=""
-      />
     </div>
   );
 }
-
 export default AdminPage;
