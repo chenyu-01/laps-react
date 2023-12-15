@@ -26,6 +26,7 @@ module.exports = {
   plugins: ['react'],
   rules: {
     'react/prop-types': 'off',
+    'linebreak-style': 'off',
   },
   globals: {
     describe: 'readonly',
@@ -33,5 +34,10 @@ module.exports = {
     expect: 'readonly',
     vi: 'readonly',
     global: 'readonly',
+  },
+  settings: {
+    react: {
+      version: 'detect', // Automatically detect the react version
+    },
   },
 };

@@ -19,22 +19,36 @@ export default function InputBox({ input, setInput, property }) {
   };
 
   let icon, inputType, toggleMethod, placeholder;
-
-  if (property === 'user') {
-    // If it's a username or email field
-    icon = crossX;
-    inputType = 'text';
-    toggleMethod = toggleClean;
-    placeholder = 'Your Email';
-  } else {
-    // If it's a password field
-    icon = hidden ? eyeIcon : eyeSlash;
-    placeholder = 'Your Password';
-    inputType = hidden ? 'password' : 'text';
-    toggleMethod = toggleHide;
-  }
-  if (property === 'pass2') {
-    placeholder = 'Confirm Password';
+  switch (property) {
+    case 'email':
+      icon = crossX;
+      inputType = 'email';
+      toggleMethod = toggleClean;
+      placeholder = 'Email';
+      break;
+    case 'pass':
+      icon = hidden ? eyeIcon : eyeSlash;
+      inputType = hidden ? 'password' : 'text';
+      toggleMethod = toggleHide;
+      placeholder = 'Password';
+      break;
+    case 'user':
+      icon = crossX;
+      inputType = 'text';
+      toggleMethod = toggleClean;
+      placeholder = 'Name';
+      break;
+    case 'pass2':
+      icon = hidden ? eyeIcon : eyeSlash;
+      inputType = hidden ? 'password' : 'text';
+      toggleMethod = toggleHide;
+      placeholder = 'Confirm Password';
+      break;
+    default:
+      icon = crossX;
+      inputType = 'text';
+      toggleMethod = toggleClean;
+      placeholder = 'Name';
   }
 
   return (
