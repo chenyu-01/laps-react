@@ -7,6 +7,7 @@ import SignUp from './components/Authentification/SignUp';
 import Approval from './components/Approval/Approval';
 import Admin from './components/Admin/Admin';
 import DashBoard from './components/Test/DashBoard.jsx';
+import DashBoard1 from './components/Test/DashBoard1.jsx';
 
 const AppRoutes = () => {
   return (
@@ -18,6 +19,7 @@ const AppRoutes = () => {
         <Route path="/Approval" element={<Approval />} />
         <Route path="/" element={<Navigate replace to="/login" />} />
         <Route path="/dashboard" element={<DashBoard />} />
+        <Route path="/dashboard1" element={<DashBoard1 />} />
         {/* ... other routes ... */}
       </Routes>
     </AuthProvider>
