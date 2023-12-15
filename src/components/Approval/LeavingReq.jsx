@@ -49,12 +49,12 @@ const LeavingReqContent = ({ duration, startDate, status, type }) => {
         <div className="text-cyan-700 text-xs font-medium">{status}</div>
         <div className="text-slate-800 text-xs font-medium">{type}</div>
       </div>
-      {showCalendar && (
+      {/* {showCalendar && (
         <CalendarComponent
           startDate={startDate}
           onClose={toggleCalendar} // Callback
         />
-      )}
+      )} */}
     </div>
   );
 };

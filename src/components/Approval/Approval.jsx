@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { AuthContext } from '../../context/AuthContext';
+import React, { useState } from 'react';
+//import { AuthContext } from '../../context/AuthContext';
 import TestLayout from '../TestLayout';
 import LeavingReqComponent from './LeavingReq';
 import queryIcon from '../../assets/query.svg';
 
-const Approval = (props) => {
+const Approval = () => {
   //const [requests, setRequests] = useState([]);
 
   // useEffect(() => {

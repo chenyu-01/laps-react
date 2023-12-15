@@ -56,7 +56,9 @@ function UserInfo() {
         className="w-7 h-7" // Tailwind class for width and height
       />
       <div className="flex flex-col justify-center grow">
-        <TextComponent className="text-xs text-black">Authored by</TextComponent>
+        <TextComponent className="text-xs text-black">
+          Authored by
+        </TextComponent>
         <TextComponent className="text-xs text-black font-semibold mt-1.5">
           Name
         </TextComponent>
@@ -74,7 +76,9 @@ function LeavingStatus() {
         className="w-7 h-7" // Tailwind class for width and height
       />
       <div className="flex flex-col justify-center grow">
-        <TextComponent className="text-xs text-black">Leaving Status</TextComponent>
+        <TextComponent className="text-xs text-black">
+          Leaving Status
+        </TextComponent>
         <TextComponent className="text-xs text-black font-semibold mt-1">
           Status
         </TextComponent>

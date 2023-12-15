@@ -4,7 +4,7 @@ import addIcon from '../../assets/add.png';
 import queryIcon from '../../assets/query.svg';
 import PersonCardComponent from './PersonCard';
 
-function AdminPage(props) {
+function AdminPage() {
   //const { personCount } = props;
 
   const renderPersonCards = () => {
@@ -41,7 +41,7 @@ function AdminTitle() {
 
   const sendQuery = (queryContent) => {
     console.log('Sending query:', queryContent);
-    // To Do: 实现查询发送逻辑
+    // To Do:
   };
 
   const handleBlur = () => {
@@ -51,20 +51,30 @@ function AdminTitle() {
     sendQuery(query);
   };
 
+  const handleAddClick = () => {
+    console.log('Add button clicked');
+    // To Do:
+  };
+
   return (
     <div className="flex justify-between items-center px-5">
       <header className="text-black text-2xl font-bold">User Records</header>
 
       <div className="flex items-center">
-        {/* Type Option - 仅在没有显示搜索框时显示 */}
         {!showInput && (
-          <div className="relative">
-            <select className="bg-white rounded text-sm text-neutral-400 p-2 mr-4 focus:outline-none focus:ring focus:border-blue-300">
+          <div className="flex items-center">
+            <select className="bg-white rounded text-sm text-neutral-400 p-2 focus:outline-none focus:ring focus:border-blue-300 mr-4">
               <option value="">Select Type</option>
               <option value="type1">Type1</option>
               <option value="type2">Type2</option>
               {/* More options */}
             </select>
+            <button
+              onClick={handleAddClick}
+              className="flex items-center justify-center p-2 mr-4"
+            >
+              <img src={addIcon} alt="Add" className="w-4 h-4" />
+            </button>
           </div>
         )}
 
@@ -96,4 +106,5 @@ function AdminTitle() {
     </div>
   );
 }
+
 export default AdminPage;
