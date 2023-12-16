@@ -13,6 +13,7 @@ import LeaveColumnStatus from "./Leave-Column-Status.jsx";
 import LeaveColumnOperator from "./Leave-Column-Operator.jsx";
 import LeavePerPage from "./LeavePerPage.jsx";
 import LeaveTotalPage from "./LeaveTotalPage.jsx";
+import LeaveHeader from "./Leave-Header.jsx";
 
 
 
@@ -25,12 +26,7 @@ export default function LeaveHistory() {
                 <div className="flex flex-col items-stretch w-[79%] ml-5 max-md:w-full max-md:ml-0">
                     <div className="flex grow flex-col items-stretch max-md:max-w-full">
 
-                        <div className="justify-center border-b-[color:var(--Dividers-and-Borders---grey-Light,#CECECE)] bg-white flex flex-col pl-16 pr-11 py-4 border-b-[0.889px] border-solid items-end max-md:max-w-full max-md:px-5">
-                            <div className="items-center flex gap-4 py-0.5">
-                                <LeaveIconAlarm />
-                                <LeaveUserCard />
-                            </div>
-                        </div>
+                        <LeaveHeader />
 
                         <div className="flex flex-col mt-4 px-16 items-start max-md:max-w-full max-md:px-5">
                             <LeaveTitle />
