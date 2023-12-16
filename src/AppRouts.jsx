@@ -7,8 +7,8 @@ import SignUp from './components/Authentification/SignUp';
 import Approval from './components/Approval/Approval';
 import Admin from './components/Admin/Admin';
 import DashBoard from './components/Test/DashBoard';
-import LeaveHistory from "./components/Leavehistory/LeaveHistory";
-import LeaveTest from "./components/Leavehistory/Leave-Test";
+import LeaveHistory from './components/Leavehistory/LeaveHistory';
+import LeaveTest from './components/Leavehistory/Leave-Test';
 
 const AppRoutes = () => {
   return (
@@ -21,6 +21,7 @@ const AppRoutes = () => {
         <Route path="/" element={<Navigate replace to="/login" />} />
         <Route path="/dashboard" element={<DashBoard />} />
         <Route path="/leavehistory" element={<LeaveHistory />} />
+        <Route path="/leavetest" element={<LeaveTest />} />
         {/* ... other routes ... */}
       </Routes>
     </AuthProvider>
