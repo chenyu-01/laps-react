@@ -17,37 +17,43 @@ function TextComponent({ children, className }) {
   return <div className={`${className}`}>{children}</div>;
 }
 
-export default function PersonCardComponent() {
+export default function PersonCardComponent({
+  PictureSrc,
+  name,
+  type,
+  authName,
+  status,
+}) {
   return (
     <div className="shadow-lg bg-white flex flex-col items-stretch mt-5 px-5 py-3.5 rounded-lg">
-      <Header />
-      <UserInfo />
-      <LeavingStatus />
+      <Header PictureSrc={PictureSrc} Name={name} Type={type} />
+      <UserInfo AuthName={authName} />
+      <LeavingStatus Status={status} />
     </div>
   );
 }
 
-function Header() {
+function Header({ PictureSrc, Name, Type }) {
   return (
     <header className="flex w-full items-stretch justify-between gap-5">
       <div className="flex items-stretch justify-between gap-2.5">
         <ImageComponent
-          src="logo_url"
-          alt="Logo"
+          src={PictureSrc}
+          alt="Picture"
           className="w-10 h-10" // Tailwind class for width and height
         />
         <TextComponent className="text-black text-lg font-semibold self-center">
-          Name
+          {Name}
         </TextComponent>
       </div>
       <TextComponent className="text-cyan-700 text-xs leading-5 capitalize self-start">
-        Type
+        {Type}
       </TextComponent>
     </header>
   );
 }
 
-function UserInfo() {
+function UserInfo({ AuthName }) {
   return (
     <div className="flex items-stretch justify-between gap-2 mt-3 py-1.5 rounded-lg">
       <ImageComponent
@@ -57,17 +63,17 @@ function UserInfo() {
       />
       <div className="flex flex-col justify-center grow">
         <TextComponent className="text-xs text-black">
-          Authored by
+          Authorize by
         </TextComponent>
         <TextComponent className="text-xs text-black font-semibold mt-1.5">
-          Name
+          {AuthName}
         </TextComponent>
       </div>
     </div>
   );
 }
 
-function LeavingStatus() {
+function LeavingStatus({ Status }) {
   return (
     <div className="flex items-stretch justify-between gap-2.5 mt-2 py-2 rounded-lg">
       <ImageComponent
@@ -80,7 +86,7 @@ function LeavingStatus() {
           Leaving Status
         </TextComponent>
         <TextComponent className="text-xs text-black font-semibold mt-1">
-          Status
+          {Status}
         </TextComponent>
       </div>
     </div>
