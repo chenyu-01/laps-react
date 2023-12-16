@@ -7,8 +7,8 @@ import SignUp from './components/Authentification/SignUp';
 import Approval from './components/Approval/Approval';
 import Admin from './components/Admin/Admin';
 import DashBoard from './components/Test/DashBoard';
-import LeaveHistory from './components/Leavehistory/LeaveHistory';
-import LeaveTest from './components/Leavehistory/Leave-Test';
+import LeaveHistory from './components/LeaveHistory/LeaveHistory';
+import LeaveTest from './components/LeaveHistory/Leave-Test';
 import TestLayout from './components/Test/TestLayout.jsx';
 
 const AppRoutes = () => {

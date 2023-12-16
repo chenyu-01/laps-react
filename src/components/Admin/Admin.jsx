@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 //import { useEffect } from 'react';
-import TestLayout from '../TestLayout';
+import TestLayout from '../Test/TestLayout.jsx';
 import ProfileCard from './ProfileCard';
 import addIcon from '../../assets/add.png';
 import queryIcon from '../../assets/query.svg';
 import PersonCardComponent from './PersonCard';
 
 function AdminComponent() {
+  // eslint-disable-next-line no-unused-vars
   const [personData, setPersonData] = useState(generateMockPersonData);
   const [showAddPerson, setShowAddPerson] = useState(false);
   const [selectedPerson, setSelectedPerson] = useState(null);
