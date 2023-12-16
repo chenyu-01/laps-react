@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function LeaveUserCard() {
+export default function LeaveTitle() {
   return (
     <div className="text-zinc-700 text-opacity-80 text-xl font-medium self-stretch max-md:max-w-full">
-      Payment History
+      Leave Application History
     </div>
   );
 }

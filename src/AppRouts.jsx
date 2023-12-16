@@ -9,6 +9,7 @@ import Admin from './components/Admin/Admin';
 import DashBoard from './components/Test/DashBoard';
 import LeaveHistory from './components/Leavehistory/LeaveHistory';
 import LeaveTest from './components/Leavehistory/Leave-Test';
+import TestLayout from './components/Test/TestLayout.jsx';
 
 const AppRoutes = () => {
   return (
@@ -19,7 +20,8 @@ const AppRoutes = () => {
         <Route path="/Admin" element={<Admin />} />
         <Route path="/Approval" element={<Approval />} />
         <Route path="/" element={<Navigate replace to="/login" />} />
-        <Route path="/dashboard" element={<DashBoard />} />
+        <Route path="/dashboard" element={<TestLayout />} />
+        <Route path="/test-dashboard" element={<DashBoard />} />
         <Route path="/leavehistory" element={<LeaveHistory />} />
         <Route path="/leavetest" element={<LeaveTest />} />
         {/* ... other routes ... */}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 //import { AuthContext } from '../../context/AuthContext';
-import TestLayout from '../TestLayout';
+import TestLayout from '../Test/TestLayout.jsx';
 import LeavingReqComponent from './LeavingReq';
 import queryIcon from '../../assets/query.svg';
 
