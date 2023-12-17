@@ -2,12 +2,19 @@ import { React, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 
-export default function SideBar() {
+export default function SideBar({ isOpen }) {
+  // eslint-disable-next-line no-unused-vars
   const { userData } = useContext(AuthContext);
-  const role = userData.role;
+  const sideBarClass = isOpen
+    ? 'transform translate-x-0 w-1/5'
+    : 'transform -translate-x-full w-0';
+  // const role = userData.role;
+  const role = 'Employee';
   return (
-    <div className="flex flex-col bg-white items-stretch w-[21%] max-md:w-full max-md:ml-0">
-      <div className="shadow-2xl flex w-full grow flex-col mx-auto px-8 py-4 items-start max-md:px-5 divide-y-5">
+    <div
+      className={`flex flex-col bg-white items-stretch max-md:w-full max-md:ml-0 overflow-hidden transition-transform duration-300 ${sideBarClass}`}
+    >
+      <div className="shadow-2xl flex grow flex-col px-2 py-4 items-start divide-y-5">
         {role === 'Employee' ? <NavigationEmployee /> : null}
         {role === 'Admin' ? <NavigationAdmin /> : null}
         {role === 'Manager' ? <NavigationManager /> : null}
@@ -31,10 +38,7 @@ function NavigationEmployee() {
         <a href={'http://localhost:8080/leave'}>New Leave Application</a>
       </NavLink>
       <NavLink>
-        <Link to={'/Admin'}>Admin Page</Link>
-      </NavLink>
-      <NavLink>
-        <Link to={'/Approval'}>Approval Page</Link>
+        <Link to={'/LeaveHistory'}>Leave History</Link>
       </NavLink>
     </div>
   );
@@ -56,6 +60,9 @@ function NavigationAdmin() {
 function NavigationManager() {
   return (
     <div>
+      <NavLink>
+        <a href={'http://localhost:8080/leave'}>New Leave Application</a>
+      </NavLink>
       <NavLink>
         <Link to={'/Approval'}>Approval Page</Link>
       </NavLink>

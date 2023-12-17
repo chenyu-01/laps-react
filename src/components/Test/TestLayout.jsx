@@ -3,11 +3,13 @@ import Header from './Header.jsx';
 import Sidebar from './Sidebar.jsx';
 
 function TestLayout({ children }) {
+  const [isSidebarOpen, setIsSidebarOpen] = React.useState(true);
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   return (
     <div className="flex flex-col bg-gray-50 h-screen w-screen">
-      <Header />
+      <Header toggleSidebar={toggleSidebar} />
       <div className="flex flex-grow">
-        <Sidebar />
+        <Sidebar isOpen={isSidebarOpen} />
         <Content>{children}</Content>
       </div>
     </div>
