@@ -24,7 +24,7 @@ export default function LeaveHistory() {
         <div className="flex flex-col mt-4 px-16 items-start max-md:max-w-full max-md:px-5">
           <LeaveTitle />
           <LeaveButtonCategories />
-          <div className="bg-white flex flex-col mt-3.5 pb-9 rounded-xl border-[0.889px] border-solid border-gray-200 max-md:max-w-full">
+          <div className="bg-white flex flex-col mt-3.5 pb-9 rounded-xl border-[0.889px] border-solid border-gray-200 md:w-full">
             <LeaveRow
               orderID={'Id'}
               startDate={'StartDate'}
