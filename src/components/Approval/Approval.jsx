@@ -29,7 +29,7 @@ const Approval = () => {
       typeName: 'Name',
       duration: '2D 5h',
       startDate: '12 Feb',
-      status: 'Approved',
+      comment: 'Approved',
       type: 'Type1',
     },
     {
@@ -38,7 +38,7 @@ const Approval = () => {
       typeName: 'Name',
       duration: '2D 5h',
       startDate: '12 Feb',
-      status: 'Approved',
+      comment: 'Approved',
       type: 'Type1',
     },
     {
@@ -47,7 +47,7 @@ const Approval = () => {
       typeName: 'Name',
       duration: '2D 5h',
       startDate: '12 Feb',
-      status: 'Approved',
+      comment: 'Approved',
       type: 'Type1',
     },
   ];
@@ -123,7 +123,7 @@ const Approval = () => {
             typeName={req.typeName}
             duration={req.duration}
             startDate={req.startDate}
-            status={req.status}
+            comment={req.comment}
             type={req.type}
           />
         </div>

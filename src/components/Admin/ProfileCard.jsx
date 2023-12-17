@@ -3,15 +3,31 @@ import jobIcon from '../../assets/job_icon.png';
 import mailIcon from '../../assets/Mail.png';
 import authIcon from '../../assets/Auth_icon.png';
 
-function ProfileCard({ mode, person }) {
+function ProfileCard({ mode, person, onClose }) {
   const [name, setName] = useState(person ? person.name : '');
   const [mail, setMail] = useState(person ? person.mail : '');
   const [authName, setAuthName] = useState(person ? person.authName : '');
   const [careerTitle, setCareerTitle] = useState(
     person ? person.careerTitle : ''
   );
+  const [error, setError] = useState('');
 
   const isEditMode = mode === 'edit';
+
+  const handleResponse = async (request) => {
+    try {
+      const response = await request;
+      if (response.ok) {
+        onClose();
+      } else {
+        const errorMessage = `Error: ${response.statusText}`;
+        setError(errorMessage);
+      }
+    } catch (error) {
+      const errorMessage = `Error: ${error.message}`;
+      setError(errorMessage);
+    }
+  };
 
   const handleSubmit = () => {
     const data = {
@@ -22,6 +38,18 @@ function ProfileCard({ mode, person }) {
     };
     console.log('Submitting:', data);
     // TODO: Submit
+    onClose();
+  };
+  const handleDelete = () => {
+    const data = {
+      name,
+      mail,
+      authName,
+      careerTitle,
+    };
+    console.log('Submitting:', data);
+    // TODO: Submit
+    onClose();
   };
 
   return (
@@ -31,7 +59,7 @@ function ProfileCard({ mode, person }) {
           mode={mode}
           onNameChange={setName}
           personName={name}
-          personImgSrc="image_source_here" // 替换为实际的图片源
+          personImgSrc="image_source_here" // TODO: Add image source
         />
 
         <ProfileDetailSection
@@ -56,7 +84,12 @@ function ProfileCard({ mode, person }) {
           onChange={setAuthName}
           iconSrc={authIcon}
         />
-        <ProfileActions isEditMode={isEditMode} onSubmit={handleSubmit} />
+        {error && <div className="text-red-400 text-sm my-2">{error}</div>}
+        <ProfileActions
+          isEditMode={isEditMode}
+          onSubmit={handleSubmit}
+          onDelete={handleDelete}
+        />
       </header>
     </div>
   );
@@ -150,17 +183,20 @@ function ProfileDetailSection({
   );
 }
 
-function ProfileActions({ isEditMode, onSubmit }) {
+function ProfileActions({ isEditMode, onSubmit, onDelete }) {
   return (
     <div className="flex justify-around p-4">
       <button
-        className="bg-blue-500 text-white py-2 px-4 rounded"
+        className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg bg-blue-400 text-white py-2 px-4 "
         onClick={onSubmit}
       >
         Submit
       </button>
       {isEditMode && (
-        <button className="bg-red-500 text-white py-2 px-4 rounded">
+        <button
+          className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg bg-red-400 text-white py-2 px-4 "
+          onClick={onDelete}
+        >
           Delete
         </button>
       )}
