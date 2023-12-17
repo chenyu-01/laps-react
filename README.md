@@ -81,7 +81,7 @@ Password: `yYjHDp)d~+]Pb`
     - [ ] Manage Leave Entitlement
     - [ ] Manage Approval Hierarchy
 
-### Leave Application Form - Priya
+### Leave Application Form - Priya （Well be done in Thymeleaf）
 
 - [ ] Design a form for leave application submission.
   - Include fields for:
@@ -92,10 +92,10 @@ Password: `yYjHDp)d~+]Pb`
 
 ### Leave History Page - Liu Bao
 
-- [ ] Design a page for employees to view their leave history.
-  - [ ] Use a tabular format to list previous leave applications with:
-    - [ ] Status.
-    - [ ] Details.
+- [x] Design a page for employees to view their leave history.
+  - [x] Use a tabular format to list previous leave applications with:
+    - [x] Status.
+    - [x] Details.
 
 ### Admin Management Page - YU ZEJING
 
