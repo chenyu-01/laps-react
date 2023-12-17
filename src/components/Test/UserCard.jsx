@@ -6,6 +6,7 @@ export default function UserCard() {
   return (
     <div className="items-stretch bg-white bg-opacity-50 self-stretch flex gap-2.5 px-2.5 py-2 rounded-lg border-[1.024px] border-solid border-indigo-50 max-md:justify-center">
       <img
+        alt={'user-icon'}
         loading="lazy"
         src={usericon}
         className="aspect-[0.97] object-contain object-center w-8 justify-center items-center overflow-hidden self-center shrink-0 max-w-full my-auto"

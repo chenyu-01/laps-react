@@ -12,7 +12,7 @@ export default function SideBar({ isOpen }) {
   const role = 'Employee';
   return (
     <div
-      className={`flex flex-col bg-white items-stretch max-md:w-full max-md:ml-0 overflow-hidden transition-transform duration-300 ${sideBarClass}`}
+      className={`flex flex-col w-1/5 bg-white items-stretch max-md:w-full overflow-hidden transition-transform duration-300 ${sideBarClass}`}
     >
       <div className="shadow-2xl flex grow flex-col px-2 py-4 items-start divide-y-5">
         {role === 'Employee' ? <NavigationEmployee /> : null}
