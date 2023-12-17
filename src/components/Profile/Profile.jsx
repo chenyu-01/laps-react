@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext.jsx';
 import BackgroundPicTest from '../../assets/background-pic-test.png';
 import { Link } from 'react-router-dom';
-export default function DashBoard() {
+export default function Profile() {
   const { isAuthenticated, logout, userData } = useContext(AuthContext);
   return (
-    <div className={'prose'}>
-      <h1 className={'mt-5'}>Dashboard To Test</h1>
+    <div className={'prose flex flex-col items-center mx-auto container'}>
+      <h1 className={'mt-5'}>Profile Page</h1>
       <h2>{isAuthenticated ? 'Authenticated' : 'Not Authenticated'}</h2>
       <div>Role: {userData.role}</div>
       <div>User: {userData.name}</div>
