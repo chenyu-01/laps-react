@@ -93,7 +93,7 @@ function AdminComponent() {
       </div>
       {showAddPerson && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+          className="z-20 fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
           onClick={handleOverlayClick}
         >
           <div

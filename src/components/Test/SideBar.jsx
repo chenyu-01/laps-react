@@ -6,8 +6,8 @@ export default function SideBar({ isOpen }) {
   // eslint-disable-next-line no-unused-vars
   const { userData } = useContext(AuthContext);
   const sideBarClass = isOpen ? 'block' : 'hidden';
-  // const role = userData.role;
-  const role = 'Employee';
+  const role = userData.role;
+  // const role = 'Employee';
   return (
     <div
       className={`shadow-2xl absolute h-full lg:relative z-10 flex-col w-1/5 bg-white items-stretch max-md:w-2/3 ${sideBarClass}`}
