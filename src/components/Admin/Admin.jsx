@@ -60,7 +60,7 @@ function AdminComponent() {
 
   return (
     <TestLayout>
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-5 m-4">
         <AdminTitle onAddClick={handleAddClick} />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
@@ -69,9 +69,9 @@ function AdminComponent() {
               <PersonCardComponent
                 key={index}
                 name={person.name}
-                type={person.type}
+                type={person.role}
                 authName={person.authName}
-                status={person.status}
+                email={person.email}
               />
             </div>
           ))}
