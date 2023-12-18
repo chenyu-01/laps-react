@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom';
 import React from 'react';
 export function Button() {
   const location = useLocation();
-  const buttonText = location.pathname === '/login' ? 'Sign In' : 'Register';
+  const buttonText = location.pathname === '/login' ? 'Login' : 'Register';
   // Destructure error from props
   return (
     <div>

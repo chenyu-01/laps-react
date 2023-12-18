@@ -13,7 +13,7 @@ export default function LeaveHistory() {
   return (
     <div>
       <TestLayout>
-        <div className="flex flex-col mt-4 px-16 items-start max-md:max-w-full max-md:px-5">
+        <div className="flex flex-col mt-4 px-16 items-start max-md:max-w-full max-md:px-5 min-w-[950px]">
           <LeaveTitle />
           <LeaveButtonCategories />
           <div className="bg-white flex flex-col mt-3.5 pb-9 rounded-xl border-[0.889px] border-solid border-gray-200 md:w-full">

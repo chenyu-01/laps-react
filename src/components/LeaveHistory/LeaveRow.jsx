@@ -11,7 +11,7 @@ export default function LeaveRow({
 }) {
   const navigate = useNavigate();
   return (
-    <div className="flex items-center justify-between px-0.5 max-md:max-w-full max-md:flex-wrap max-md:justify-center border-b">
+    <div className="flex items-center justify-between px-0.5 w-full border-b">
       <div className={'w-1/6'}>
         <Cell>{leaveId}</Cell>
       </div>
@@ -51,7 +51,7 @@ export default function LeaveRow({
 
 function Cell({ children }) {
   return (
-    <div className="text-zinc-700 text-opacity-80 text-center text-sm tracking-normal whitespace-nowrap justify-center px-2  py-5  max-md:px-5">
+    <div className="text-zinc-700 text-opacity-80 text-center text-sm tracking-normal whitespace-nowrap justify-center px-2 py-5 min-w-[100px]">
       {children}
     </div>
   );
@@ -59,7 +59,7 @@ function Cell({ children }) {
 
 export function HeaderRow() {
   return (
-    <div className="flex items-stretch justify-between px-0.5 max-md:max-w-full max-md:flex-wrap max-md:justify-center border-b">
+    <div className="flex items-stretch justify-between px-0.5 w-full border-b">
       <div className={'w-1/6'}>
         <Cell>Id</Cell>
       </div>
