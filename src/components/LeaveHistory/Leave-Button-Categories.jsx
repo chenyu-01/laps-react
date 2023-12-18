@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function LeaveButtonCategories() {
   return (
-    <div className="flex w-full gap-3.5 mt-5 max-md:max-w-full max-md:flex-wrap max-md:justify-center">
+    <div className="flex w-full gap-3.5 mt-5 max-md:max-w-full max-md:flex-wrap">
       <CategoryButton>All</CategoryButton>
       <CategoryButton>Applied</CategoryButton>
       <CategoryButton>Approved</CategoryButton>

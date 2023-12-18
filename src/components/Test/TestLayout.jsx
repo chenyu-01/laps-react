@@ -9,7 +9,7 @@ function TestLayout({ children }) {
     <div className="bg-gray-50 h-screen w-screen flex xl:justify-center">
       <div className={'flex flex-col items-center xl:max-w-screen-xl w-full '}>
         <Header toggleSidebar={toggleSidebar} />
-        <div className="flex flex-grow w-full">
+        <div className="flex flex-grow w-full relative">
           <Sidebar isOpen={isSidebarOpen} />
           <Content>{children}</Content>
         </div>

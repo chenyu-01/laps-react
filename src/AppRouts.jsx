@@ -9,6 +9,7 @@ import Admin from './components/Admin/Admin';
 import Profile from './components/Profile/Profile.jsx';
 import LeaveHistory from './components/LeaveHistory/LeaveHistory';
 import TestLayout from './components/Test/TestLayout.jsx';
+import LeaveModify from './components/LeaveHistory/LeaveModify.jsx';
 
 const AppRoutes = () => {
   return (
@@ -22,6 +23,7 @@ const AppRoutes = () => {
         <Route path="/dashboard" element={<TestLayout />} />
         <Route path="/test-dashboard" element={<Profile />} />
         <Route path="/leavehistory" element={<LeaveHistory />} />
+        <Route path="/leave-modify/:leaveId" element={<LeaveModify />} />
         {/* ... other routes ... */}
       </Routes>
     </AuthProvider>
