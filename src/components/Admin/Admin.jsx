@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-//import { useEffect } from 'react';
+import React from 'react';
+import { useEffect, useContext, useState } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 import TestLayout from '../TestLayout';
 import ProfileCard from './ProfileCard';
 import addIcon from '../../assets/add.png';
@@ -7,22 +8,35 @@ import queryIcon from '../../assets/query.svg';
 import PersonCardComponent from './PersonCard';
 
 function AdminComponent() {
-  const [personData, setPersonData] = useState(generateMockPersonData);
+  const [personData, setPersonData] = useState([]);
   const [showAddPerson, setShowAddPerson] = useState(false);
   const [selectedPerson, setSelectedPerson] = useState(null);
-  // useEffect(() => {
-  //   const fetchPersonData = async () => {
-  //     try {
-  //       const response = await fetch('YOUR_API_ENDPOINT'); // TODO
-  //       const data = await response.json();
-  //       setPersonData(data); //
-  //     } catch (error) {
-  //       console.error('Error fetching person data:', error);
-  //     }
-  //   };
 
-  //   fetchPersonData();
-  // }, []);
+  const { isAuthenticated } = useContext(AuthContext);
+
+  const list_all_persons = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/api/admin/users', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+      const data = await response.json();
+
+      setPersonData(data);
+    } catch (error) {
+      console.error('Error fetching person data:', error);
+    }
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      list_all_persons();
+    }
+    list_all_persons();
+  }, [isAuthenticated]);
 
   const handleAddClick = () => {
     setSelectedPerson(null);
@@ -31,6 +45,7 @@ function AdminComponent() {
 
   const handleCloseAddPerson = () => {
     setShowAddPerson(false);
+    list_all_persons();
   };
 
   const handleOverlayClick = (event) => {
@@ -44,18 +59,18 @@ function AdminComponent() {
     setShowAddPerson(true);
   };
 
-  function generateMockPersonData() {
-    const mockData = [];
-    for (let i = 0; i < 10; i++) {
-      mockData.push({
-        name: `Person ${i + 1}`,
-        type: `Type ${Math.ceil(Math.random() * 5)}`, // 随机生成类型
-        authName: `Authorizer ${Math.ceil(Math.random() * 5)}`, // 随机生成授权人
-        status: Math.random() > 0.5 ? 'Approved' : 'Pending', // 随机生成状态
-      });
-    }
-    return mockData;
-  }
+  // function generateMockPersonData() {
+  //   const mockData = [];
+  //   for (let i = 0; i < 10; i++) {
+  //     mockData.push({
+  //       name: `Person ${i + 1}`,
+  //       type: `Type ${Math.ceil(Math.random() * 5)}`, // 随机生成类型
+  //       authName: `Authorizer ${Math.ceil(Math.random() * 5)}`, // 随机生成授权人
+  //       mail: Math.random() > 0.5 ? 'Approved' : 'Pending', // 随机生成状态
+  //     });
+  //   }
+  //   return mockData;
+  // }
 
   return (
     <TestLayout>
@@ -68,9 +83,9 @@ function AdminComponent() {
               <PersonCardComponent
                 key={index}
                 name={person.name}
-                type={person.type}
+                type={person.role}
                 authName={person.authName}
-                status={person.status}
+                email={person.email}
               />
             </div>
           ))}
