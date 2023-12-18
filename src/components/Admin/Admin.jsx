@@ -1,7 +1,8 @@
 import React from 'react';
 import { useEffect, useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-import TestLayout from '../TestLayout';
+//import { useEffect } from 'react';
+import TestLayout from '../Test/TestLayout.jsx';
 import ProfileCard from './ProfileCard';
 import addIcon from '../../assets/add.png';
 import queryIcon from '../../assets/query.svg';
@@ -44,7 +45,6 @@ function AdminComponent() {
 
   const handleCloseAddPerson = () => {
     setShowAddPerson(false);
-    list_all_persons();
   };
 
   const handleOverlayClick = (event) => {
@@ -69,9 +69,9 @@ function AdminComponent() {
               <PersonCardComponent
                 key={index}
                 name={person.name}
-                type={person.role}
+                type={person.type}
                 authName={person.authName}
-                email={person.email}
+                status={person.status}
               />
             </div>
           ))}
@@ -79,7 +79,7 @@ function AdminComponent() {
       </div>
       {showAddPerson && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+          className="z-20 fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
           onClick={handleOverlayClick}
         >
           <div

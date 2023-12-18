@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-import TestLayout from '../TestLayout';
+//import { AuthContext } from '../../context/AuthContext';
+import TestLayout from '../Test/TestLayout.jsx';
 import LeavingReqComponent from './LeavingReq';
 import queryIcon from '../../assets/query.svg';
 
@@ -136,13 +137,12 @@ const Approval = () => {
           {' '}
           <LeavingReqComponent
             reason={req.reason}
-            //personSrc={req.employee.personSrc}
-            //typeName={req.employee.name}
+            personSrc={req.personSrc}
+            typeName={req.typeName}
+            duration={req.duration}
             startDate={req.startDate}
-            endDate={req.endDate}
-            comment={req.comment}
+            status={req.status}
             type={req.type}
-            applicationId={req.id}
           />
         </div>
       ))}

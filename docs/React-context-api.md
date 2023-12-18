@@ -37,7 +37,7 @@ To use `AuthContext` in a component:
      }
      ```
    - **Using User Data**
-     - example file: [Dashboard.jsx](../src/components/Test/DashBoard.jsx)
+     - example file: [Dashboard.jsx](../src/components/Profile/Profile.jsx)
        ```jsx
        console.log(userData.role, userData.name, userData.email);
        ```

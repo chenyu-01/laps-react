@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useState } from 'react';
 import InputBox from './inputBox';
 import { Link, useNavigate } from 'react-router-dom';
@@ -9,9 +9,6 @@ export default function Login() {
   const { isAuthenticated, setIsAuthenticated, setUserData } =
     useContext(AuthContext);
   const navigate = useNavigate();
-  if (isAuthenticated) {
-    window.location.href = '/dashboard';
-  }
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -48,7 +45,7 @@ export default function Login() {
       password,
     };
     try {
-      const response = await fetch('http://localhost:8080/api/login', {
+      const response = await fetch('http://localhost:8080/api/users/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -77,6 +74,11 @@ export default function Login() {
     }
   };
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/dashboard');
+    }
+  }, [isAuthenticated]);
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent default form submission
     if (!validateForm()) return;

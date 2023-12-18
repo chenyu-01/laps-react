@@ -9,11 +9,15 @@ export const AuthProvider = ({ children }) => {
   const [userData, setUserData] = useState({});
   const checkAuthStatus = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/check-auth', {
-        credentials: 'include',
-      });
+      const response = await fetch(
+        'http://localhost:8080/api/users/check-auth',
+        {
+          credentials: 'include',
+        }
+      );
       if (response.ok) {
         setIsAuthenticated(true);
+        setUserData(await response.json());
         console.log('User is authenticated', response);
       } else {
         setIsAuthenticated(false);
@@ -33,7 +37,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/logout', {
+      const response = await fetch('http://localhost:8080/api/users/logout', {
         method: 'POST',
         credentials: 'include',
       });
