@@ -35,8 +35,7 @@ function AdminComponent() {
     if (isAuthenticated) {
       list_all_persons();
     }
-    list_all_persons();
-  }, [isAuthenticated]);
+  }, [isAuthenticated, showAddPerson]);
 
   const handleAddClick = () => {
     setSelectedPerson(null);
@@ -58,19 +57,6 @@ function AdminComponent() {
     setSelectedPerson(person);
     setShowAddPerson(true);
   };
-
-  // function generateMockPersonData() {
-  //   const mockData = [];
-  //   for (let i = 0; i < 10; i++) {
-  //     mockData.push({
-  //       name: `Person ${i + 1}`,
-  //       type: `Type ${Math.ceil(Math.random() * 5)}`, // 随机生成类型
-  //       authName: `Authorizer ${Math.ceil(Math.random() * 5)}`, // 随机生成授权人
-  //       mail: Math.random() > 0.5 ? 'Approved' : 'Pending', // 随机生成状态
-  //     });
-  //   }
-  //   return mockData;
-  // }
 
   return (
     <TestLayout>
