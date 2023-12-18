@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useEffect, useContext, useState } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 //import { useEffect } from 'react';
 import TestLayout from '../Test/TestLayout.jsx';
 import ProfileCard from './ProfileCard';
@@ -7,23 +9,35 @@ import queryIcon from '../../assets/query.svg';
 import PersonCardComponent from './PersonCard';
 
 function AdminComponent() {
-  // eslint-disable-next-line no-unused-vars
-  const [personData, setPersonData] = useState(generateMockPersonData);
+  const [personData, setPersonData] = useState([]);
   const [showAddPerson, setShowAddPerson] = useState(false);
   const [selectedPerson, setSelectedPerson] = useState(null);
-  // useEffect(() => {
-  //   const fetchPersonData = async () => {
-  //     try {
-  //       const response = await fetch('YOUR_API_ENDPOINT'); // TODO
-  //       const data = await response.json();
-  //       setPersonData(data); //
-  //     } catch (error) {
-  //       console.error('Error fetching person data:', error);
-  //     }
-  //   };
 
-  //   fetchPersonData();
-  // }, []);
+  const { isAuthenticated } = useContext(AuthContext);
+
+  const list_all_persons = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/api/admin/users', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+      const data = await response.json();
+
+      setPersonData(data);
+    } catch (error) {
+      console.error('Error fetching person data:', error);
+    }
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      list_all_persons();
+    }
+    list_all_persons();
+  }, [isAuthenticated]);
 
   const handleAddClick = () => {
     setSelectedPerson(null);

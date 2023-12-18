@@ -1,27 +1,91 @@
 import React, { useState } from 'react';
 import jobIcon from '../../assets/job_icon.png';
-import mailIcon from '../../assets/Mail.png';
+import emailIcon from '../../assets/mail.png';
 import authIcon from '../../assets/Auth_icon.png';
 
-function ProfileCard({ mode, person }) {
+function ProfileCard({ mode, person, onClose }) {
   const [name, setName] = useState(person ? person.name : '');
-  const [mail, setMail] = useState(person ? person.mail : '');
+  const [email, setemail] = useState(person ? person.email : '');
   const [authName, setAuthName] = useState(person ? person.authName : '');
-  const [careerTitle, setCareerTitle] = useState(
-    person ? person.careerTitle : ''
-  );
+  const [role, setrole] = useState(person ? person.role : 'Employee');
+  const [error, setError] = useState('');
 
   const isEditMode = mode === 'edit';
 
-  const handleSubmit = () => {
-    const data = {
-      name,
-      mail,
-      authName,
-      careerTitle,
-    };
-    console.log('Submitting:', data);
-    // TODO: Submit
+  const API_URL = 'http://localhost:8080/api/admin';
+
+  const updateUser = async (userId, userData) => {
+    try {
+      const response = await fetch(`${API_URL}/${userId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+      return response;
+    } catch (error) {
+      console.error('Error updating user:', error);
+    }
+  };
+
+  const addUser = async (userData) => {
+    try {
+      const password = 'Test?123';
+      userData.password = password;
+      const response = await fetch(`${API_URL}/user`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+      return response;
+    } catch (error) {
+      console.error('Error adding user:', error);
+    }
+  };
+
+  const deleteUser = async (userId) => {
+    try {
+      const response = await fetch(`${API_URL}/${userId}`, {
+        method: 'DELETE',
+      });
+      return response;
+    } catch (error) {
+      console.error('Error deleting user:', error);
+    }
+  };
+
+  const handleSubmit = async () => {
+    const userData = { name, email, authName, role };
+    if (mode === 'create') {
+      const response = await addUser(userData);
+      if (response && response.ok) {
+        onClose();
+      } else {
+        setError('Failed to add user');
+      }
+    } else if (mode === 'edit' && person && person.id) {
+      const response = await updateUser(person.id, userData);
+      if (response && response.ok) {
+        onClose();
+      } else {
+        setError('Failed to update user');
+      }
+    }
+  };
+
+  const handleDelete = async () => {
+    if (mode === 'edit' && person && person.id) {
+      const response = await deleteUser(person.id);
+      if (response && response.ok) {
+        onClose();
+      } else {
+        // 处理错误情况
+        setError('Failed to delete user');
+      }
+    }
   };
 
   return (
@@ -31,21 +95,21 @@ function ProfileCard({ mode, person }) {
           mode={mode}
           onNameChange={setName}
           personName={name}
-          personImgSrc="image_source_here" // 替换为实际的图片源
+          personImgSrc="image_source_here" // TODO: Add image source
         />
 
         <ProfileDetailSection
-          title="Mail Address"
-          value={mail}
+          title="email Address"
+          value={email}
           editable={!isEditMode}
-          onChange={setMail}
-          iconSrc={mailIcon}
+          onChange={setemail}
+          iconSrc={emailIcon}
         />
         <ProfileDetailSection
           title="Career Title"
-          value={careerTitle}
+          value={role}
           editable={true} //
-          onChange={setCareerTitle}
+          onChange={setrole}
           isSelect={true} //
           iconSrc={jobIcon}
         />
@@ -56,7 +120,12 @@ function ProfileCard({ mode, person }) {
           onChange={setAuthName}
           iconSrc={authIcon}
         />
-        <ProfileActions isEditMode={isEditMode} onSubmit={handleSubmit} />
+        {error && <div className="text-red-400 text-sm my-2">{error}</div>}
+        <ProfileActions
+          isEditMode={isEditMode}
+          onSubmit={handleSubmit}
+          onDelete={handleDelete}
+        />
       </header>
     </div>
   );
@@ -113,9 +182,9 @@ function ProfileDetailSection({
           onChange={(e) => onChange(e.target.value)}
           className="border-none bg-transparent p-2 ml-5 mt-2.5 self-start"
         >
-          <option value="Type1">Type1</option>
-          <option value="Type2">Type2</option>
-          <option value="Type3">Type3</option>
+          <option value="Employee">Employee</option>
+          <option value="Manager">Manager</option>
+          <option value="Admin">Admin</option>
         </select>
       );
     } else if (editable) {
@@ -150,17 +219,20 @@ function ProfileDetailSection({
   );
 }
 
-function ProfileActions({ isEditMode, onSubmit }) {
+function ProfileActions({ isEditMode, onSubmit, onDelete }) {
   return (
     <div className="flex justify-around p-4">
       <button
-        className="bg-blue-500 text-white py-2 px-4 rounded"
+        className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg bg-blue-400 text-white py-2 px-4 "
         onClick={onSubmit}
       >
         Submit
       </button>
       {isEditMode && (
-        <button className="bg-red-500 text-white py-2 px-4 rounded">
+        <button
+          className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg bg-red-400 text-white py-2 px-4 "
+          onClick={onDelete}
+        >
           Delete
         </button>
       )}

@@ -27,6 +27,7 @@ module.exports = {
   rules: {
     'react/prop-types': 'off',
     'linebreak-style': 'off',
+    "no-unused-vars": "off",
   },
   globals: {
     describe: 'readonly',
