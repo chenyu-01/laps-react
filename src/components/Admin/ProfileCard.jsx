@@ -1,55 +1,91 @@
 import React, { useState } from 'react';
 import jobIcon from '../../assets/job_icon.png';
-import mailIcon from '../../assets/Mail.png';
+import emailIcon from '../../assets/mail.png';
 import authIcon from '../../assets/Auth_icon.png';
 
 function ProfileCard({ mode, person, onClose }) {
   const [name, setName] = useState(person ? person.name : '');
-  const [mail, setMail] = useState(person ? person.mail : '');
+  const [email, setemail] = useState(person ? person.email : '');
   const [authName, setAuthName] = useState(person ? person.authName : '');
-  const [careerTitle, setCareerTitle] = useState(
-    person ? person.careerTitle : ''
-  );
+  const [role, setrole] = useState(person ? person.role : 'Employee');
   const [error, setError] = useState('');
 
   const isEditMode = mode === 'edit';
 
-  const handleResponse = async (request) => {
+  const API_URL = 'http://localhost:8080/api/admin';
+
+  const updateUser = async (userId, userData) => {
     try {
-      const response = await request;
-      if (response.ok) {
-        onClose();
-      } else {
-        const errorMessage = `Error: ${response.statusText}`;
-        setError(errorMessage);
-      }
+      const response = await fetch(`${API_URL}/${userId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+      return response;
     } catch (error) {
-      const errorMessage = `Error: ${error.message}`;
-      setError(errorMessage);
+      console.error('Error updating user:', error);
     }
   };
 
-  const handleSubmit = () => {
-    const data = {
-      name,
-      mail,
-      authName,
-      careerTitle,
-    };
-    console.log('Submitting:', data);
-    // TODO: Submit
-    onClose();
+  const addUser = async (userData) => {
+    try {
+      const password = 'Test?123';
+      userData.password = password;
+      const response = await fetch(`${API_URL}/user`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+      return response;
+    } catch (error) {
+      console.error('Error adding user:', error);
+    }
   };
-  const handleDelete = () => {
-    const data = {
-      name,
-      mail,
-      authName,
-      careerTitle,
-    };
-    console.log('Submitting:', data);
-    // TODO: Submit
-    onClose();
+
+  const deleteUser = async (userId) => {
+    try {
+      const response = await fetch(`${API_URL}/${userId}`, {
+        method: 'DELETE',
+      });
+      return response;
+    } catch (error) {
+      console.error('Error deleting user:', error);
+    }
+  };
+
+  const handleSubmit = async () => {
+    const userData = { name, email, authName, role };
+    if (mode === 'create') {
+      const response = await addUser(userData);
+      if (response && response.ok) {
+        onClose();
+      } else {
+        setError('Failed to add user');
+      }
+    } else if (mode === 'edit' && person && person.id) {
+      const response = await updateUser(person.id, userData);
+      if (response && response.ok) {
+        onClose();
+      } else {
+        setError('Failed to update user');
+      }
+    }
+  };
+
+  const handleDelete = async () => {
+    if (mode === 'edit' && person && person.id) {
+      const response = await deleteUser(person.id);
+      if (response && response.ok) {
+        onClose();
+      } else {
+        // 处理错误情况
+        setError('Failed to delete user');
+      }
+    }
   };
 
   return (
@@ -63,17 +99,17 @@ function ProfileCard({ mode, person, onClose }) {
         />
 
         <ProfileDetailSection
-          title="Mail Address"
-          value={mail}
+          title="email Address"
+          value={email}
           editable={!isEditMode}
-          onChange={setMail}
-          iconSrc={mailIcon}
+          onChange={setemail}
+          iconSrc={emailIcon}
         />
         <ProfileDetailSection
           title="Career Title"
-          value={careerTitle}
+          value={role}
           editable={true} //
-          onChange={setCareerTitle}
+          onChange={setrole}
           isSelect={true} //
           iconSrc={jobIcon}
         />
@@ -146,9 +182,9 @@ function ProfileDetailSection({
           onChange={(e) => onChange(e.target.value)}
           className="border-none bg-transparent p-2 ml-5 mt-2.5 self-start"
         >
-          <option value="Type1">Type1</option>
-          <option value="Type2">Type2</option>
-          <option value="Type3">Type3</option>
+          <option value="Employee">Employee</option>
+          <option value="Manager">Manager</option>
+          <option value="Admin">Admin</option>
         </select>
       );
     } else if (editable) {

@@ -1,56 +1,73 @@
-import React, { useState } from 'react';
-//import { AuthContext } from '../../context/AuthContext';
+import React, { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 import TestLayout from '../TestLayout';
 import LeavingReqComponent from './LeavingReq';
 import queryIcon from '../../assets/query.svg';
 
 const Approval = () => {
-  //const [requests, setRequests] = useState([]);
+  const [requests, setRequests] = useState([]);
+  const { isAuthenticated } = useContext(AuthContext);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch('YOUR_API_ENDPOINT'); // 替换为您的 API 端点
-  //       const data = await response.json();
-  //       setRequests(data); // 假设响应直接是请求数组
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchData = async () => {
+      //if (isAuthenticated) {
+      try {
+        const response = await fetch(
+          'http://localhost:8080/api/applications/applied',
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+          }
+        );
 
-  //   fetchData();
-  // }, []);
+        if (response.ok) {
+          const data = await response.json();
+          setRequests(data);
+        } else {
+          console.error('Error fetching data:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+      //}
+    };
 
-  const requests = [
-    // 示例数据，根据实际情况替换
-    {
-      reason: 'Your Reason',
-      personSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/person1.png',
-      typeName: 'Name',
-      duration: '2D 5h',
-      startDate: '12 Feb',
-      comment: 'Approved',
-      type: 'Type1',
-    },
-    {
-      reason: 'Your Reason',
-      personSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/person1.png',
-      typeName: 'Name',
-      duration: '2D 5h',
-      startDate: '12 Feb',
-      comment: 'Approved',
-      type: 'Type1',
-    },
-    {
-      reason: 'Your Reason',
-      personSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/person1.png',
-      typeName: 'Name',
-      duration: '2D 5h',
-      startDate: '12 Feb',
-      comment: 'Approved',
-      type: 'Type1',
-    },
-  ];
+    fetchData();
+  }, [isAuthenticated]);
+
+  // const requests = [
+  //   // 示例数据，根据实际情况替换
+  //   {
+  //     reason: 'Your Reason',
+  //     personSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/person1.png',
+  //     typeName: 'Name',
+  //     duration: '2D 5h',
+  //     startDate: '12 Feb',
+  //     comment: 'Approved',
+  //     type: 'Type1',
+  //   },
+  //   {
+  //     reason: 'Your Reason',
+  //     personSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/person1.png',
+  //     typeName: 'Name',
+  //     duration: '2D 5h',
+  //     startDate: '12 Feb',
+  //     comment: 'Approved',
+  //     type: 'Type1',
+  //   },
+  //   {
+  //     reason: 'Your Reason',
+  //     personSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/person1.png',
+  //     typeName: 'Name',
+  //     duration: '2D 5h',
+  //     startDate: '12 Feb',
+  //     comment: 'Approved',
+  //     type: 'Type1',
+  //   },
+  // ];
 
   const ApprvoalHeader = () => {
     const [showInput, setShowInput] = useState(false);
@@ -119,12 +136,13 @@ const Approval = () => {
           {' '}
           <LeavingReqComponent
             reason={req.reason}
-            personSrc={req.personSrc}
-            typeName={req.typeName}
-            duration={req.duration}
+            //personSrc={req.employee.personSrc}
+            //typeName={req.employee.name}
             startDate={req.startDate}
+            endDate={req.endDate}
             comment={req.comment}
             type={req.type}
+            applicationId={req.id}
           />
         </div>
       ))}

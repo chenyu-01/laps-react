@@ -30,33 +30,24 @@ const LeavingReqContent = ({ duration, startDate, comment, type }) => {
   };
 
   return (
-    <div className="flex flex-col w-full">
-      <div className="flex justify-around text-neutral-400 text-sm font-medium">
-        <div>Duration</div>
-        <div>Start</div>
-        <div>Comment</div>
-        <div>Type</div>
-      </div>
-      <div className="flex justify-around items-center text-black text-base font-bold mt-3.5">
-        <div>{duration}</div>
-        <div className="flex items-center text-slate-800 text-xs font-medium">
-          {startDate}
-          <img
-            src={CalendarIcon}
-            alt="Calendar"
-            className="ml-2 cursor-pointer w-4 h-4"
-            onClick={toggleCalendar}
-          />
-        </div>
-        <div className="text-cyan-700 text-xs font-medium">{comment}</div>
-        <div className="text-slate-800 text-xs font-medium">{type}</div>
-      </div>
-      {/* {showCalendar && (
-        <CalendarComponent
-          startDate={startDate}
-          onClose={toggleCalendar} // Callback
+    <div className="grid grid-cols-4 gap-4 w-full">
+      <div className="text-neutral-400 text-sm font-medium">Duration</div>
+      <div className="text-neutral-400 text-sm font-medium">Start</div>
+      <div className="text-neutral-400 text-sm font-medium">Comment</div>
+      <div className="text-neutral-400 text-sm font-medium">Type</div>
+
+      <div className="text-black text-base font-bold">{duration}</div>
+      <div className="flex items-center text-slate-800 text-xs font-medium">
+        {startDate}
+        <img
+          src={CalendarIcon}
+          alt="Calendar"
+          className="ml-2 cursor-pointer w-4 h-4"
+          onClick={toggleCalendar}
         />
-      )} */}
+      </div>
+      <div className="text-cyan-700 text-xs font-medium">{comment}</div>
+      <div className="text-slate-800 text-xs font-medium">{type}</div>
     </div>
   );
 };
@@ -65,12 +56,14 @@ const LeavingReqComponent = ({
   reason,
   personSrc,
   typeName,
-  duration,
   startDate,
+  endDate,
   comment,
   type,
+  applicationId,
 }) => {
   const [showCommentInput, setShowCommentInput] = useState(false);
+  const [newComment, setNewComment] = useState('');
   const [commentPosition, setCommentPosition] = useState({});
   const dropdownMenuRef = useRef(null);
   const layoutRef = useRef(null);
@@ -89,8 +82,76 @@ const LeavingReqComponent = ({
     }
   };
 
-  const handleSubmitComment = () => {
-    setShowCommentInput(false);
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return `${date.getDate()}/${
+      date.getMonth() + 1
+    }/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
+  };
+
+  const calculateDuration = (startDate, endDate) => {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const diffTime = Math.abs(end - start);
+
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    const diffHours = Math.floor(
+      (diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+
+    return `${diffDays} Day ${diffHours} H `;
+  };
+
+  const formattedStartDate = formatDate(startDate);
+  const duration = calculateDuration(startDate, endDate);
+  const API_URL = 'http://localhost:8080/api/applications';
+
+  const handleApprove = async (applicationId) => {
+    const updatedData = { status: 'Approved' };
+    try {
+      const response = await fetch(`${API_URL}/approve/${applicationId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedData),
+      });
+      if (response.ok) {
+        // Todo
+      }
+    } catch (error) {
+      console.error('Error approving application:', error);
+    }
+  };
+
+  const handleReject = async (applicationId) => {
+    const updatedData = { status: 'Rejected' };
+    try {
+      const response = await fetch(`${API_URL}/reject/${applicationId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedData),
+      });
+      if (response.ok) {
+        // Todo
+      }
+    } catch (error) {
+      console.error('Error rejecting application:', error);
+    }
+  };
+
+  const handleSubmitComment = async (applicationId) => {
+    const updatedData = { comment: newComment };
+    try {
+      const response = await fetch(`${API_URL}/comment/${applicationId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedData),
+      });
+      if (response.ok) {
+        setShowCommentInput(false);
+      }
+    } catch (error) {
+      console.error('Error submitting comment:', error);
+    }
   };
 
   const handleCancelComment = () => {
@@ -118,7 +179,7 @@ const LeavingReqComponent = ({
         <div className="md:w-2/3">
           <LeavingReqContent
             duration={duration}
-            startDate={startDate}
+            startDate={formattedStartDate}
             comment={comment}
             type={type}
           />
@@ -137,7 +198,7 @@ const LeavingReqComponent = ({
           tabIndex={0}
           className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
         >
-          <li>
+          <li onClick={() => handleApprove(applicationId)}>
             <a>
               <img
                 src={acceptIcon}
@@ -147,7 +208,7 @@ const LeavingReqComponent = ({
               Accept
             </a>
           </li>
-          <li>
+          <li onClick={() => handleReject(applicationId)}>
             <a>
               <img
                 src={rejectIcon}
@@ -171,17 +232,17 @@ const LeavingReqComponent = ({
           <textarea
             className="textarea textarea-accent w-full"
             placeholder="Add a comment..."
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
             onClick={handleCommentAreaClick}
           ></textarea>
           <div className="flex mt-2">
-            <div className="flex-1 flex justify-center">
-              <img
-                src={acceptIcon}
-                alt="Submit"
-                className="cursor-pointer w-6 h-6"
-                onClick={handleSubmitComment}
-              />
-            </div>
+            <img
+              src={acceptIcon}
+              alt="Submit"
+              className="cursor-pointer w-6 h-6"
+              onClick={() => handleSubmitComment(applicationId, newComment)}
+            />
             <div className="flex-1 flex justify-center">
               <img
                 src={rejectIcon}
