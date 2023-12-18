@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import TimerIcon from '../../assets/Time.png';
 import vectorIcon from '../../assets/Vector.png';
 import CalendarIcon from '../../assets/CalendarIcon.png';

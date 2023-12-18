@@ -1,7 +1,8 @@
 import React from 'react';
 import { useEffect, useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-import TestLayout from '../TestLayout';
+//import { useEffect } from 'react';
+import TestLayout from '../Test/TestLayout.jsx';
 import ProfileCard from './ProfileCard';
 import addIcon from '../../assets/add.png';
 import queryIcon from '../../assets/query.svg';
@@ -45,7 +46,6 @@ function AdminComponent() {
 
   const handleCloseAddPerson = () => {
     setShowAddPerson(false);
-    list_all_persons();
   };
 
   const handleOverlayClick = (event) => {
@@ -59,18 +59,18 @@ function AdminComponent() {
     setShowAddPerson(true);
   };
 
-  // function generateMockPersonData() {
-  //   const mockData = [];
-  //   for (let i = 0; i < 10; i++) {
-  //     mockData.push({
-  //       name: `Person ${i + 1}`,
-  //       type: `Type ${Math.ceil(Math.random() * 5)}`, // 随机生成类型
-  //       authName: `Authorizer ${Math.ceil(Math.random() * 5)}`, // 随机生成授权人
-  //       mail: Math.random() > 0.5 ? 'Approved' : 'Pending', // 随机生成状态
-  //     });
-  //   }
-  //   return mockData;
-  // }
+  function generateMockPersonData() {
+    const mockData = [];
+    for (let i = 0; i < 10; i++) {
+      mockData.push({
+        name: `Person ${i + 1}`,
+        type: `Type ${Math.ceil(Math.random() * 5)}`, // 随机生成类型
+        authName: `Authorizer ${Math.ceil(Math.random() * 5)}`, // 随机生成授权人
+        status: Math.random() > 0.5 ? 'Approved' : 'Pending', // 随机生成状态
+      });
+    }
+    return mockData;
+  }
 
   return (
     <TestLayout>
@@ -83,9 +83,9 @@ function AdminComponent() {
               <PersonCardComponent
                 key={index}
                 name={person.name}
-                type={person.role}
+                type={person.type}
                 authName={person.authName}
-                email={person.email}
+                status={person.status}
               />
             </div>
           ))}
@@ -93,7 +93,7 @@ function AdminComponent() {
       </div>
       {showAddPerson && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+          className="z-20 fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
           onClick={handleOverlayClick}
         >
           <div
