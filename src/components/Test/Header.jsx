@@ -1,7 +1,10 @@
 import React from 'react';
 import UserCard from './UserCard.jsx';
-
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 export default function Header({ toggleSidebar }) {
+  const { logout } = useContext(AuthContext);
+
   return (
     <div className={'flex w-full'}>
       <div className="flex justify-between items-center bg-white w-full px-12 py-4 border-b-2 border-solid max-md:px-5">
@@ -23,6 +26,9 @@ export default function Header({ toggleSidebar }) {
         </div>
         <div className="items-center flex gap-4 py-0.5">
           <UserCard />
+          <button className="btn btn-primary" onClick={logout}>
+            Logout
+          </button>
         </div>
       </div>
     </div>
