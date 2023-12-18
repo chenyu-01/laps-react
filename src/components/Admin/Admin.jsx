@@ -36,8 +36,7 @@ function AdminComponent() {
     if (isAuthenticated) {
       list_all_persons();
     }
-    list_all_persons();
-  }, [isAuthenticated]);
+  }, [isAuthenticated, showAddPerson]);
 
   const handleAddClick = () => {
     setSelectedPerson(null);
@@ -59,22 +58,9 @@ function AdminComponent() {
     setShowAddPerson(true);
   };
 
-  function generateMockPersonData() {
-    const mockData = [];
-    for (let i = 0; i < 10; i++) {
-      mockData.push({
-        name: `Person ${i + 1}`,
-        type: `Type ${Math.ceil(Math.random() * 5)}`, // 随机生成类型
-        authName: `Authorizer ${Math.ceil(Math.random() * 5)}`, // 随机生成授权人
-        status: Math.random() > 0.5 ? 'Approved' : 'Pending', // 随机生成状态
-      });
-    }
-    return mockData;
-  }
-
   return (
     <TestLayout>
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-5 m-4">
         <AdminTitle onAddClick={handleAddClick} />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
@@ -83,9 +69,9 @@ function AdminComponent() {
               <PersonCardComponent
                 key={index}
                 name={person.name}
-                type={person.type}
+                type={person.role}
                 authName={person.authName}
-                status={person.status}
+                email={person.email}
               />
             </div>
           ))}
