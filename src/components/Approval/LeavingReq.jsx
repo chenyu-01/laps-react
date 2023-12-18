@@ -1,9 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import TimerIcon from '../../assets/Time.png';
 import vectorIcon from '../../assets/Vector.png';
 import CalendarIcon from '../../assets/CalendarIcon.png';
 import acceptIcon from '../../assets/AcceptIcon.png';
 import rejectIcon from '../../assets/RejectIcon.png';
+import { use } from 'chai';
 
 const LeavingReqHeader = ({ reason, personSrc, typeName }) => {
   return (
@@ -54,19 +55,23 @@ const LeavingReqContent = ({ duration, startDate, comment, type }) => {
 
 const LeavingReqComponent = ({
   reason,
-  personSrc,
+  personId,
   typeName,
   startDate,
   endDate,
   comment,
   type,
   applicationId,
+  refreshRequests,
 }) => {
   const [showCommentInput, setShowCommentInput] = useState(false);
   const [newComment, setNewComment] = useState('');
   const [commentPosition, setCommentPosition] = useState({});
+  const [person, setPerson] = useState({});
   const dropdownMenuRef = useRef(null);
   const layoutRef = useRef(null);
+  //for demo
+  const personSrc = 'https://i.pravatar.cc/150?img=3';
 
   const handleCommentClick = () => {
     if (dropdownMenuRef.current && layoutRef.current) {
@@ -106,6 +111,30 @@ const LeavingReqComponent = ({
   const duration = calculateDuration(startDate, endDate);
   const API_URL = 'http://localhost:8080/api/applications';
 
+  const fetchPerson = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/admin/${personId}`,
+        {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      }
+    } catch (error) {
+      console.error('Error fetching person:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPerson().then((data) => {
+      setPerson(data);
+    });
+  }, []);
+
   const handleApprove = async (applicationId) => {
     const updatedData = { status: 'Approved' };
     try {
@@ -116,6 +145,7 @@ const LeavingReqComponent = ({
       });
       if (response.ok) {
         // Todo
+        refreshRequests();
       }
     } catch (error) {
       console.error('Error approving application:', error);
@@ -132,6 +162,7 @@ const LeavingReqComponent = ({
       });
       if (response.ok) {
         // Todo
+        refreshRequests();
       }
     } catch (error) {
       console.error('Error rejecting application:', error);
@@ -148,6 +179,7 @@ const LeavingReqComponent = ({
       });
       if (response.ok) {
         setShowCommentInput(false);
+        refreshRequests();
       }
     } catch (error) {
       console.error('Error submitting comment:', error);
@@ -173,7 +205,7 @@ const LeavingReqComponent = ({
           <LeavingReqHeader
             reason={reason}
             personSrc={personSrc}
-            typeName={typeName}
+            typeName={person.name}
           />
         </div>
         <div className="md:w-2/3">

@@ -9,9 +9,8 @@ const Approval = () => {
   const [requests, setRequests] = useState([]);
   const { isAuthenticated } = useContext(AuthContext);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      //if (isAuthenticated) {
+  const fetchData = async () => {
+    if (isAuthenticated) {
       try {
         const response = await fetch(
           'http://localhost:8080/api/applications/applied',
@@ -25,6 +24,10 @@ const Approval = () => {
         );
 
         if (response.ok) {
+          if (response.status === 204) {
+            setRequests([]);
+            return;
+          }
           const data = await response.json();
           setRequests(data);
         } else {
@@ -33,42 +36,12 @@ const Approval = () => {
       } catch (error) {
         console.error('Error fetching data:', error);
       }
-      //}
-    };
+    }
+  };
 
+  useEffect(() => {
     fetchData();
   }, [isAuthenticated]);
-
-  // const requests = [
-  //   // 示例数据，根据实际情况替换
-  //   {
-  //     reason: 'Your Reason',
-  //     personSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/person1.png',
-  //     typeName: 'Name',
-  //     duration: '2D 5h',
-  //     startDate: '12 Feb',
-  //     comment: 'Approved',
-  //     type: 'Type1',
-  //   },
-  //   {
-  //     reason: 'Your Reason',
-  //     personSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/person1.png',
-  //     typeName: 'Name',
-  //     duration: '2D 5h',
-  //     startDate: '12 Feb',
-  //     comment: 'Approved',
-  //     type: 'Type1',
-  //   },
-  //   {
-  //     reason: 'Your Reason',
-  //     personSrc: 'https://cdn.builder.io/api/v1/image/assets/TEMP/person1.png',
-  //     typeName: 'Name',
-  //     duration: '2D 5h',
-  //     startDate: '12 Feb',
-  //     comment: 'Approved',
-  //     type: 'Type1',
-  //   },
-  // ];
 
   const ApprvoalHeader = () => {
     const [showInput, setShowInput] = useState(false);
@@ -131,21 +104,25 @@ const Approval = () => {
   //a sample
   return (
     <TestLayout>
-      <ApprvoalHeader />
-      {requests.map((req, index) => (
-        <div className="mb-4" key={index}>
-          {' '}
-          <LeavingReqComponent
-            reason={req.reason}
-            personSrc={req.personSrc}
-            typeName={req.typeName}
-            duration={req.duration}
-            startDate={req.startDate}
-            status={req.status}
-            type={req.type}
-          />
-        </div>
-      ))}
+      <div className="flex flex-col  m-4">
+        <ApprvoalHeader />
+        {requests.map((req, index) => (
+          <div className="mb-4" key={index}>
+            {' '}
+            <LeavingReqComponent
+              reason={req.reason}
+              personId={req.employeeId}
+              typeName={req.typeName}
+              endDate={req.endDate}
+              startDate={req.startDate}
+              comment={req.comment}
+              type={req.type}
+              applicationId={req.id}
+              refreshRequests={fetchData}
+            />
+          </div>
+        ))}
+      </div>
     </TestLayout>
   );
 };
