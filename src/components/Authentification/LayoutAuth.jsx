@@ -12,6 +12,7 @@ export default function LayoutAuth({ children }) {
               loading="lazy"
               srcSet={universityImage}
               className="object-contain object-center md:w-1/2 overflow-hidden hidden md:flex"
+              alt={'university logo'}
             />
             <div className="justify-center flex flex-col items-center my-auto">
               <div className="mr-4">{children}</div>
