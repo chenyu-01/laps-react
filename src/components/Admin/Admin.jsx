@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect, useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 //import { useEffect } from 'react';
-import TestLayout from '../Test/TestLayout.jsx';
+import Layout from '../Test/Layout.jsx';
 import ProfileCard from './ProfileCard';
 import addIcon from '../../assets/add.png';
 import queryIcon from '../../assets/query.svg';
@@ -59,7 +59,7 @@ function AdminComponent() {
   };
 
   return (
-    <TestLayout>
+    <Layout>
       <div className="flex flex-col gap-5 m-4">
         <AdminTitle onAddClick={handleAddClick} />
 
@@ -94,7 +94,7 @@ function AdminComponent() {
           </div>
         </div>
       )}
-    </TestLayout>
+    </Layout>
   );
 }
 

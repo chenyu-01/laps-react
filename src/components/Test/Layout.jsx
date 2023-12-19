@@ -4,7 +4,7 @@ import Sidebar from './Sidebar.jsx';
 import { AuthContext } from '../../context/AuthContext.jsx';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-function TestLayout({ children }) {
+function Layout({ children }) {
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(true);
   const { isAuthenticated } = useContext(AuthContext);
@@ -45,4 +45,4 @@ function Content({ children }) {
   return <div className={'bg-gray-100 grow'}>{children}</div>;
 }
 
-export default TestLayout;
+export default Layout;

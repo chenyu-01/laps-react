@@ -1,5 +1,5 @@
 import React from 'react';
-import TestLayout from '../Test/TestLayout.jsx';
+import Layout from '../Test/Layout.jsx';
 import { useParams } from 'react-router-dom';
 function LeaveModify() {
   // eslint-disable-next-line no-unused-vars
@@ -145,9 +145,9 @@ function LeaveModify() {
 
 function LeaveModifyPage() {
   return (
-    <TestLayout>
+    <Layout>
       <LeaveModify />
-    </TestLayout>
+    </Layout>
   );
 }
 

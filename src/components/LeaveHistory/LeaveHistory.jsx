@@ -6,7 +6,7 @@ import LeaveRow, { HeaderRow } from './LeaveRow.jsx';
 import LeavePerPage from './LeavePerPage.jsx';
 // eslint-disable-next-line no-unused-vars
 import LeaveTotalPage from './LeaveTotalPage.jsx';
-import TestLayout from '../Test/TestLayout.jsx';
+import Layout from '../Test/Layout.jsx';
 import mockLeaveApplicationList from './mocklist.js';
 
 export default function LeaveHistory() {
@@ -67,7 +67,7 @@ export default function LeaveHistory() {
   fetchLeaveApplicationList();
   return (
     <div>
-      <TestLayout>
+      <Layout>
         <div className="flex flex-col mt-4 px-16 items-start max-md:max-w-full max-md:px-5 min-w-[950px]">
           <LeaveTitle />
           <LeaveButtonCategories status={status} setStatus={setStatus} />
@@ -91,7 +91,7 @@ export default function LeaveHistory() {
             {/*</div>*/}
           </div>
         </div>
-      </TestLayout>
+      </Layout>
     </div>
   );
 }
