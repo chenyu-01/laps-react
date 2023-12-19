@@ -12,6 +12,7 @@ function AdminComponent() {
   const [personData, setPersonData] = useState([]);
   const [showAddPerson, setShowAddPerson] = useState(false);
   const [selectedPerson, setSelectedPerson] = useState(null);
+  const [selectedRole, setSelectedRole] = useState('');
 
   const { isAuthenticated } = useContext(AuthContext);
 
@@ -58,23 +59,31 @@ function AdminComponent() {
     setShowAddPerson(true);
   };
 
+  const handleRoleChange = (event) => {
+    setSelectedRole(event.target.value);
+  };
+
   return (
     <TestLayout>
       <div className="flex flex-col gap-5 m-4">
-        <AdminTitle onAddClick={handleAddClick} />
+        <AdminTitle onAddClick={handleAddClick} onSelect={handleRoleChange} />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-          {personData.map((person, index) => (
-            <div key={index} onClick={() => handlePersonCardClick(person)}>
-              <PersonCardComponent
-                key={index}
-                name={person.name}
-                type={person.role}
-                authName={person.authName}
-                email={person.email}
-              />
-            </div>
-          ))}
+          {personData
+            .filter(
+              (person) => selectedRole === '' || person.role === selectedRole
+            )
+            .map((person, index) => (
+              <div key={index} onClick={() => handlePersonCardClick(person)}>
+                <PersonCardComponent
+                  key={index}
+                  name={person.name}
+                  type={person.role}
+                  authName={person.authName}
+                  email={person.email}
+                />
+              </div>
+            ))}
         </div>
       </div>
       {showAddPerson && (
@@ -98,7 +107,7 @@ function AdminComponent() {
   );
 }
 
-function AdminTitle({ onAddClick }) {
+function AdminTitle({ onAddClick, onSelect }) {
   const [showInput, setShowInput] = useState(false);
   const [query, setQuery] = useState('');
 
@@ -115,6 +124,12 @@ function AdminTitle({ onAddClick }) {
     // To Do:
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      sendQuery(query);
+    }
+  };
+
   const handleBlur = () => {
     if (!query) {
       setShowInput(false);
@@ -129,10 +144,14 @@ function AdminTitle({ onAddClick }) {
       <div className="flex items-center">
         {!showInput && (
           <div className="flex items-center">
-            <select className="bg-white rounded text-sm text-neutral-400 p-2 focus:outline-none focus:ring focus:border-blue-300 mr-4">
+            <select
+              className="bg-white rounded text-sm text-neutral-400 p-2 focus:outline-none focus:ring focus:border-blue-300 mr-4"
+              onChange={onSelect}
+            >
               <option value="">Select Type</option>
-              <option value="type1">Type1</option>
-              <option value="type2">Type2</option>
+              <option value="Employee">Employee</option>
+              <option value="Manager">Manager</option>
+              <option value="Admin">Admin</option>
               {/* More options */}
             </select>
             <button
@@ -152,6 +171,7 @@ function AdminTitle({ onAddClick }) {
               onChange={handleQueryChange}
               className="border border-gray-300 rounded p-2"
               onBlur={handleBlur}
+              onKeyDown={handleKeyDown}
             />
             <img
               src={queryIcon}
