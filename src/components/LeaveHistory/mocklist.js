@@ -6,6 +6,8 @@ for (let i = 0; i < 10; i++) {
     startDate: '2010-09-04',
     endDate: '2010-09-15',
     reason: 'Family Vacation',
+    comment: null,
+    contactInfo: '1234567890',
     status: 'Applied',
   };
   const mockLeaveApplicationApproved = {
@@ -15,6 +17,8 @@ for (let i = 0; i < 10; i++) {
     endDate: '2010-09-15',
     reason: 'Family Vacation',
     status: 'Approved',
+    comment: 'Please approve',
+    contactInfo: '1234567890',
   };
   const mockLeaveApplicationRejected = {
     leaveId: 1000 - i,
@@ -23,6 +27,8 @@ for (let i = 0; i < 10; i++) {
     endDate: '2010-09-15',
     reason: 'Family Vacation',
     status: 'Rejected',
+    comment: 'Not approved',
+    contactInfo: '1234567890',
   };
   mockLeaveApplicationList.push(mockLeaveApplication);
   mockLeaveApplicationList.push(mockLeaveApplicationApproved);

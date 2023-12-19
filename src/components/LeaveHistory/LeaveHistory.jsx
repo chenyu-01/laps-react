@@ -18,7 +18,6 @@ export default function LeaveHistory() {
           <LeaveButtonCategories />
           <div className="bg-white flex flex-col mt-3.5 pb-9 rounded-xl border-[0.889px] border-solid border-gray-200 md:w-full">
             <HeaderRow />
-
             {mockLeaveApplicationList.map((la) => (
               <LeaveRow
                 key={la.leaveId}

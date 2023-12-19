@@ -36,13 +36,8 @@ export default function LeaveRow({
             className="btn btn-primary"
             onClick={() => navigate(`/leave-modify/${leaveId}`)}
           >
-            Modify
+            View Detail
           </button>
-        </Cell>
-      </div>
-      <div className={'w-1/6'}>
-        <Cell>
-          <button className="btn btn-error">Delete</button>
         </Cell>
       </div>
     </div>
@@ -78,7 +73,7 @@ export function HeaderRow() {
       <div className={'w-1/5'}>
         <Cell>Status</Cell>
       </div>
-      <div className={'w-1/3'}>
+      <div className={'w-1/6'}>
         <Cell>Operation</Cell>
       </div>
     </div>
