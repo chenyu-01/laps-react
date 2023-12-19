@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect, useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 //import { useEffect } from 'react';
-import Layout from '../Test/Layout.jsx';
+import Layout from '../Dashboard/Layout.jsx';
 import ProfileCard from './ProfileCard';
 import addIcon from '../../assets/add.png';
 import queryIcon from '../../assets/query.svg';

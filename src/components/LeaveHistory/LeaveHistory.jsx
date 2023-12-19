@@ -6,7 +6,7 @@ import LeaveRow, { HeaderRow } from './LeaveRow.jsx';
 import LeavePerPage from './LeavePerPage.jsx';
 // eslint-disable-next-line no-unused-vars
 import LeaveTotalPage from './LeaveTotalPage.jsx';
-import Layout from '../Test/Layout.jsx';
+import Layout from '../Dashboard/Layout.jsx';
 import mockLeaveApplicationList from './mocklist.js';
 
 export default function LeaveHistory() {

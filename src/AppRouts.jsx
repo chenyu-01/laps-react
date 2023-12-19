@@ -8,7 +8,7 @@ import Approval from './components/Approval/Approval';
 import Admin from './components/Admin/Admin';
 import Profile from './components/Profile/Profile.jsx';
 import LeaveHistory from './components/LeaveHistory/LeaveHistory';
-import Layout from './components/Test/Layout.jsx';
+import Layout from './components/Dashboard/Layout.jsx';
 import LeaveModify from './components/LeaveHistory/LeaveModify.jsx';
 
 const AppRoutes = () => {

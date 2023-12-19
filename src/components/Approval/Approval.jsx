@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 //import { AuthContext } from '../../context/AuthContext';
-import Layout from '../Test/Layout.jsx';
+import Layout from '../Dashboard/Layout.jsx';
 import LeavingReqComponent from './LeavingReq';
 import queryIcon from '../../assets/query.svg';
 
