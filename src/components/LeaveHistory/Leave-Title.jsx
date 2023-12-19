@@ -5,8 +5,8 @@ export default function LeaveTitle() {
     <div className="flex justify-between text-zinc-700 text-opacity-80 text-xl font-medium self-stretch max-md:max-w-full">
       <p>Leave Application History</p>
       <div className="dropdown dropdown-end">
-        <div tabIndex={0} role="button" className="btn m-1">
-          Click
+        <div tabIndex={0} role="button" className="btn m-1 md:hidden block">
+          Filter by status
         </div>
         <ul
           tabIndex={0}
