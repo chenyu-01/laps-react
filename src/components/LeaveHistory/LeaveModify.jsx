@@ -4,7 +4,9 @@ import { useParams } from 'react-router-dom';
 function LeaveModify() {
   // eslint-disable-next-line no-unused-vars
   const { leaveId } = useParams();
-  // const leaveApplication = fetch(`http://localhost:8080/api/employee/${leaveId}`); // backend not ready
+  const leaveApplication = fetch(
+    `http://localhost:8080/api/leaveApplication/find/${leaveId}`
+  ); // backend not ready
   let mockApplication = {
     leaveId: 10,
     type: 'Annual',
