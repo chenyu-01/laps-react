@@ -1,12 +1,26 @@
 import React from 'react';
 
-export default function LeaveButtonCategories() {
+export default function LeaveButtonCategories({ status, setStatus }) {
   return (
-    <div className="flex w-full gap-3.5 mt-5 max-md:max-w-full max-md:flex-wrap">
-      <CategoryButton>All</CategoryButton>
-      <CategoryButton>Applied</CategoryButton>
-      <CategoryButton>Approved</CategoryButton>
-      <CategoryButton>Rejected</CategoryButton>
+    <div className="w-full gap-3.5 mt-5 max-md:max-w-full md:flex hidden">
+      <button onClick={() => setStatus('All')}>
+        <CategoryButton>All</CategoryButton>
+      </button>
+      <button onClick={() => setStatus('Applied')}>
+        <CategoryButton>Applied</CategoryButton>
+      </button>
+      <button onClick={() => setStatus('Approved')}>
+        <CategoryButton>Approved</CategoryButton>
+      </button>
+      <button onClick={() => setStatus('Rejected')}>
+        <CategoryButton>Rejected</CategoryButton>
+      </button>
+      <button onClick={() => setStatus('Cancelled')}>
+        <CategoryButton>Cancelled</CategoryButton>
+      </button>
+      <button onClick={() => setStatus('Updated')}>
+        <CategoryButton>Updated</CategoryButton>
+      </button>
     </div>
   );
 }

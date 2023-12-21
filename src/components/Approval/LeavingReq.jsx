@@ -4,7 +4,6 @@ import vectorIcon from '../../assets/Vector.png';
 import CalendarIcon from '../../assets/CalendarIcon.png';
 import acceptIcon from '../../assets/AcceptIcon.png';
 import rejectIcon from '../../assets/RejectIcon.png';
-import { use } from 'chai';
 
 const LeavingReqHeader = ({ reason, personSrc, typeName }) => {
   return (

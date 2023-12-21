@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-import TestLayout from '../Test/TestLayout.jsx';
+//import { AuthContext } from '../../context/AuthContext';
+import Layout from '../Dashboard/Layout.jsx';
 import LeavingReqComponent from './LeavingReq';
 import queryIcon from '../../assets/query.svg';
 
@@ -102,7 +103,7 @@ const Approval = () => {
   };
   //a sample
   return (
-    <TestLayout>
+    <Layout>
       <div className="flex flex-col  m-4">
         <ApprvoalHeader />
         {requests.map((req, index) => (
@@ -122,7 +123,7 @@ const Approval = () => {
           </div>
         ))}
       </div>
-    </TestLayout>
+    </Layout>
   );
 };
 export default Approval;

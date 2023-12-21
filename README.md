@@ -81,7 +81,7 @@ Password: `yYjHDp)d~+]Pb`
     - [ ] Manage Leave Entitlement
     - [ ] Manage Approval Hierarchy
 
-### Leave Application Form - Priya （Well be done in Thymeleaf）
+### Leave Application Form - Priya （Will be done in Thymeleaf）
 
 - [ ] Design a form for leave application submission.
   - Include fields for:
