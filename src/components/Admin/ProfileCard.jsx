@@ -188,7 +188,7 @@ function ProfileDetailSection({
         >
           <option value="Employee">Employee</option>
           <option value="Manager">Manager</option>
-          <option value="Admin">Admin</option>
+          <option value="Admin">Administrators</option>
         </select>
       );
     } else if (editable) {
