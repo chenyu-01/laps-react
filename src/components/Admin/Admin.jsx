@@ -68,7 +68,7 @@ function AdminComponent() {
       <div className="flex flex-col gap-5 m-4">
         <AdminTitle onAddClick={handleAddClick} onSelect={handleRoleChange} />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {personData
             .filter(
               (person) => selectedRole === '' || person.role === selectedRole

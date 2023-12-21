@@ -14,9 +14,9 @@ function ProfileCard({ mode, person, onClose }) {
 
   const API_URL = 'http://localhost:8080/api/admin';
 
-  const updateUser = async (userId, userData) => {
+  const updateUser = async (id, userData) => {
     try {
-      const response = await fetch(`${API_URL}/${userId}`, {
+      const response = await fetch(`${API_URL}/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -58,7 +58,8 @@ function ProfileCard({ mode, person, onClose }) {
   };
 
   const handleSubmit = async () => {
-    const userData = { name, email, authName, role };
+    var id = person.id;
+    const userData = { id, name, email, authName, role };
     if (mode === 'create') {
       const response = await addUser(userData);
       if (response && response.ok) {

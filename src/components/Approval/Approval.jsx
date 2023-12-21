@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-//import { AuthContext } from '../../context/AuthContext';
 import TestLayout from '../Test/TestLayout.jsx';
 import LeavingReqComponent from './LeavingReq';
 import queryIcon from '../../assets/query.svg';
@@ -8,12 +7,12 @@ import queryIcon from '../../assets/query.svg';
 const Approval = () => {
   const [requests, setRequests] = useState([]);
   const { isAuthenticated } = useContext(AuthContext);
-
+  const { userData } = useContext(AuthContext);
   const fetchData = async () => {
     if (isAuthenticated) {
       try {
         const response = await fetch(
-          'http://localhost:8080/api/applications/applied',
+          `http://localhost:8080/api/applications/applied_list/${userData.id}`,
           {
             method: 'GET',
             headers: {
