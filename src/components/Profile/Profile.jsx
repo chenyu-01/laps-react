@@ -7,6 +7,7 @@ export default function Profile() {
   return (
     <div className={'prose flex flex-col mx-auto container'}>
       <h1 className={'mt-5 mx-auto'}>Profile Page</h1>
+      <h2>Id: {userData.id}</h2>
       <h2>Role: {userData.role}</h2>
       <h2>User: {userData.name}</h2>
       <h2>Email: {userData.email}</h2>

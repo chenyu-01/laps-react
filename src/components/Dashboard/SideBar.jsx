@@ -38,6 +38,9 @@ function NavigationEmployee() {
       <NavLink>
         <Link to={'/LeaveHistory'}>My Leave History</Link>
       </NavLink>
+      <NavLink>
+        <Link to={'/Dashboard'}>Dashboard</Link>
+      </NavLink>
     </div>
   );
 }
@@ -47,6 +50,9 @@ function NavigationAdmin() {
     <div className={'divide-y-2 w-full'}>
       <NavLink>
         <Link to={'/Admin'}>Admin Page</Link>
+      </NavLink>
+      <NavLink>
+        <Link to={'/Dashboard'}>Dashboard</Link>
       </NavLink>
     </div>
   );
@@ -63,6 +69,9 @@ function NavigationManager() {
       </NavLink>
       <NavLink>
         <Link to={'/LeaveHistory'}>My Leave History</Link>
+      </NavLink>
+      <NavLink>
+        <Link to={'/Dashboard'}>Dashboard</Link>
       </NavLink>
     </div>
   );
