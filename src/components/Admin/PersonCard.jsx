@@ -35,24 +35,27 @@ export default function PersonCardComponent({
 
 function Header({ PictureSrc, Name, Type }) {
   return (
-    <header className="flex w-full items-stretch justify-between gap-5">
-      <div className="flex items-stretch justify-between gap-2.5">
+    <header className="flex w-full items-center justify-between">
+      <div className="flex items-center gap-2.5">
         <ImageComponent
           src={PictureSrc}
           alt="Picture"
           className="w-10 h-10" // Tailwind class for width and height
         />
-        <TextComponent className="text-black text-lg font-semibold self-center">
-          {Name}
+        <div className="max-w-[calc(100%-2rem)] whitespace-normal"> 
+          <TextComponent className="text-black text-sm font-semibold">
+            {Name}
+          </TextComponent>
+        </div>
+      </div>
+      <div className="flex-shrink-0">
+        <TextComponent className="text-cyan-700 text-xs leading-5 capitalize">
+          {Type}
         </TextComponent>
       </div>
-      <TextComponent className="text-cyan-700 text-xs leading-5 capitalize self-start">
-        {Type}
-      </TextComponent>
     </header>
   );
 }
-
 function UserInfo({ AuthName }) {
   return (
     <div className="flex items-stretch justify-between gap-2 mt-3 py-1.5 rounded-lg">
