@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect,useState } from 'react';
 import workIcon from '../../assets/busi_person.png';
 import timerIcon from '../../assets/mail.png';
 
@@ -21,9 +22,32 @@ export default function PersonCardComponent({
   PictureSrc,
   name,
   type,
-  authName,
   email,
+  id,
 }) {
+  const [authName, setAuthName] = useState('');
+
+  const API_URL = 'http://localhost:8080/api/admin';
+
+  useEffect(() => {
+    getAuthName(id);
+  }, []);
+
+  const getAuthName = async (id) => {
+    try {
+      const response = await fetch(`${API_URL}/users/Manager/${id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
+      setAuthName(data.name);
+    } catch (error) {
+      console.error('Error fetching person data:', error);
+    }
+  };
+
   return (
     <div className="shadow-lg bg-white flex flex-col items-stretch mt-5 px-5 py-3.5 rounded-lg">
       <Header PictureSrc={PictureSrc} Name={name} Type={type} />

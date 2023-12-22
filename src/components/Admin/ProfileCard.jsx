@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import jobIcon from '../../assets/job_icon.png';
 import emailIcon from '../../assets/mail.png';
 import authIcon from '../../assets/Auth_icon.png';
@@ -9,10 +9,25 @@ function ProfileCard({ mode, person, onClose }) {
   const [authName, setAuthName] = useState(person ? person.authName : '');
   const [role, setrole] = useState(person ? person.role : 'Employee');
   const [error, setError] = useState('');
-
+  const [managers, setManagers] = useState([]); // TODO: Add managers here
   const isEditMode = mode === 'edit';
 
   const API_URL = 'http://localhost:8080/api/admin';
+
+  const getAllManagers = async () => {
+    try {
+      const response = await fetch(`${API_URL}/users/Manager`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
+      setManagers(data);
+    } catch (error) {
+      console.error('Error fetching person data:', error);
+    }
+  };
 
   const updateUser = async (id, userData) => {
     try {
@@ -58,8 +73,7 @@ function ProfileCard({ mode, person, onClose }) {
   };
 
   const handleSubmit = async () => {
-    var id = person.id;
-    const userData = { id, name, email, authName, role };
+    const userData = { name, email, authName, role };
     if (mode === 'create') {
       const response = await addUser(userData);
       if (response && response.ok) {
@@ -88,6 +102,9 @@ function ProfileCard({ mode, person, onClose }) {
       }
     }
   };
+  useEffect(() => {
+    getAllManagers();
+  }, []);
 
   return (
     <div className="flex max-w-[500px] flex-col justify-center items-stretch">
@@ -120,6 +137,7 @@ function ProfileCard({ mode, person, onClose }) {
           editable={true}
           onChange={setAuthName}
           iconSrc={authIcon}
+          managers={managers}
         />
         {error && (
           <div className="text-red-400 justify-center text-sm my-2">
@@ -178,9 +196,27 @@ function ProfileDetailSection({
   onChange,
   isSelect,
   iconSrc,
+  managers,
 }) {
   const renderInputOrSelect = () => {
-    if (editable && isSelect) {
+    if (title === 'Authorized by' && editable) {
+      let managerExists = managers.some((manager) => manager.name === value);
+
+      return (
+        <select
+          value={managerExists ? value : 'NA'}
+          onChange={(e) => onChange(e.target.value)}
+          className="border-none bg-transparent p-2 ml-5 mt-2.5 self-start"
+        >
+          {!managerExists && <option value="NA">NA</option>}
+          {managers.map((manager) => (
+            <option key={manager.id} value={manager.name}>
+              {manager.name}
+            </option>
+          ))}
+        </select>
+      );
+    } else if (editable && isSelect) {
       return (
         <select
           value={value}

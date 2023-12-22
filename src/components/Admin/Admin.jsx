@@ -79,8 +79,8 @@ function AdminComponent() {
                   key={index}
                   name={person.name}
                   type={person.role}
-                  authName={person.authName}
                   email={person.email}
+                  id={person.id}
                 />
               </div>
             ))}
