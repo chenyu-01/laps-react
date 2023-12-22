@@ -42,7 +42,7 @@ function Header({ PictureSrc, Name, Type }) {
           alt="Picture"
           className="w-10 h-10" // Tailwind class for width and height
         />
-        <div className="max-w-[calc(100%-2rem)] whitespace-normal"> 
+        <div className="max-w-[calc(100%-2rem)] whitespace-normal">
           <TextComponent className="text-black text-sm font-semibold">
             {Name}
           </TextComponent>
