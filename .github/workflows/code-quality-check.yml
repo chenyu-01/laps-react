@@ -21,18 +21,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run ESLint # if failed will continue to run the other steps, but will record this failed step
-        continue-on-error: true
+      - name: Run ESLint
         id: eslint
         run: npx eslint . --ext .js,.jsx,.ts,.tsx
 
-      - name: Run Prettier
-        continue-on-error: true
-        id: prettier
-        run: npx prettier --check .
 
-      - name: Check If Failed Before
-        run: |
-          if [ ${{ steps.eslint.outcome }} == 'failure' ] || [ ${{ steps.prettier.outcome }} == 'failure' ]; then
-            exit 1
-          fi

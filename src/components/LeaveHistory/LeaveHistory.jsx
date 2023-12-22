@@ -7,7 +7,6 @@ import LeavePerPage from './LeavePerPage.jsx';
 // eslint-disable-next-line no-unused-vars
 import LeaveTotalPage from './LeaveTotalPage.jsx';
 import Layout from '../Dashboard/Layout.jsx';
-import mockLeaveApplicationList from './mocklist.js';
 import { AuthContext } from '../../context/AuthContext.jsx';
 import { useContext, useEffect, useState } from 'react';
 
