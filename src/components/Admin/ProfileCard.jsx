@@ -14,9 +14,9 @@ function ProfileCard({ mode, person, onClose }) {
 
   const API_URL = 'http://localhost:8080/api/admin';
 
-  const updateUser = async (userId, userData) => {
+  const updateUser = async (id, userData) => {
     try {
-      const response = await fetch(`${API_URL}/${userId}`, {
+      const response = await fetch(`${API_URL}/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ function ProfileCard({ mode, person, onClose }) {
 
   const addUser = async (userData) => {
     try {
-      const password = 'Test?123';
+      const password = userData.email + '123';
       userData.password = password;
       const response = await fetch(`${API_URL}/user`, {
         method: 'POST',
@@ -58,7 +58,8 @@ function ProfileCard({ mode, person, onClose }) {
   };
 
   const handleSubmit = async () => {
-    const userData = { name, email, authName, role };
+    var id = person.id;
+    const userData = { id, name, email, authName, role };
     if (mode === 'create') {
       const response = await addUser(userData);
       if (response && response.ok) {
@@ -82,7 +83,7 @@ function ProfileCard({ mode, person, onClose }) {
       if (response && response.ok) {
         onClose();
       } else {
-        // 处理错误情况
+        //handler error
         setError('Failed to delete user');
       }
     }
@@ -120,7 +121,11 @@ function ProfileCard({ mode, person, onClose }) {
           onChange={setAuthName}
           iconSrc={authIcon}
         />
-        {error && <div className="text-red-400 text-sm my-2">{error}</div>}
+        {error && (
+          <div className="text-red-400 justify-center text-sm my-2">
+            {error}
+          </div>
+        )}
         <ProfileActions
           isEditMode={isEditMode}
           onSubmit={handleSubmit}
@@ -184,7 +189,7 @@ function ProfileDetailSection({
         >
           <option value="Employee">Employee</option>
           <option value="Manager">Manager</option>
-          <option value="Admin">Admin</option>
+          <option value="Admin">Administrators</option>
         </select>
       );
     } else if (editable) {
