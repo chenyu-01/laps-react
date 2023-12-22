@@ -10,27 +10,33 @@ export default function LeaveRow({
   status,
 }) {
   const navigate = useNavigate();
+  const formatDate = (dateTimeString) => {
+    const date = new Date(dateTimeString);
+    return date.toLocaleDateString('en-SG', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  };
+
   return (
-    <div className="flex items-center justify-between px-0.5 w-full border-b">
-      <div className={'w-1/6'}>
+    <div className="flex items-center justify-between px-0.5 w-full border-b gap-2">
+      <div className={'w-1/8'}>
         <Cell>{leaveId}</Cell>
       </div>
-      <div className={'w-1/6'}>
+      <div className={'w-1/8'}>
         <Cell>{type}</Cell>
       </div>
-      <div className={'w-1/5'}>
-        <Cell>{startDate}</Cell>
+      <div className={'w-1/4'}>
+        <Cell>{formatDate(startDate)}</Cell>
       </div>
-      <div className={'w-1/5'}>
-        <Cell>{endDate}</Cell>
+      <div className={'w-1/4'}>
+        <Cell>{formatDate(endDate)}</Cell>
       </div>
-      <div className={'w-1/5'}>
-        <Cell>{reason}</Cell>
-      </div>
-      <div className={'w-1/5'}>
+      <div className={'w-1/8'}>
         <Cell>{status}</Cell>
       </div>
-      <div className={'w-1/6'}>
+      <div className={'w-1/8'}>
         <Cell>
           <button
             className="btn btn-primary"
@@ -46,7 +52,7 @@ export default function LeaveRow({
 
 function Cell({ children }) {
   return (
-    <div className="text-zinc-700 text-opacity-80 text-center text-sm tracking-normal whitespace-nowrap justify-center px-2 py-5 min-w-[100px]">
+    <div className="text-zinc-700 text-opacity-80 text-center text-sm tracking-normal min-w-[110px] justify-center py-5">
       {children}
     </div>
   );
@@ -54,26 +60,24 @@ function Cell({ children }) {
 
 export function HeaderRow() {
   return (
-    <div className="flex items-stretch justify-between px-0.5 w-full border-b">
-      <div className={'w-1/6'}>
-        <Cell>Id</Cell>
+    <div className="flex items-center justify-between px-0.5 w-full border-b gap-2">
+      <div className={'w-1/8'}>
+        <Cell>ApplicationID</Cell>
       </div>
-      <div className={'w-1/6'}>
+      <div className={'w-1/8'}>
         <Cell>Type</Cell>
       </div>
-      <div className={'w-1/5'}>
+      <div className={'w-1/4'}>
         <Cell>StartDate</Cell>
       </div>
-      <div className={'w-1/5'}>
+      <div className={'w-1/4'}>
         <Cell>EndDate</Cell>
       </div>
-      <div className={'w-1/5'}>
-        <Cell>Reason</Cell>
-      </div>
-      <div className={'w-1/5'}>
+
+      <div className={'w-1/8'}>
         <Cell>Status</Cell>
       </div>
-      <div className={'w-1/6'}>
+      <div className={'w-1/8'}>
         <Cell>Operation</Cell>
       </div>
     </div>

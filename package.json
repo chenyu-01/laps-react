@@ -20,7 +20,9 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview --port 5837",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,scss,md,json,html}\""
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,scss,md,json,html}\"",
+    "prettier-check": "prettier --check .",
+    "prettier-write": "prettier --write ."
   },
   "proxy": "http://localhost:8080",
   "dependencies": {

@@ -36,7 +36,10 @@ function NavigationEmployee() {
         <a href={'http://localhost:8080/leave'}>New Leave Application</a>
       </NavLink>
       <NavLink>
-        <Link to={'/LeaveHistory'}>Leave History</Link>
+        <Link to={'/LeaveHistory'}>My Leave History</Link>
+      </NavLink>
+      <NavLink>
+        <Link to={'/Dashboard'}>Dashboard</Link>
       </NavLink>
     </div>
   );
@@ -49,7 +52,7 @@ function NavigationAdmin() {
         <Link to={'/Admin'}>Admin Page</Link>
       </NavLink>
       <NavLink>
-        <Link to={'/Approval'}>Approval Page</Link>
+        <Link to={'/Dashboard'}>Dashboard</Link>
       </NavLink>
     </div>
   );
@@ -62,7 +65,13 @@ function NavigationManager() {
         <a href={'http://localhost:8080/leave'}>New Leave Application</a>
       </NavLink>
       <NavLink>
-        <Link to={'/Approval'}>Approval Page</Link>
+        <Link to={'/Approval'}>Subordinate Applications</Link>
+      </NavLink>
+      <NavLink>
+        <Link to={'/LeaveHistory'}>My Leave History</Link>
+      </NavLink>
+      <NavLink>
+        <Link to={'/Dashboard'}>Dashboard</Link>
       </NavLink>
     </div>
   );

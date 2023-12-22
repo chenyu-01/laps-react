@@ -11,7 +11,6 @@ export default function SignUp() {
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [error, setError] = useState('');
-  const [role, setRole] = useState('');
   const navigate = useNavigate();
   const validateEmail = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -48,7 +47,7 @@ export default function SignUp() {
     // Prepare data to be sent
     const data = {
       name,
-      role,
+      role: 'User',
       email,
       password,
     };
@@ -78,25 +77,13 @@ export default function SignUp() {
       setError('Failed to connect to the server. Please try again later.');
     }
   };
-  const handleSelect = (event) => {
-    setRole(event.target.value);
-  };
   return (
     <div>
       <LayoutAuth>
         <form onSubmit={handleSubmit}>
-          <select
-            className="select select-bordered w-full"
-            value={role}
-            onChange={handleSelect}
-          >
-            <option disabled selected value="">
-              User Type?
-            </option>
-            <option value="Employee">Employee</option>
-            <option value="Admin">Admin</option>
-            <option value="Manager">Manager</option>
-          </select>
+          <div className="text-center text-3xl font-bold text-black">
+            Sign Up As A New User
+          </div>
           <InputBox
             input={name}
             setInput={setName}
