@@ -102,9 +102,35 @@ function ProfileCard({ mode, person, onClose }) {
       }
     }
   };
+
+  const getAuthName = async (id) => {
+    try {
+      const response = await fetch(`${API_URL}/users/Manager/${id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.status === 204) {
+        setAuthName('N/A');
+      } else if (response.ok) {
+        const data = await response.json();
+        setAuthName(data.name);
+      } //handle no content
+    } catch (error) {
+      console.error('Error fetching person data:', error);
+    }
+  };
+
   useEffect(() => {
     getAllManagers();
   }, []);
+
+  useEffect(() => {
+    if (person && person.id) {
+      getAuthName(person.id);
+    }
+  }, [person]);
 
   return (
     <div className="flex max-w-[500px] flex-col justify-center items-stretch">

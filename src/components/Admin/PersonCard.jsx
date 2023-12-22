@@ -1,5 +1,5 @@
 import React from 'react';
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 import workIcon from '../../assets/busi_person.png';
 import timerIcon from '../../assets/mail.png';
 
@@ -41,8 +41,13 @@ export default function PersonCardComponent({
           'Content-Type': 'application/json',
         },
       });
-      const data = await response.json();
-      setAuthName(data.name);
+      if (response.status === 204) {
+        setAuthName('N/A');
+      } else if (response.ok) {
+        //parse response
+        const data = await response.json();
+        setAuthName(data.name);
+      }
     } catch (error) {
       console.error('Error fetching person data:', error);
     }
