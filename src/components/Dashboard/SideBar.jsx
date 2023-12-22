@@ -33,7 +33,7 @@ function NavigationEmployee() {
   return (
     <div className={'w-full'}>
       <NavLink>
-        <a href={'http://localhost:8080/leave'}>New Leave Application</a>
+        <a href={'/leave'}>New Leave Application</a>
       </NavLink>
       <NavLink>
         <Link to={'/LeaveHistory'}>My Leave History</Link>
@@ -62,7 +62,7 @@ function NavigationManager() {
   return (
     <div className={'divide-y-2 w-full'}>
       <NavLink>
-        <a href={'http://localhost:8080/leave'}>New Leave Application</a>
+        <a href={'/leave'}>New Leave Application</a>
       </NavLink>
       <NavLink>
         <Link to={'/Approval'}>Subordinate Applications</Link>

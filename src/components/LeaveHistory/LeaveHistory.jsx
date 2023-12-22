@@ -18,7 +18,7 @@ export default function LeaveHistory() {
   async function getLeaveApplicationList() {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/applications/findemployee/${employeeId}`,
+        `/api/applications/findemployee/${employeeId}`,
         {
           method: 'GET',
           credentials: 'include',

@@ -53,7 +53,7 @@ export default function SignUp() {
     };
 
     try {
-      const response = await fetch('http://localhost:8080/api/users/register', {
+      const response = await fetch('/api/users/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

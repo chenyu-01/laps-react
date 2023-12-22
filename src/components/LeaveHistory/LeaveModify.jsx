@@ -38,17 +38,14 @@ function LeaveModify() {
       isOverseas: isOverseas,
     };
     try {
-      const response = await fetch(
-        'http://localhost:8080/api/applications/update',
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(requestBody),
-          credentials: 'include',
-        }
-      );
+      const response = await fetch('/api/applications/update', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+        credentials: 'include',
+      });
       if (response.ok) {
         console.log('Leave application updated');
         navigate(-1);
@@ -63,13 +60,10 @@ function LeaveModify() {
   const cancelApplication = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/applications/cancel/${leaveId} `,
-        {
-          method: 'PUT',
-          credentials: 'include',
-        }
-      );
+      const response = await fetch(`/api/applications/cancel/${leaveId} `, {
+        method: 'PUT',
+        credentials: 'include',
+      });
       if (response.ok) {
         console.log('Leave application cancelled');
         navigate(-1);
@@ -84,13 +78,10 @@ function LeaveModify() {
   const deleteApplication = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/applications/delete/${leaveId} `,
-        {
-          method: 'DELETE',
-          credentials: 'include',
-        }
-      );
+      const response = await fetch(`/api/applications/delete/${leaveId} `, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
       if (response.ok) {
         console.log('Leave application deleted');
         navigate(-1);
@@ -104,13 +95,10 @@ function LeaveModify() {
   };
   const getLeaveApplication = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/applications/get/${leaveId}`,
-        {
-          method: 'GET',
-          credentials: 'include',
-        }
-      );
+      const response = await fetch(`/api/applications/get/${leaveId}`, {
+        method: 'GET',
+        credentials: 'include',
+      });
       if (response.ok) {
         const la = await response.json();
         console.log('Leave application:', la);
