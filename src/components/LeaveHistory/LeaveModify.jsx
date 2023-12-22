@@ -8,13 +8,7 @@ import { useNavigate } from 'react-router-dom';
 function LeaveModify() {
   const navigate = useNavigate();
   const { userData } = useContext(AuthContext);
-  const employeeId = userData.id;
-  // eslint-disable-next-line no-unused-vars
   const { leaveId } = useParams();
-  const requestBody = {
-    leaveId: leaveId,
-    employeeId: employeeId,
-  };
   const [leaveType, setLeaveType] = React.useState('');
   const [status, setStatus] = React.useState('');
   const [startDate, setStartDate] = React.useState('');
@@ -22,21 +16,23 @@ function LeaveModify() {
   const [reason, setReason] = React.useState('');
   const [contactInfo, setContactInfo] = React.useState('');
   const [isOverseas, setIsOverseas] = React.useState(false);
+  const [workDissemination, setWorkDissemination] = React.useState('');
   useEffect(() => {
     getLeaveApplication();
   }, []);
   const updateApplicationSubmit = async (e) => {
     e.preventDefault();
     const requestBody = {
-      leaveId: leaveId,
-      employeeId: employeeId,
+      id: parseInt(leaveId),
       type: leaveType,
       startDate: startDate,
       endDate: endDate,
       reason: reason,
       contactInfo: contactInfo,
       isOverseas: isOverseas,
+      workDissemination: workDissemination,
     };
+    console.log('requestBody:', requestBody);
     try {
       const response = await fetch('/api/applications/update', {
         method: 'PUT',
@@ -47,11 +43,12 @@ function LeaveModify() {
         credentials: 'include',
       });
       if (response.ok) {
-        console.log('Leave application updated');
+        alert('Leave application updated');
         navigate(-1);
       } else {
         const error = await response.json();
-        console.error('Error response:', error);
+        console.error('Error updating leave application:', error);
+        handleErrorResponse(error);
       }
     } catch (error) {
       console.error('Error caught:', error);
@@ -217,6 +214,22 @@ function LeaveModify() {
                     placeholder="Phone number or email"
                   />
                 </div>
+                <div className="mb-4">
+                  <label
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                    htmlFor="workDissemination"
+                  >
+                    Work Dissemination
+                  </label>
+                  <textarea
+                    id="workDissemination"
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    rows="2"
+                    placeholder="Work dissemination"
+                    onChange={(e) => setWorkDissemination(e.target.value)}
+                    value={workDissemination}
+                  ></textarea>
+                </div>
                 <div className="flex items-center justify-center mb-2 gap-2">
                   <button
                     className="bg-indigo-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
@@ -265,4 +278,20 @@ function LeaveModifyPage() {
   );
 }
 
+function handleErrorResponse(responseObj) {
+  try {
+    let errorMessage = '';
+    if (Array.isArray(responseObj)) {
+      responseObj.forEach((error) => {
+        errorMessage += error.defaultMessage + '\n'; // Add each error message to the alert
+      });
+    } else {
+      // If the error structure is different, adjust accordingly
+      errorMessage = responseObj.message || 'An error occurred';
+    }
+    alert(errorMessage);
+  } catch (e) {
+    alert('An error occurred while processing the response.');
+  }
+}
 export default LeaveModifyPage;
