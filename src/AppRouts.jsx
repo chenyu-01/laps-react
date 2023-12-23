@@ -24,6 +24,7 @@ const AppRoutes = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/leavehistory" element={<LeaveHistory />} />
         <Route path="/leave-modify/:leaveId" element={<LeaveModify />} />
+
         {/* ... other routes ... */}
       </Routes>
     </AuthProvider>

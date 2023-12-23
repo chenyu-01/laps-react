@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import jobIcon from '../../assets/job_icon.png';
 import emailIcon from '../../assets/mail.png';
 import authIcon from '../../assets/Auth_icon.png';
+import happyIcon from '../../assets/happy.png';
 
 function ProfileCard({ mode, person, onClose }) {
   const [name, setName] = useState(person ? person.name : '');
@@ -9,10 +10,25 @@ function ProfileCard({ mode, person, onClose }) {
   const [authName, setAuthName] = useState(person ? person.authName : '');
   const [role, setrole] = useState(person ? person.role : 'Employee');
   const [error, setError] = useState('');
-
+  const [managers, setManagers] = useState([]); // TODO: Add managers here
   const isEditMode = mode === 'edit';
 
   const API_URL = '/api/admin';
+
+  const getAllManagers = async () => {
+    try {
+      const response = await fetch(`${API_URL}/users/Manager`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
+      setManagers(data);
+    } catch (error) {
+      console.error('Error fetching person data:', error);
+    }
+  };
 
   const updateUser = async (id, userData) => {
     try {
@@ -58,8 +74,7 @@ function ProfileCard({ mode, person, onClose }) {
   };
 
   const handleSubmit = async () => {
-    var id = person.id;
-    const userData = { id, name, email, authName, role };
+    const userData = { name, email, authName, role };
     if (mode === 'create') {
       const response = await addUser(userData);
       if (response && response.ok) {
@@ -89,6 +104,35 @@ function ProfileCard({ mode, person, onClose }) {
     }
   };
 
+  const getAuthName = async (id) => {
+    try {
+      const response = await fetch(`${API_URL}/users/Manager/${id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.status === 204) {
+        setAuthName('N/A');
+      } else if (response.ok) {
+        const data = await response.json();
+        setAuthName(data.name);
+      } //handle no content
+    } catch (error) {
+      console.error('Error fetching person data:', error);
+    }
+  };
+
+  useEffect(() => {
+    getAllManagers();
+  }, []);
+
+  useEffect(() => {
+    if (person && person.id) {
+      getAuthName(person.id);
+    }
+  }, [person]);
+
   return (
     <div className="flex max-w-[500px] flex-col justify-center items-stretch">
       <header className="shadow-lg bg-white flex w-full flex-col items-stretch pt-2.5 pb-11 rounded-lg">
@@ -96,7 +140,7 @@ function ProfileCard({ mode, person, onClose }) {
           mode={mode}
           onNameChange={setName}
           personName={name}
-          personImgSrc="image_source_here" // TODO: Add image source
+          personImgSrc={happyIcon} // TODO: Add image source
         />
 
         <ProfileDetailSection
@@ -120,6 +164,7 @@ function ProfileCard({ mode, person, onClose }) {
           editable={true}
           onChange={setAuthName}
           iconSrc={authIcon}
+          managers={managers}
         />
         {error && (
           <div className="text-red-400 justify-center text-sm my-2">
@@ -150,7 +195,7 @@ function ProfileImageSection({ mode, onNameChange, personName, personImgSrc }) {
           <img
             src={personImgSrc}
             alt="Profile"
-            className="w-full h-auto object-contain"
+            className="object-contain w-10 h-10"
           />
           <div className="text-black text-lg font-semibold self-center my-auto">
             {personName}
@@ -178,9 +223,27 @@ function ProfileDetailSection({
   onChange,
   isSelect,
   iconSrc,
+  managers,
 }) {
   const renderInputOrSelect = () => {
-    if (editable && isSelect) {
+    if (title === 'Authorized by' && editable) {
+      let managerExists = managers.some((manager) => manager.name === value);
+
+      return (
+        <select
+          value={managerExists ? value : 'NA'}
+          onChange={(e) => onChange(e.target.value)}
+          className="border-none bg-transparent p-2 ml-5 mt-2.5 self-start"
+        >
+          {!managerExists && <option value="NA">NA</option>}
+          {managers.map((manager) => (
+            <option key={manager.id} value={manager.name}>
+              {manager.name}
+            </option>
+          ))}
+        </select>
+      );
+    } else if (editable && isSelect) {
       return (
         <select
           value={value}

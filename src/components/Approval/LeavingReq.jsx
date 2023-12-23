@@ -4,6 +4,7 @@ import vectorIcon from '../../assets/Vector.png';
 import CalendarIcon from '../../assets/CalendarIcon.png';
 import acceptIcon from '../../assets/AcceptIcon.png';
 import rejectIcon from '../../assets/RejectIcon.png';
+import MyCalendar from './calendar';
 
 const LeavingReqHeader = ({ reason, personSrc, typeName }) => {
   return (
@@ -22,12 +23,51 @@ const LeavingReqHeader = ({ reason, personSrc, typeName }) => {
   );
 };
 
-const LeavingReqContent = ({ duration, startDate, comment, type }) => {
+const LeavingReqContent = ({
+  duration,
+  startDate,
+  endDate,
+  comment,
+  type,
+  layoutRef,
+}) => {
   const [showCalendar, setShowCalendar] = useState(false);
-
-  const toggleCalendar = () => {
-    setShowCalendar(!showCalendar);
+  const [calendarPosition, setCalendarPosition] = useState({});
+  const calendarIconRef = useRef(null); // Ref for the calendar icon
+  //only print the DD/MM/YYYY
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
   };
+
+  const handleMouseEnter = () => {
+    if (calendarIconRef.current) {
+      const rect = calendarIconRef.current.getBoundingClientRect();
+      const layoutRect = layoutRef.current.getBoundingClientRect();
+      setCalendarPosition({
+        top: rect.bottom - layoutRect.top,
+        left: rect.left - layoutRect.left,
+      });
+      setShowCalendar(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setShowCalendar(false);
+  };
+
+  // const toggleCalendar = () => {
+  //   if (!showCalendar && calendarIconRef.current) {
+  //     const rect = calendarIconRef.current.getBoundingClientRect();
+  //     const layoutRect = layoutRef.current.getBoundingClientRect();
+
+  //     setCalendarPosition({
+  //       top: rect.bottom - layoutRect.top,
+  //       left: rect.left - layoutRect.left,
+  //     });
+  //   }
+  //   setShowCalendar(!showCalendar);
+  // };
 
   return (
     <div className="grid grid-cols-4 gap-4 w-full">
@@ -38,13 +78,31 @@ const LeavingReqContent = ({ duration, startDate, comment, type }) => {
 
       <div className="text-black text-base font-bold">{duration}</div>
       <div className="flex items-center text-slate-800 text-xs font-medium">
-        {startDate}
+        {formatDate(startDate)}
         <img
+          ref={calendarIconRef}
           src={CalendarIcon}
           alt="Calendar"
           className="ml-2 cursor-pointer w-4 h-4"
-          onClick={toggleCalendar}
+          //onClick={toggleCalendar}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         />
+        {showCalendar && (
+          <div
+            style={{
+              position: 'absolute',
+              top: `${calendarPosition.top}px`,
+              left: `${calendarPosition.left}px`,
+              zIndex: 10,
+            }}
+          >
+            <MyCalendar
+              startDate={new Date(startDate)}
+              endDate={new Date(endDate)}
+            />
+          </div>
+        )}
       </div>
       <div className="text-cyan-700 text-xs font-medium">{comment}</div>
       <div className="text-slate-800 text-xs font-medium">{type}</div>
@@ -79,8 +137,8 @@ const LeavingReqComponent = ({
 
       setShowCommentInput(true);
       setCommentPosition({
-        top: dropdownRect.bottom - layoutRect.top + window.scrollY + 'px',
-        left: dropdownRect.left - layoutRect.left + window.scrollX + 'px',
+        top: dropdownRect.bottom - layoutRect.top + 'px',
+        left: dropdownRect.left - layoutRect.left + 'px',
         width: dropdownRect.width + 'px',
       });
     }
@@ -106,7 +164,6 @@ const LeavingReqComponent = ({
     return `${diffDays} Day ${diffHours} H `;
   };
 
-  const formattedStartDate = formatDate(startDate);
   const duration = calculateDuration(startDate, endDate);
   const API_URL = '/api/applications';
 
@@ -207,9 +264,11 @@ const LeavingReqComponent = ({
         <div className="md:w-2/3">
           <LeavingReqContent
             duration={duration}
-            startDate={formattedStartDate}
+            startDate={startDate}
+            endDate={endDate}
             comment={comment}
             type={type}
+            layoutRef={layoutRef}
           />
         </div>
       </div>
