@@ -7,6 +7,7 @@ import ProfileCard from './ProfileCard';
 import addIcon from '../../assets/add.png';
 import queryIcon from '../../assets/query.svg';
 import PersonCardComponent from './PersonCard';
+import happyIcon from '../../assets/happy.png';
 
 function AdminComponent() {
   const [personData, setPersonData] = useState([]);
@@ -63,10 +64,38 @@ function AdminComponent() {
     setSelectedRole(event.target.value);
   };
 
+  const sendQuery = (queryContent) => {
+    console.log('Sending query:', queryContent);
+
+    try {
+      const response = fetch(`http://localhost:8080/api/admin/user/Query`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify(queryContent),
+      });
+      if (response.ok) {
+        if (response.status === 204) {
+          return;
+        }
+        const data = response.json();
+        setPersonData(data);
+      }
+    } catch (error) {
+      console.error('Error fetching person data:', error);
+    }
+  };
+
   return (
     <Layout>
       <div className="flex flex-col gap-5 m-4">
-        <AdminTitle onAddClick={handleAddClick} onSelect={handleRoleChange} />
+        <AdminTitle
+          onAddClick={handleAddClick}
+          onSelect={handleRoleChange}
+          sendQuery={sendQuery}
+        />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {personData
@@ -81,6 +110,7 @@ function AdminComponent() {
                   type={person.role}
                   email={person.email}
                   id={person.id}
+                  PictureSrc={happyIcon}
                 />
               </div>
             ))}
@@ -107,7 +137,7 @@ function AdminComponent() {
   );
 }
 
-function AdminTitle({ onAddClick, onSelect }) {
+function AdminTitle({ onAddClick, onSelect, sendQuery }) {
   const [showInput, setShowInput] = useState(false);
   const [query, setQuery] = useState('');
 
@@ -117,11 +147,6 @@ function AdminTitle({ onAddClick, onSelect }) {
 
   const handleQueryChange = (event) => {
     setQuery(event.target.value);
-  };
-
-  const sendQuery = (queryContent) => {
-    console.log('Sending query:', queryContent);
-    // To Do:
   };
 
   const handleKeyDown = (event) => {

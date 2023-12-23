@@ -9,39 +9,38 @@ const Approval = () => {
   const [requests, setRequests] = useState([]);
   const { isAuthenticated } = useContext(AuthContext);
   const { userData } = useContext(AuthContext);
-  const fetchData = async () => {
-    if (isAuthenticated) {
-      try {
-        const response = await fetch(
-          `http://localhost:8080/api/applications/applied_list/${userData.id}`,
-          {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            credentials: 'include',
-          }
-        );
 
-        if (response.ok) {
-          if (response.status === 204) {
-            setRequests([]);
-            return;
-          }
-          const data = await response.json();
-          setRequests(data);
-        } else {
-          console.error('Error fetching data:', response.statusText);
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/applications/applied_list/${userData.id}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
         }
-      } catch (error) {
-        console.error('Error fetching data:', error);
+      );
+
+      if (response.ok) {
+        if (response.status === 204) {
+          setRequests([]);
+          return;
+        }
+        const data = await response.json();
+        setRequests(data);
+      } else {
+        console.error('Error fetching data:', response.statusText);
       }
+    } catch (error) {
+      console.error('Error fetching data:', error);
     }
   };
 
   useEffect(() => {
     fetchData();
-  }, [isAuthenticated]);
+  }, [userData]);
 
   const ApprvoalHeader = () => {
     const [showInput, setShowInput] = useState(false);
@@ -52,19 +51,53 @@ const Approval = () => {
     };
 
     const handleQueryChange = (event) => {
-      setQuery(event.target.value);
+      setQuery(event.target.value.trim());
     };
 
     const handleBlur = () => {
       if (!query) {
         setShowInput(false);
       }
-      sendQuery(query);
+      //sendQuery(query);
     };
 
-    const sendQuery = (queryContent) => {
-      console.log('Sending query:', queryContent);
-      //To DO
+    const handleKeyDown = (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        sendQuery(query);
+      }
+    };
+
+    const sendQuery = async (query) => {
+      if (query.trim()) {
+        console.log('Sending query:', query);
+        try {
+          const response = await fetch(
+            `http://localhost:8080/api/applications/query/${userData.id}`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              credentials: 'include',
+              body: JSON.stringify(query),
+            }
+          );
+
+          if (response.ok) {
+            if (response.status === 204) {
+              setRequests([]);
+              return;
+            }
+            const data = await response.json();
+            setRequests(data);
+          } else {
+            console.error('Error fetching data:', response.statusText);
+          }
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      }
     };
 
     return (
@@ -87,6 +120,7 @@ const Approval = () => {
                 alt="Query"
                 className="ml-2 w-4 h-4 cursor-pointer"
                 onClick={() => sendQuery(query)}
+                onKeyDown={handleKeyDown}
               />
             </div>
           ) : (

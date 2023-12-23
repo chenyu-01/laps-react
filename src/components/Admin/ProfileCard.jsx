@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import jobIcon from '../../assets/job_icon.png';
 import emailIcon from '../../assets/mail.png';
 import authIcon from '../../assets/Auth_icon.png';
+import happyIcon from '../../assets/happy.png';
 
 function ProfileCard({ mode, person, onClose }) {
   const [name, setName] = useState(person ? person.name : '');
@@ -139,7 +140,7 @@ function ProfileCard({ mode, person, onClose }) {
           mode={mode}
           onNameChange={setName}
           personName={name}
-          personImgSrc="image_source_here" // TODO: Add image source
+          personImgSrc={happyIcon} // TODO: Add image source
         />
 
         <ProfileDetailSection
@@ -194,7 +195,7 @@ function ProfileImageSection({ mode, onNameChange, personName, personImgSrc }) {
           <img
             src={personImgSrc}
             alt="Profile"
-            className="w-full h-auto object-contain"
+            className="object-contain w-10 h-10"
           />
           <div className="text-black text-lg font-semibold self-center my-auto">
             {personName}
