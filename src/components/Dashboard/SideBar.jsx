@@ -13,9 +13,13 @@ export default function SideBar({ isOpen }) {
       className={`shadow-2xl absolute h-full md:relative z-10 flex-col w-1/5 bg-white items-stretch max-md:w-2/3 ${sideBarClass}`}
     >
       <div className="flex flex-col px-2 py-4 items-start divide-y-5">
-        {role === 'Employee' ? <NavigationEmployee /> : null}
+        {role === 'Employee' ? (
+          <NavigationEmployee employeeId={userData.id} />
+        ) : null}
         {role === 'Admin' ? <NavigationAdmin /> : null}
-        {role === 'Manager' ? <NavigationManager /> : null}
+        {role === 'Manager' ? (
+          <NavigationManager managerId={userData.id} />
+        ) : null}
       </div>
     </div>
   );
@@ -29,11 +33,11 @@ function NavLink({ children }) {
   );
 }
 
-function NavigationEmployee() {
+function NavigationEmployee({ employeeId }) {
   return (
     <div className={'w-full'}>
       <NavLink>
-        <a href={'http://localhost:8080/leave'}>New Leave Application</a>
+        <a href={`/leave/${employeeId}`}>New Leave Application</a>
       </NavLink>
       <NavLink>
         <Link to={'/LeaveHistory'}>My Leave History</Link>
@@ -45,7 +49,7 @@ function NavigationEmployee() {
   );
 }
 
-function NavigationAdmin() {
+function NavigationAdmin({ managerId }) {
   return (
     <div className={'divide-y-2 w-full'}>
       <NavLink>
@@ -58,11 +62,11 @@ function NavigationAdmin() {
   );
 }
 
-function NavigationManager() {
+function NavigationManager({ managerId }) {
   return (
     <div className={'divide-y-2 w-full'}>
       <NavLink>
-        <a href={'http://localhost:8080/leave'}>New Leave Application</a>
+        <a href={`/leave/${managerId}`}>New Leave Application</a>
       </NavLink>
       <NavLink>
         <Link to={'/Approval'}>Subordinate Applications</Link>

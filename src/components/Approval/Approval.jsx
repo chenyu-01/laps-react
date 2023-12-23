@@ -13,7 +13,7 @@ const Approval = () => {
     if (isAuthenticated) {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/applications/applied_list/${userData.id}`,
+          `/api/applications/applied_list/${userData.id}`,
           {
             method: 'GET',
             headers: {

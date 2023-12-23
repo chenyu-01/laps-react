@@ -12,7 +12,7 @@ function ProfileCard({ mode, person, onClose }) {
 
   const isEditMode = mode === 'edit';
 
-  const API_URL = 'http://localhost:8080/api/admin';
+  const API_URL = '/api/admin';
 
   const updateUser = async (id, userData) => {
     try {

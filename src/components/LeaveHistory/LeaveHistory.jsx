@@ -15,10 +15,11 @@ export default function LeaveHistory() {
   const employeeId = userData.id;
   const [status, setStatus] = React.useState('All');
   const [leaveApplicationList, setLeaveApplicationList] = useState([]);
-  async function getLeaveApplicationList() {
+  const [fetchList, setFetchList] = useState([]);
+  async function fetchLeaveApplicationList() {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/applications/findemployee/${employeeId}`,
+        `/api/applications/findemployee/${employeeId}`,
         {
           method: 'GET',
           credentials: 'include',
@@ -27,7 +28,7 @@ export default function LeaveHistory() {
       if (response.ok) {
         const list = await response.json();
         console.log('Leave application list:', list);
-        setLeaveApplicationList(list);
+        setFetchList(list);
       } else {
         console.error('Error fetching leave application list:', response);
       }
@@ -36,43 +37,37 @@ export default function LeaveHistory() {
     }
   }
   useEffect(() => {
-    getLeaveApplicationList();
-  }, []);
+    if (userData.id === undefined) {
+      return;
+    }
+    fetchLeaveApplicationList();
+  }, [userData]);
   useEffect(() => {
+    if (fetchList.length === 0) return;
     let filteredList = [];
     switch (status) {
       case 'All':
-        filteredList = leaveApplicationList;
+        filteredList = fetchList;
         break;
       case 'Applied':
-        filteredList = leaveApplicationList.filter(
-          (la) => la.status === 'Applied'
-        );
+        filteredList = fetchList.filter((la) => la.status === 'Applied');
         break;
       case 'Approved':
-        filteredList = leaveApplicationList.filter(
-          (la) => la.status === 'Approved'
-        );
+        filteredList = fetchList.filter((la) => la.status === 'Approved');
         break;
       case 'Rejected':
-        filteredList = leaveApplicationList.filter(
-          (la) => la.status === 'Rejected'
-        );
+        filteredList = fetchList.filter((la) => la.status === 'Rejected');
         break;
       case 'Cancelled':
-        filteredList = leaveApplicationList.filter(
-          (la) => la.status === 'Cancelled'
-        );
+        filteredList = fetchList.filter((la) => la.status === 'Cancelled');
         break;
       case 'Updated':
-        filteredList = leaveApplicationList.filter(
-          (la) => la.status === 'Updated'
-        );
+        filteredList = fetchList.filter((la) => la.status === 'Updated');
         break;
       // Add more cases as needed
     }
     setLeaveApplicationList(filteredList);
-  }, [status, leaveApplicationList]);
+  }, [status, fetchList]);
 
   // ... existing return statement ...
 
