@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 
 export default function SideBar({ isOpen }) {
-  // eslint-disable-next-line no-unused-vars
   const { userData } = useContext(AuthContext);
   const sideBarClass = isOpen ? 'block' : 'hidden';
   const role = userData.role;
@@ -60,6 +59,12 @@ function NavigationAdmin() {
       </NavLink>
       <NavLink>
         <a href={`/leavetype/list`}>Edit Leave Types</a>
+      </NavLink>
+      <NavLink>
+        <a href={`/publicholidays/list`}>Public Holidays</a>
+      </NavLink>
+      <NavLink>
+        <a href={`/admin/role/list`}>Role List</a>
       </NavLink>
     </div>
   );
