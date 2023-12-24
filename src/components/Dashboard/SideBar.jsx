@@ -49,7 +49,7 @@ function NavigationEmployee({ employeeId }) {
   );
 }
 
-function NavigationAdmin({ managerId }) {
+function NavigationAdmin() {
   return (
     <div className={'divide-y-2 w-full'}>
       <NavLink>
@@ -57,6 +57,9 @@ function NavigationAdmin({ managerId }) {
       </NavLink>
       <NavLink>
         <Link to={'/Dashboard'}>Dashboard</Link>
+      </NavLink>
+      <NavLink>
+        <a href={`/leavetype/list`}>Edit Leave Types</a>
       </NavLink>
     </div>
   );
@@ -69,7 +72,7 @@ function NavigationManager({ managerId }) {
         <a href={`/leave/${managerId}`}>New Leave Application</a>
       </NavLink>
       <NavLink>
-        <Link to={'/Approval'}>Subordinate Applications</Link>
+        <Link to={'/Approval'}>View Leave Application for Approval</Link>
       </NavLink>
       <NavLink>
         <Link to={'/LeaveHistory'}>My Leave History</Link>
