@@ -32,6 +32,12 @@ function ProfileCard({ mode, person, onClose }) {
 
   const updateUser = async (id, userData) => {
     try {
+      if (userData.role === 'User') {
+        userData.role = 'Employee';
+      }
+      if (userData.authName === 'N/A') {
+        userData.authName = null;
+      }
       const response = await fetch(`${API_URL}/${id}`, {
         method: 'PUT',
         headers: {
