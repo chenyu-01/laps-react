@@ -104,8 +104,9 @@ function LeaveModify() {
         setStartDate(la.startDate);
         setEndDate(la.endDate);
         setReason(la.reason);
-        setContactInfo(la.contactInfo || ''); // For not oversea leave, contactInfo may be null
-        setIsOverseas(la.isOverseas || false);
+        setContactInfo(la.contactInfo);
+        setIsOverseas(la.overseas);
+        setWorkDissemination(la.workDissemination);
       } else {
         console.error('Error fetching leave application:', response);
       }
