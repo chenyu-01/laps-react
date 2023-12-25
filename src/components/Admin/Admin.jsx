@@ -35,9 +35,7 @@ function AdminComponent() {
   };
 
   useEffect(() => {
-    if (isAuthenticated) {
-      list_all_persons();
-    }
+    list_all_persons();
   }, [isAuthenticated, showAddPerson]);
 
   const handleAddClick = () => {
