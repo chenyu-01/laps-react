@@ -165,17 +165,14 @@ const LeavingReqComponent = ({
   };
 
   const duration = calculateDuration(startDate, endDate);
-  const API_URL = 'http://localhost:8080/api/applications';
+  const API_URL = '/api/applications';
 
   const fetchPerson = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/admin/${personId}`,
-        {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
-        }
-      );
+      const response = await fetch(`/api/admin/${personId}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      });
       if (response.ok) {
         const data = await response.json();
         return data;

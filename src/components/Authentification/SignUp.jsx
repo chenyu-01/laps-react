@@ -12,24 +12,15 @@ export default function SignUp() {
   const [password2, setPassword2] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const validateEmail = () => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
 
   const validateForm = () => {
-    if (!validateEmail(email)) {
-      setError('Please enter a valid email address');
+    if (!email) {
+      setError('Please enter a email address');
       return false;
     }
     // Password check (basic example: check for non-empty and minimum length)
     if (!password) {
-      if (password.length < 8) {
-        setError('Password must be at least 8 characters long.');
-      }
-      if (password.length > 20) {
-        setError('Password must be at most 20 characters long.');
-      }
+      setError('Please enter a password');
       return false;
     }
 
@@ -53,7 +44,7 @@ export default function SignUp() {
     };
 
     try {
-      const response = await fetch('http://localhost:8080/api/users/register', {
+      const response = await fetch('/api/users/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

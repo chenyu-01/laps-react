@@ -13,7 +13,7 @@ function ProfileCard({ mode, person, onClose }) {
   const [managers, setManagers] = useState([]); // TODO: Add managers here
   const isEditMode = mode === 'edit';
 
-  const API_URL = 'http://localhost:8080/api/admin';
+  const API_URL = '/api/admin';
 
   const getAllManagers = async () => {
     try {
