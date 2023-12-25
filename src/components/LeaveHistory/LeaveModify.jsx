@@ -149,7 +149,7 @@ function LeaveModify() {
                     Start Date
                   </label>
                   <input
-                    type="datetime-local"
+                    type="date"
                     id="startDate"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
@@ -164,7 +164,7 @@ function LeaveModify() {
                     End Date
                   </label>
                   <input
-                    type="datetime-local"
+                    type="date"
                     id="endDate"
                     onChange={(e) => setEndDate(e.target.value)}
                     value={endDate}
