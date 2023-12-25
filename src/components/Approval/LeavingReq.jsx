@@ -156,12 +156,13 @@ const LeavingReqComponent = ({
     const end = new Date(endDate);
     const diffTime = Math.abs(end - start);
 
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-    const diffHours = Math.floor(
-      (diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
+    // const diffHours = Math.floor(
+    //   (diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    // );
 
-    return `${diffDays} Day ${diffHours} H `;
+    //return `${diffDays} Day ${diffHours} H `;
+    return `${diffDays} Day `;
   };
 
   const duration = calculateDuration(startDate, endDate);
