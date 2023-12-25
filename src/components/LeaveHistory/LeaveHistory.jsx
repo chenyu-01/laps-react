@@ -2,10 +2,7 @@ import * as React from 'react';
 import LeaveTitle from './Leave-Title';
 import LeaveButtonCategories from './Leave-Button-Categories.jsx';
 import LeaveRow, { HeaderRow } from './LeaveRow.jsx';
-// eslint-disable-next-line no-unused-vars
-import LeavePerPage from './LeavePerPage.jsx';
-// eslint-disable-next-line no-unused-vars
-import LeaveTotalPage from './LeaveTotalPage.jsx';
+
 import Layout from '../Dashboard/Layout.jsx';
 import { AuthContext } from '../../context/AuthContext.jsx';
 import { useContext, useEffect, useState } from 'react';
@@ -90,11 +87,6 @@ export default function LeaveHistory() {
                 status={la.status}
               />
             ))}
-
-            {/*<div className="self-center flex w-[812px] max-w-full items-stretch justify-between gap-5 mt-80 px-0.5 max-md:flex-wrap max-md:mt-10">*/}
-            {/*  <LeavePerPage />*/}
-            {/*  <LeaveTotalPage />*/}
-            {/*</div>*/}
           </div>
         </div>
       </Layout>
