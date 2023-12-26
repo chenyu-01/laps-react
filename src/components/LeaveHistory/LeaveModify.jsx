@@ -104,8 +104,9 @@ function LeaveModify() {
         setStartDate(la.startDate);
         setEndDate(la.endDate);
         setReason(la.reason);
-        setContactInfo(la.contactInfo || ''); // For not oversea leave, contactInfo may be null
-        setIsOverseas(la.isOverseas || false);
+        setContactInfo(la.contactInfo);
+        setIsOverseas(la.overseas);
+        setWorkDissemination(la.workDissemination);
       } else {
         console.error('Error fetching leave application:', response);
       }
@@ -149,7 +150,7 @@ function LeaveModify() {
                     Start Date
                   </label>
                   <input
-                    type="datetime-local"
+                    type="date"
                     id="startDate"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
@@ -164,7 +165,7 @@ function LeaveModify() {
                     End Date
                   </label>
                   <input
-                    type="datetime-local"
+                    type="date"
                     id="endDate"
                     onChange={(e) => setEndDate(e.target.value)}
                     value={endDate}
