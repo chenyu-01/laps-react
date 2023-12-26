@@ -29,12 +29,20 @@ export default function Profile() {
   }, [userData]);
   return (
     <div className={'prose flex flex-col mx-auto container'}>
-      <h1 className={'mt-5 mx-auto'}>Profile Page</h1>
+      <h1 className={'mt-5 mx-auto'}></h1>
+      <h1 className={'mt-5 mx-auto'}>
+        {userData.role === 'User' ? (
+          <div>Waiting for Admin to give you role</div>
+        ) : (
+          <p>Profile Page</p>
+        )}
+      </h1>
       <h2>Id: {userData.id}</h2>
       <h2>Role: {userData.role}</h2>
       <h2>User: {userData.name}</h2>
       <h2>Email: {userData.email}</h2>
       <h2>Leave Entitlement: </h2>
+
       <ul>
         <li>Annual Leave: {leaveEntitlement.annualLeaveDays}</li>
         <li>Medical Leave: {leaveEntitlement.medicalLeaveDays}</li>
