@@ -237,11 +237,11 @@ function ProfileDetailSection({
 
       return (
         <select
-          value={managerExists ? value : 'NA'}
+          value={managerExists ? value : 'N/A'}
           onChange={(e) => onChange(e.target.value)}
           className="border-none bg-transparent p-2 ml-5 mt-2.5 self-start"
         >
-          {!managerExists && <option value="NA">NA</option>}
+          {<option value="N/A">N/A</option>}
           {managers.map((manager) => (
             <option key={manager.id} value={manager.name}>
               {manager.name}
