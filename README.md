@@ -33,7 +33,6 @@ For every page, please contain your React component within `<Layout><Layout/>` t
 
 ## Development
 
-- Before you start your work, please make sure you have the latest version of the project and check if dependencies are installed correctly. For more information about how to use git, please refer to [How to Use Git](docs/How-to-use-git.md)
 - Here is a guide for how to use [React Context API](docs/React-context-api.md) in our project.
 - Since it is the front end part, we will also have to run the back end part to test the whole project. Please refer to [LAPS Back-End Project](https://github.com/chenyu-01/LAPS-Back-End.git) for more information.
 
